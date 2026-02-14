@@ -44,7 +44,10 @@ modules:
 #        # "firefox" is the main package, "firefox-langpacks" is a dependency
 #        - firefox
 #        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
+  - type: script
+    scripts:
+#      - install-proton-pass.sh
+      - install-jetbrains-toolbox.sh
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
