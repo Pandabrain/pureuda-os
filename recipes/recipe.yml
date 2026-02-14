@@ -31,9 +31,7 @@ modules:
 #        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 
     install:
-      options:
-        - --disableexcludes=fedora,updates,rpmfusion-nonfree,rpmfusion-nonfree-updates
-        - --setopt=install_weak_deps=False
+      install-weak-deps: true
       packages:
         - steam
 #        - codium
