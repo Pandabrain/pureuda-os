@@ -12,17 +12,20 @@ image-version: stable # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+#  - type: files
+#    files:
+#      - source: system
+#        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-#  - type: dnf
-#    repos:
+  - type: dnf
+    repos:
+      nonfree: rpmfusion
 #      copr:
 #        - atim/starship
-#    install:
-#      packages:
+    install:
+      packages:
+        - steam
+        - codium
 #        - micro
 #        - starship
 #    remove:
@@ -37,9 +40,14 @@ modules:
       - notify: true # Send notification after install/uninstall is finished (true/false)
         scope: system
 #        # If no repo information is specified, Flathub will be used by default
-#        install: # system flatpaks we want all users to have and not remove
+        install: # system flatpaks we want all users to have and not remove
 #          - org.mozilla.firefox
 #          - org.gnome.Loupe
+           - org.gnome.Calculator
+        remove:
+          - org.mozilla.Thunderbird
+          - org.kde.kontakt
+          - org.kde.kcalc
       - scope: user # Also add Flathub user repo, but no user packages
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
