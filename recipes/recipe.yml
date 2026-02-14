@@ -34,6 +34,7 @@ modules:
     install:
       packages:
         - steam
+        - mesa-libGL.i686
 #        - codium
         - vivaldi-stable
 #        - micro
