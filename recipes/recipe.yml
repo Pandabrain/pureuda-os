@@ -19,6 +19,8 @@ modules:
 
   - type: dnf
     repos:
+#      copr:
+#        - atim/starship
       cleanup: true 
       nonfree: rpmfusion
       files:
@@ -27,14 +29,13 @@ modules:
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
 #        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
-    install:
-#      copr:
-#        - atim/starship
 
     install:
+      options:
+        - --disableexcludes=fedora,updates,rpmfusion-nonfree,rpmfusion-nonfree-updates
+        - --setopt=install_weak_deps=False
       packages:
         - steam
-        - mesa-libGL.i686
 #        - codium
         - vivaldi-stable
 #        - micro
