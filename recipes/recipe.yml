@@ -24,7 +24,7 @@ modules:
         - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
 #      copr:
 #        - atim/starship
-    keys:
+      keys:
         - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     install:
       packages:
