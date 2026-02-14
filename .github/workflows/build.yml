@@ -4,11 +4,20 @@ on:
     - cron:
         "00 06 * * *" # build at 06:00 UTC every day
         # (20 minutes after last ublue images start building)
+    
+  # Pushes – only when they land on main or test
   push:
+    branches:
+      - main
+      - test
     paths-ignore: # don't rebuild if only documentation has changed
       - "**.md"
 
+  # Pull‑request events – only for PRs targeting main or test
   pull_request:
+    branches:
+      - main
+      - test
   workflow_dispatch: # allow manually triggering builds
 concurrency:
   # only run one build at a time
@@ -22,6 +31,11 @@ jobs:
       contents: read
       packages: write
       id-token: write
+    # Guard clause – abort early if we’re not on main or test.
+    # This protects run from building on other branches when triggered by cron schedule.
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/test'
     strategy:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
