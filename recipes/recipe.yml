@@ -20,8 +20,12 @@ modules:
   - type: dnf
     repos:
       nonfree: rpmfusion
+      files:
+        - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
 #      copr:
 #        - atim/starship
+    keys:
+        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     install:
       packages:
         - steam
