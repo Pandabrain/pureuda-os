@@ -22,7 +22,7 @@ modules:
 #      copr:
 #        - atim/starship
       cleanup: true 
-      nonfree: rpmfusion
+#      nonfree: rpmfusion
       files:
         - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
 #        - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
@@ -31,9 +31,9 @@ modules:
 #        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 
     install:
-      install-weak-deps: true
+#      install-weak-deps: true
       packages:
-        - steam
+#        - steam
 #        - codium
         - vivaldi-stable
 #        - micro
