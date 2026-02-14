@@ -19,17 +19,23 @@ modules:
 
   - type: dnf
     repos:
+      cleanup: true 
       nonfree: rpmfusion
       files:
-        - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+        - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+#        - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+      keys:
+        - https://repo.vivaldi.com/archive/linux_signing_key.pub
+#        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    install:
 #      copr:
 #        - atim/starship
-      keys:
-        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+
     install:
       packages:
         - steam
-        - codium
+#        - codium
+        - vivaldi-stable
 #        - micro
 #        - starship
 #    remove:
