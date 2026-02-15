@@ -32,6 +32,11 @@ modules:
         - codium
         - vivaldi-stable
         - google-chrome-stable
+        - git
+        - cmake
+        - ninja-build
+        - gtk3-devel
+        - mesa-libGLU-devel
 #        - micro
 #        - starship
 #    remove:
@@ -48,6 +53,7 @@ modules:
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
       - install-joplin.sh
+      - install-flutter.sh
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
@@ -71,6 +77,7 @@ modules:
            - org.gimp.GIMP
            - org.freecad.FreeCAD
            - org.deskflow.deskflow
+           - com.bambulab.BambuStudio
         remove:
           - org.mozilla.Thunderbird
           - org.kde.kontakt
