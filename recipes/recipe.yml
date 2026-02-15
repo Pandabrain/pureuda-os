@@ -41,6 +41,7 @@ modules:
   - type: script
     scripts:
       - install-proton-pass.sh
+      - install-proton-mail.sh
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
   - type: default-flatpaks
