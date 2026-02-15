@@ -63,11 +63,12 @@ modules:
            - io.github.kolunmi.Bazaar
            - io.github.flattool.Warehouse
            - com.ranfdev.DistroShelf
-           - org.torproject.torbrowser-launcher
            - io.podman_desktop.PodmanDesktop
            - org.kde.haruna
            - org.inkscape.Inkscape
            - org.gimp.GIMP
+           - org.freecad.FreeCAD
+           - org.deskflow.deskflow
         remove:
           - org.mozilla.Thunderbird
           - org.kde.kontakt
