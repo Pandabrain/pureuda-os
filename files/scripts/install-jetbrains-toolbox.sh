@@ -4,9 +4,15 @@ set -euo pipefail
 # 1. Fetch latest download URL
 URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' | grep -Po '"linux":\s*\{"link":\s*"\K[^"]+')
 
-# 2. Extract binary to /usr/bin
-# This makes it part of your immutable image
-curl -L "$URL" | tar -xz -O --wildcards "*/jetbrains-toolbox" > /usr/bin/jetbrains-toolbox
+# Make sure the target directory exists (needs root)
+sudo mkdir -p /usr/bin/jetbrains-toolbox
+
+# Pull the tarball, stream it into tar, and extract only the bin/* tree
+curl -L "$URL" \
+| sudo tar -xz \
+      -C /usr/bin/jetbrains-toolbox \
+      --strip-components=2 \
+      --wildcards '*/bin/*'
 
 # 3. Handle Autostart via /etc/profile.d/
 # Instead of a .desktop file, we place a shell script in profile.d.
