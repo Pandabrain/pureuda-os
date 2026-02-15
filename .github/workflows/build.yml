@@ -13,11 +13,13 @@ on:
     paths-ignore: # don't rebuild if only documentation has changed
       - "**.md"
 
+  # the merge will also trigger a push, so it would build twice.
+  # since I have not the need to check the build before merging, I disabled it.
   # Pull‑request events – only for PRs targeting main or test
-  pull_request:
-    branches:
-      - main
-      - test
+  #pull_request:
+  #  branches:
+  #    - main
+  #    - test
   workflow_dispatch: # allow manually triggering builds
 concurrency:
   # only run one build at a time

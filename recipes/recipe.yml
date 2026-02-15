@@ -12,29 +12,23 @@ image-version: stable # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-#  - type: files
-#    files:
-#      - source: system
-#        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
     repos:
-#      copr:
-#        - atim/starship
       cleanup: true 
-#      nonfree: rpmfusion
       files:
         - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
-#        - https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
-#        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 
     install:
-#      install-weak-deps: true
       packages:
-#        - steam
-#        - codium
+        - codium
         - vivaldi-stable
 #        - micro
 #        - starship
@@ -46,7 +40,9 @@ modules:
 #        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
   - type: script
     scripts:
-#      - install-proton-pass.sh
+      - install-proton-vpn.sh
+      - install-proton-pass.sh
+      - install-proton-mail.sh
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
   - type: default-flatpaks
