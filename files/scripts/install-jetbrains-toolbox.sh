@@ -42,7 +42,7 @@ sudo tee "$AUTOSTART_SCRIPT" > /dev/null <<'EOF'
 if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Only launch if the official desktop file hasn't been created yet
     if [[ ! -f "$HOME/.local/share/applications/jetbrains-toolbox.desktop" ]]; then
-        /usr/local/bin/jetbrains-toolbox --nosplash &
+        /opt/jetbrains-toolbox/bin/jetbrains-toolbox --nosplash &
     fi
 fi
 EOF
