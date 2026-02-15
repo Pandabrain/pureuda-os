@@ -58,6 +58,19 @@ modules:
 #          - org.mozilla.firefox
 #          - org.gnome.Loupe
            - org.gnome.Calculator
+           - com.discordapp.Discord
+           - org.jellyfin.JellyfinDesktop
+           - org.telegram.desktop
+           - org.libreoffice.LibreOffice
+           - com.github.tchx84.Flatseal
+           - io.github.kolunmi.Bazaar
+           - io.github.flattool.Warehouse
+           - com.ranfdev.DistroShelf
+           - org.torproject.torbrowser-launcher
+           - io.podman_desktop.PodmanDesktop
+           - org.kde.haruna
+           - org.inkscape.Inkscape
+           - org.gimp.GIMP
         remove:
           - org.mozilla.Thunderbird
           - org.kde.kontakt
