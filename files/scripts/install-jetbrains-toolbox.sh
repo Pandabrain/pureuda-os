@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -exuo pipefail
 
 # ----------------------------------------------------------------------
 # 1️⃣ Determine the latest Linux Toolbox tarball URL
 # ----------------------------------------------------------------------
 API_URL="https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release"
-URL=$(curl -sSf "$API_URL" |
-      grep -Po '"linux":\s*{"link":\s*"\K[^"]+')
+URL=$(curl -sSfL "$API_URL" |
+      grep -Po '"linux":\s*{"link":\s*"\K[^"]+' || echo "")
 if [[ -z "$URL" ]]; then
     echo "❌ Could not locate the download URL – the JetBrains API may have changed."
     exit 1
@@ -23,7 +23,7 @@ mkdir -p "$INSTALL_ROOT"
 # 3️⃣ Stream the tarball and extract the full tree
 # ----------------------------------------------------------------------
 echo "📦 Extracting Toolbox into $INSTALL_ROOT ..."
-curl -L "$URL" |
+curl -sSfL "$URL" |
     tar -xz -C "$INSTALL_ROOT" \
         --strip-components=1   # keep the whole directory layout
 

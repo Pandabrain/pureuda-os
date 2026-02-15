@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -exuo pipefail
 
 # This script installs Joplin system-wide in a BlueBuild image.
 # It is adapted from the official Joplin Linux installation script.
@@ -50,8 +50,8 @@ echo "🚀 Starting Joplin installation..."
 # 1. Get the latest version to download
 echo "🔍 Checking for latest Joplin version..."
 TEMP_JSON=$(mktemp)
-curl -sSf "https://api.github.com/repos/laurent22/joplin/releases/latest" -o "$TEMP_JSON"
-RELEASE_VERSION=$(grep -Po '"tag_name": ?"v\K.*?(?=")' "$TEMP_JSON")
+curl -sSfL "https://api.github.com/repos/laurent22/joplin/releases/latest" -o "$TEMP_JSON"
+RELEASE_VERSION=$(grep -Po '"tag_name": ?"v\K.*?(?=")' "$TEMP_JSON" || echo "")
 rm "$TEMP_JSON"
 
 if [[ -z "$RELEASE_VERSION" ]]; then

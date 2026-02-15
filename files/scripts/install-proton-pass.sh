@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -exuo pipefail
 
 echo "Fetching latest Proton Pass RPM URL..."
 JSON_URL="https://proton.me/download/PassDesktop/linux/x64/version.json"
 TEMP_JSON=$(mktemp)
-curl -sSf "$JSON_URL" -o "$TEMP_JSON"
-URL=$(grep -Po '"Url":\s*"\Khttps://[^"]+\.rpm' "$TEMP_JSON" | head -n 1)
+curl -sSfL "$JSON_URL" -o "$TEMP_JSON"
+URL=$(grep -Po '"Url":\s*"\Khttps://[^"]+\.rpm' "$TEMP_JSON" | head -n 1 || echo "")
 rm "$TEMP_JSON"
 
 ## Mock systemctl to prevent failing scriptlets in container environment
