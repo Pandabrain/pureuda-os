@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -exuo pipefail
 
 echo "🚀 Installing Flutter SDK..."
 
@@ -9,13 +9,17 @@ echo "🔍 Fetching release information from $RELEASES_JSON ..."
 
 # Use a temporary file to avoid curl error 23 (SIGPIPE) when the pipe is closed early by grep
 TEMP_RELEASES_JSON=$(mktemp)
-curl -sSf "$RELEASES_JSON" -o "$TEMP_RELEASES_JSON"
+if ! curl -sSfL "$RELEASES_JSON" -o "$TEMP_RELEASES_JSON"; then
+    echo "❌ Failed to download release information from $RELEASES_JSON"
+    exit 1
+fi
 
 # Use grep to find the latest stable archive path
 # We look for the first occurrence of "archive" after the "stable" channel indicator
-ARCHIVE_PATH=$(grep -A 10 '"channel": "stable"' "$TEMP_RELEASES_JSON" | grep -m 1 '"archive":' | cut -d '"' -f 4)
+# We use || echo "" to prevent pipefail from exiting if grep fails
+ARCHIVE_PATH=$(grep -A 10 '"channel": "stable"' "$TEMP_RELEASES_JSON" | grep -Po '"archive":\s*"\K[^"]+' | head -n 1 || echo "")
 
-rm "$TEMP_RELEASES_JSON"
+rm -f "$TEMP_RELEASES_JSON"
 
 if [[ -z "$ARCHIVE_PATH" ]]; then
     echo "❌ Could not determine latest Flutter stable version."

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -exuo pipefail
 
 # 1. Determine Fedora version
 FEDORA_VERSION=$(rpm -E %fedora)
@@ -19,7 +19,7 @@ echo "🚀 Detected Fedora version: $FEDORA_VERSION"
 BASE_URL="https://repo.protonvpn.com/fedora-${FEDORA_VERSION}-stable/protonvpn-stable-release/"
 echo "🔍 Searching for latest release RPM at $BASE_URL ..."
 
-RPM_NAME=$(curl -sSf "$BASE_URL" | grep -Po 'href="\Kprotonvpn-stable-release-[^"]+\.noarch\.rpm' | sort -V | tail -n 1)
+RPM_NAME=$(curl -sSfL "$BASE_URL" | grep -Po 'href="\Kprotonvpn-stable-release-[^"]+\.noarch\.rpm' | sort -V | tail -n 1 || echo "")
 
 if [[ -z "$RPM_NAME" ]]; then
     echo "❌ Could not find the Proton VPN release RPM in the directory listing."
