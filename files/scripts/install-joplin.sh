@@ -49,7 +49,10 @@ echo "🚀 Starting Joplin installation..."
 
 # 1. Get the latest version to download
 echo "🔍 Checking for latest Joplin version..."
-RELEASE_VERSION=$(curl -s "https://api.github.com/repos/laurent22/joplin/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
+TEMP_JSON=$(mktemp)
+curl -sSf "https://api.github.com/repos/laurent22/joplin/releases/latest" -o "$TEMP_JSON"
+RELEASE_VERSION=$(grep -Po '"tag_name": ?"v\K.*?(?=")' "$TEMP_JSON")
+rm "$TEMP_JSON"
 
 if [[ -z "$RELEASE_VERSION" ]]; then
     echo "❌ Could not determine latest Joplin version."
@@ -64,14 +67,14 @@ mkdir -p "$INSTALL_DIR"
 # 3. Download Joplin AppImage
 echo "📥 Downloading Joplin AppImage..."
 # We use DOWNLOAD_TYPE="New" as per the original script for a fresh install
-curl -Lo "$INSTALL_DIR/Joplin.AppImage" "https://objects.joplinusercontent.com/v${RELEASE_VERSION}/Joplin-${RELEASE_VERSION}.AppImage?source=LinuxInstallScript&type=New"
+curl -sSfLo "$INSTALL_DIR/Joplin.AppImage" "https://objects.joplinusercontent.com/v${RELEASE_VERSION}/Joplin-${RELEASE_VERSION}.AppImage?source=LinuxInstallScript&type=New"
 chmod +x "$INSTALL_DIR/Joplin.AppImage"
 
 # 4. Download and install icon
 echo "📥 Downloading Joplin icon..."
 ICON_DIR="/usr/share/icons/hicolor/512x512/apps"
 mkdir -p "$ICON_DIR"
-curl -Lo "$ICON_DIR/joplin.png" "https://joplinapp.org/images/Icon512.png"
+curl -sSfLo "$ICON_DIR/joplin.png" "https://joplinapp.org/images/Icon512.png"
 
 # 5. Create Desktop Entry
 echo "🖥️ Creating Desktop Entry..."
