@@ -40,6 +40,7 @@ modules:
 #        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
   - type: script
     scripts:
+      - install-proton-vpn.sh
       - install-proton-pass.sh
       - install-proton-mail.sh
       - set-fish-shell.sh
