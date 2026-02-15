@@ -40,7 +40,7 @@ modules:
 #        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
   - type: script
     scripts:
-#      - install-proton-pass.sh
+      - install-proton-pass.sh
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
   - type: default-flatpaks
