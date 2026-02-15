@@ -25,11 +25,13 @@ modules:
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
         - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+        - https://dl.google.com/linux/linux_signing_key.pub
 
     install:
       packages:
         - codium
         - vivaldi-stable
+        - google-chrome-stable
 #        - micro
 #        - starship
 #    remove:
