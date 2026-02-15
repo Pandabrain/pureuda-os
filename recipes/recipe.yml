@@ -25,11 +25,18 @@ modules:
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
         - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+        - https://dl.google.com/linux/linux_signing_key.pub
 
     install:
       packages:
         - codium
         - vivaldi-stable
+        - google-chrome-stable
+        - git
+        - cmake
+        - ninja-build
+        - gtk3-devel
+        - mesa-libGLU-devel
 #        - micro
 #        - starship
 #    remove:
@@ -46,6 +53,7 @@ modules:
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
       - install-joplin.sh
+      - install-flutter.sh
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
@@ -63,11 +71,13 @@ modules:
            - io.github.kolunmi.Bazaar
            - io.github.flattool.Warehouse
            - com.ranfdev.DistroShelf
-           - org.torproject.torbrowser-launcher
            - io.podman_desktop.PodmanDesktop
            - org.kde.haruna
            - org.inkscape.Inkscape
            - org.gimp.GIMP
+           - org.freecad.FreeCAD
+           - org.deskflow.deskflow
+           - com.bambulab.BambuStudio
         remove:
           - org.mozilla.Thunderbird
           - org.kde.kontakt
