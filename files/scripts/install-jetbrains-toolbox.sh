@@ -1,34 +1,59 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# 1. Fetch latest download URL
-URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' | grep -Po '"linux":\s*\{"link":\s*"\K[^"]+')
+# ----------------------------------------------------------------------
+# 1️⃣ Determine the latest Linux Toolbox tarball URL
+# ----------------------------------------------------------------------
+API_URL="https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release"
+URL=$(curl -sSf "$API_URL" |
+      grep -Po '"linux":\s*{"link":\s*"\K[^"]+')
+if [[ -z "$URL" ]]; then
+    echo "❌ Could not locate the download URL – the JetBrains API may have changed."
+    exit 1
+fi
+echo "🔗 Download URL: $URL"
 
-# Make sure the target directory exists (needs root)
-sudo mkdir -p /usr/bin/jetbrains-toolbox
+# ----------------------------------------------------------------------
+# 2️⃣ Install location (root‑owned, but outside /usr/bin)
+# ----------------------------------------------------------------------
+INSTALL_ROOT="/opt/jetbrains-toolbox"
+sudo mkdir -p "$INSTALL_ROOT"
 
-# Pull the tarball, stream it into tar, and extract only the bin/* tree
-curl -L "$URL" \
-| sudo tar -xz \
-      -C /usr/bin/jetbrains-toolbox \
-      --strip-components=2 \
-      --wildcards '*/bin/*'
+# ----------------------------------------------------------------------
+# 3️⃣ Stream the tarball and extract the full tree
+# ----------------------------------------------------------------------
+echo "📦 Extracting Toolbox into $INSTALL_ROOT ..."
+curl -L "$URL" |
+    sudo tar -xz -C "$INSTALL_ROOT" \
+        --strip-components=1   # keep the whole directory layout
 
-# 3. Handle Autostart via /etc/profile.d/
-# Instead of a .desktop file, we place a shell script in profile.d.
-# This runs when you log in. It checks if the toolbox has already 
-# initialized itself. If not, it launches it.
-mkdir -p /etc/profile.d
-cat <<EOF > /etc/profile.d/jetbrains-toolbox-start.sh
-# Only run for interactive graphical sessions
-if [ -n "\$DISPLAY" ] || [ -n "\$WAYLAND_DISPLAY" ]; then
-    # If the user hasn't initialized the toolbox yet, start it.
-    # Once it starts, it creates its own official .desktop file 
-    # and handles its own future autostarts.
-    if [ ! -f "\$HOME/.local/share/applications/jetbrains-toolbox.desktop" ]; then
-        /usr/bin/jetbrains-toolbox --nosplash &
+# ----------------------------------------------------------------------
+# 4️⃣ Symlink the launcher into a standard bin directory
+# ----------------------------------------------------------------------
+# or I'd rather not, jetbrains creates a desktop file and autostart entry on its own, that's enough
+#sudo ln -sf "$INSTALL_ROOT/jetbrains-toolbox" /usr/local/bin/jetbrains-toolbox
+
+# ----------------------------------------------------------------------
+# 5️⃣ Autostart helper – placed in /etc/profile.d/
+# ----------------------------------------------------------------------
+AUTOSTART_SCRIPT="/etc/profile.d/jetbrains-toolbox-start.sh"
+sudo tee "$AUTOSTART_SCRIPT" > /dev/null <<'EOF'
+# JetBrains Toolbox autostart (runs once per login session)
+if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    # Only launch if the official desktop file hasn't been created yet
+    if [[ ! -f "$HOME/.local/share/applications/jetbrains-toolbox.desktop" ]]; then
+        /usr/local/bin/jetbrains-toolbox --nosplash &
     fi
 fi
 EOF
 
-echo "Binary installed to /usr/bin. Initialization script added to /etc/profile.d/."
+# Ensure the script is executable (profile.d scripts are sourced, not executed)
+sudo chmod 644 "$AUTOSTART_SCRIPT"
+
+# ----------------------------------------------------------------------
+# 6️⃣ Finish up
+# ----------------------------------------------------------------------
+echo "✅ JetBrains Toolbox installed to $INSTALL_ROOT"
+echo "   Launcher symlink: /usr/local/bin/jetbrains-toolbox"
+echo "   Autostart hook: $AUTOSTART_SCRIPT"
+echo "You may need to log out/in (or source /etc/profile) for the autostart to take effect."
