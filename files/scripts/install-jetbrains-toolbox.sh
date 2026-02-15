@@ -6,7 +6,7 @@ URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&la
 
 # 2. Extract binary to /usr/bin
 # This makes it part of your immutable image
-curl -L "$URL" | tar -xz -C /usr/bin --strip-components=1 --wildcards "*/jetbrains-toolbox"
+curl -L "$URL" | tar -xz -O --wildcards "*/jetbrains-toolbox" > /usr/bin/jetbrains-toolbox
 
 # 3. Handle Autostart via /etc/profile.d/
 # Instead of a .desktop file, we place a shell script in profile.d.
