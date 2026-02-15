@@ -30,7 +30,6 @@ modules:
       packages:
         - codium
         - vivaldi-stable
-        - fuse2-libs
 #        - micro
 #        - starship
 #    remove:
