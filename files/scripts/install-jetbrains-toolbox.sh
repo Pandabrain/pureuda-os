@@ -17,14 +17,14 @@ echo "🔗 Download URL: $URL"
 # 2️⃣ Install location (root‑owned, but outside /usr/bin)
 # ----------------------------------------------------------------------
 INSTALL_ROOT="/opt/jetbrains-toolbox"
-sudo mkdir -p "$INSTALL_ROOT"
+mkdir -p "$INSTALL_ROOT"
 
 # ----------------------------------------------------------------------
 # 3️⃣ Stream the tarball and extract the full tree
 # ----------------------------------------------------------------------
 echo "📦 Extracting Toolbox into $INSTALL_ROOT ..."
 curl -L "$URL" |
-    sudo tar -xz -C "$INSTALL_ROOT" \
+    tar -xz -C "$INSTALL_ROOT" \
         --strip-components=1   # keep the whole directory layout
 
 # ----------------------------------------------------------------------
@@ -37,7 +37,7 @@ curl -L "$URL" |
 # 5️⃣ Autostart helper – placed in /etc/profile.d/
 # ----------------------------------------------------------------------
 AUTOSTART_SCRIPT="/etc/profile.d/jetbrains-toolbox-start.sh"
-sudo tee "$AUTOSTART_SCRIPT" > /dev/null <<'EOF'
+tee "$AUTOSTART_SCRIPT" > /dev/null <<'EOF'
 # JetBrains Toolbox autostart (runs once per login session)
 if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
     # Only launch if the official desktop file hasn't been created yet
@@ -48,7 +48,7 @@ fi
 EOF
 
 # Ensure the script is executable (profile.d scripts are sourced, not executed)
-sudo chmod 644 "$AUTOSTART_SCRIPT"
+chmod 644 "$AUTOSTART_SCRIPT"
 
 # ----------------------------------------------------------------------
 # 6️⃣ Finish up
