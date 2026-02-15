@@ -3,7 +3,10 @@ set -euo pipefail
 
 echo "Fetching latest Proton Mail RPM URL..."
 JSON_URL="https://proton.me/download/mail/linux/version.json"
-URL=$(curl -sSf "$JSON_URL" | grep -Po '"Url":\s*"\Khttps://[^"]+\.rpm' | head -n 1)
+TEMP_JSON=$(mktemp)
+curl -sSf "$JSON_URL" -o "$TEMP_JSON"
+URL=$(grep -Po '"Url":\s*"\Khttps://[^"]+\.rpm' "$TEMP_JSON" | head -n 1)
+rm "$TEMP_JSON"
 
 ## Mock systemctl to prevent failing scriptlets in container environment
 #mkdir -p /tmp/mock-bin

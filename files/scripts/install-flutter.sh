@@ -7,9 +7,15 @@ echo "🚀 Installing Flutter SDK..."
 RELEASES_JSON="https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
 echo "🔍 Fetching release information from $RELEASES_JSON ..."
 
+# Use a temporary file to avoid curl error 23 (SIGPIPE) when the pipe is closed early by grep
+TEMP_RELEASES_JSON=$(mktemp)
+curl -sSf "$RELEASES_JSON" -o "$TEMP_RELEASES_JSON"
+
 # Use grep to find the latest stable archive path
 # We look for the first occurrence of "archive" after the "stable" channel indicator
-ARCHIVE_PATH=$(curl -sSf "$RELEASES_JSON" | grep -A 10 '"channel": "stable"' | grep -m 1 '"archive":' | cut -d '"' -f 4)
+ARCHIVE_PATH=$(grep -A 10 '"channel": "stable"' "$TEMP_RELEASES_JSON" | grep -m 1 '"archive":' | cut -d '"' -f 4)
+
+rm "$TEMP_RELEASES_JSON"
 
 if [[ -z "$ARCHIVE_PATH" ]]; then
     echo "❌ Could not determine latest Flutter stable version."
@@ -27,7 +33,7 @@ INSTALL_ROOT="/opt"
 echo "📦 Extracting Flutter into /opt/flutter ..."
 # Ensure /opt exists
 mkdir -p /opt
-curl -L "$URL" | tar -xJ -C "$INSTALL_ROOT"
+curl -sSfL "$URL" | tar -xJ -C "$INSTALL_ROOT"
 
 # 4. Permissions
 echo "🔐 Setting permissions..."
