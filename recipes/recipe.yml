@@ -30,6 +30,7 @@ modules:
       packages:
         - codium
         - vivaldi-stable
+        - fuse2-libs
 #        - micro
 #        - starship
 #    remove:
@@ -45,6 +46,7 @@ modules:
       - install-proton-mail.sh
       - set-fish-shell.sh
       - install-jetbrains-toolbox.sh
+      - install-joplin.sh
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
