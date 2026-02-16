@@ -42,8 +42,8 @@ jobs:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
         recipe:
-          # !! Add your recipes here
-          - recipe.yml
+          - recipes/pureuda-os.yml
+          - recipes/pureuda-os-gaming.yml
     steps:
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
