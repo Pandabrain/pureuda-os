@@ -13,6 +13,7 @@ install:
     - codium
     - vivaldi-stable
     - google-chrome-stable
+    - audacity.x86_64
 
     #flutter dependencies
     - cmake
