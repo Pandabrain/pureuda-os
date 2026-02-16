@@ -15,7 +15,7 @@ install-flutter:
         exit 0
     fi
     mkdir -p "$INSTALL_DIR"
-    
+
     # Check for dependencies
     for cmd in git curl tar; do
         if ! command -v $cmd &> /dev/null; then
@@ -42,7 +42,7 @@ install-flutter:
     echo "🔗 Latest stable release: $VERSION"
     echo "📥 Downloading and extracting Flutter..."
     curl -sSfL "$URL" | tar -xJ -C "$INSTALL_DIR" --strip-components=1
-    
+
     echo "⚙️ Configuring PATH..."
     # Bash configuration
     if ! grep -q "develop/flutter/bin" ~/.bashrc; then
@@ -55,7 +55,7 @@ install-flutter:
         } >> ~/.bashrc
         echo "✅ Added Flutter configuration to ~/.bashrc"
     fi
-    
+
     # Fish configuration
     if [ -d ~/.config/fish ] || [ -f /usr/bin/fish ]; then
         mkdir -p ~/.config/fish/conf.d
@@ -83,10 +83,10 @@ install-flutter:
             echo "✅ Added Flutter configuration to ~/.zshrc"
         fi
     fi
-    
+
     echo "🔄 Running flutter precache..."
     "$INSTALL_DIR/bin/flutter" precache
-    
+
     echo "✅ Flutter installed successfully!"
     echo "Please restart your shell or source your config file."
 
