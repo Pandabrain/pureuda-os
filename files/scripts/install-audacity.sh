@@ -35,9 +35,18 @@ echo "📥 Downloading Audacity AppImage..."
 curl -sSfLo "$INSTALL_DIR/audacity.AppImage" "$DOWNLOAD_URL"
 chmod +x "$INSTALL_DIR/audacity.AppImage"
 
-# 5. Create symlink
-mkdir -p /usr/local/bin
-ln -sf "$INSTALL_DIR/audacity.AppImage" /usr/local/bin/audacity
+# 5. Create wrapper script
+mkdir -p /usr/bin
+cat > /usr/bin/audacity <<EOF
+#!/bin/bash
+# Force X11 to fix missing window decorations on Wayland
+export GDK_BACKEND=x11
+# Prevent AppImageLauncher from interfering with system-wide installation
+export APPIMAGELAUNCHER_DISABLE=TRUE
+# Use --appimage-extract-and-run for better compatibility and to avoid FUSE issues
+exec "$INSTALL_DIR/audacity.AppImage" --appimage-extract-and-run "\$@"
+EOF
+chmod +x /usr/bin/audacity
 
 # 6. Icon
 echo "📥 Downloading Audacity icon..."
