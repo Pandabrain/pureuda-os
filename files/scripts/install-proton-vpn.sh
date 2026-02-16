@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
-# 1. Determine Fedora version
 FEDORA_VERSION=$(rpm -E %fedora)
-echo "🚀 Detected Fedora version: $FEDORA_VERSION"
+REPO_RPM_URL="https://repo.protonvpn.com/fedora-${FEDORA_VERSION}-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm"
 
 # Mock systemctl to prevent failing scriptlets in container environment
 mkdir -p /tmp/mock-bin
@@ -14,31 +13,14 @@ EOF
 chmod +x /tmp/mock-bin/systemctl
 export PATH="/tmp/mock-bin:$PATH"
 
-# 2. Find the latest release RPM URL
-# The directory structure is https://repo.protonvpn.com/fedora-<version>-stable/protonvpn-stable-release/
-BASE_URL="https://repo.protonvpn.com/fedora-${FEDORA_VERSION}-stable/protonvpn-stable-release/"
-echo "🔍 Searching for latest release RPM at $BASE_URL ..."
+echo "🔗 Downloading Proton VPN repository configuration from: $REPO_RPM_URL"
+dnf install -y "$REPO_RPM_URL"
 
-RPM_NAME=$(curl -sSfL "$BASE_URL" | grep -Po 'href="\Kprotonvpn-stable-release-[^"]+\.noarch\.rpm' | sort -V | tail -n 1 || echo "")
+echo "🔄 Refreshing dnf cache..."
+dnf check-update --refresh || true
 
-if [[ -z "$RPM_NAME" ]]; then
-    echo "❌ Could not find the Proton VPN release RPM in the directory listing."
-    exit 1
-fi
-
-URL="${BASE_URL}${RPM_NAME}"
-echo "🔗 Found latest release RPM: $URL"
-
-# 3. Install the repository package
-echo "📦 Installing Proton VPN repository..."
-dnf install -y "$URL"
-
-# 4. Refresh and install the VPN app
-echo "🔄 Refreshing dnf and installing Proton VPN..."
-dnf check-update --refresh || true # check-update might return 100 if updates are available, which is fine
+echo "📦 Installing Proton VPN..."
 dnf install -y proton-vpn-gnome-desktop
-
-echo "✅ Proton VPN installation completed successfully."
 
 # Clean up mock
 rm -rf /tmp/mock-bin
