@@ -19,6 +19,7 @@ configurations:
        - org.freecad.FreeCAD
        - org.deskflow.deskflow
        - com.bambulab.BambuStudio
+       - it.mijorus.gearlever
     remove:
       - org.mozilla.Thunderbird
       - org.kde.kontakt

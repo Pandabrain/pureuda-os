@@ -13,8 +13,9 @@ install:
     - codium
     - vivaldi-stable
     - google-chrome-stable
-    - git
+    - audacity.x86_64
+
+    #flutter dependencies
     - cmake
     - ninja-build
     - gtk3-devel
-    - mesa-libGLU-devel
