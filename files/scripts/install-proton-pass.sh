@@ -8,14 +8,14 @@ curl -sSfL "$JSON_URL" -o "$TEMP_JSON"
 URL=$(grep -Po '"Url":\s*"\Khttps://[^"]+\.rpm' "$TEMP_JSON" | head -n 1 || echo "")
 rm "$TEMP_JSON"
 
-## Mock systemctl to prevent failing scriptlets in container environment
-#mkdir -p /tmp/mock-bin
-#cat <<EOF > /tmp/mock-bin/systemctl
-##!/bin/bash
-#exit 0
-#EOF
-#chmod +x /tmp/mock-bin/systemctl
-#export PATH="/tmp/mock-bin:$PATH"
+# Mock systemctl to prevent failing scriptlets in container environment
+mkdir -p /tmp/mock-bin
+cat <<EOF > /tmp/mock-bin/systemctl
+#!/bin/bash
+exit 0
+EOF
+chmod +x /tmp/mock-bin/systemctl
+export PATH="/tmp/mock-bin:$PATH"
 
 if [[ -z "$URL" ]]; then
     echo "❌ Could not locate the Proton Pass RPM download URL."

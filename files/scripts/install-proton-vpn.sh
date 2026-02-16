@@ -5,14 +5,14 @@ set -exuo pipefail
 FEDORA_VERSION=$(rpm -E %fedora)
 echo "🚀 Detected Fedora version: $FEDORA_VERSION"
 
-## Mock systemctl to prevent failing scriptlets in container environment
-#mkdir -p /tmp/mock-bin
-#cat <<EOF > /tmp/mock-bin/systemctl
-##!/bin/bash
-#exit 0
-#EOF
-#chmod +x /tmp/mock-bin/systemctl
-#export PATH="/tmp/mock-bin:$PATH"
+# Mock systemctl to prevent failing scriptlets in container environment
+mkdir -p /tmp/mock-bin
+cat <<EOF > /tmp/mock-bin/systemctl
+#!/bin/bash
+exit 0
+EOF
+chmod +x /tmp/mock-bin/systemctl
+export PATH="/tmp/mock-bin:$PATH"
 
 # 2. Find the latest release RPM URL
 # The directory structure is https://repo.protonvpn.com/fedora-<version>-stable/protonvpn-stable-release/

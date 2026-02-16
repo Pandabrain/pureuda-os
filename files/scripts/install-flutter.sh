@@ -67,6 +67,10 @@ export PATH="$PATH:/opt/flutter/bin"
 # But usually in container builds HOME is /root
 export FLUTTER_ROOT="/opt/flutter"
 
+# Fix "dubious ownership" error in git when running as root during build
+# The error log showed /usr/lib/opt/flutter, but we'll allow all to be safe
+git config --global --add safe.directory '*'
+
 # Disable analytics
 flutter config --no-analytics
 
