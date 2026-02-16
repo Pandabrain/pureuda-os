@@ -6,6 +6,4 @@ scripts:
   - set-fish-shell.sh
   - install-jetbrains-toolbox.sh
   - install-joplin.sh
-  - install-flutter.sh
   - configure-gearlever.sh
-  - configure-flatpak-update.sh
