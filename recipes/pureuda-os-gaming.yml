@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: pureuda-os-gaming
+description: This is my personal gaming OS image.
+base-image: ghcr.io/ublue-os/bazzite-dx
+image-version: stable
+modules:
+  - from-file: common/files.yml
+  - from-file: common/dnf.yml
+  - from-file: common/scripts.yml
+  - from-file: common/flatpaks.yml
+  - from-file: common/signing.yml

@@ -1,0 +1,10 @@
+type: script
+scripts:
+  - install-proton-vpn.sh
+  - install-proton-pass.sh
+  - install-proton-mail.sh
+  - set-fish-shell.sh
+  - install-jetbrains-toolbox.sh
+  - install-joplin.sh
+  - install-flutter.sh
+  - install-audacity.sh
