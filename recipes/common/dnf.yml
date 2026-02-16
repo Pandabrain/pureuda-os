@@ -13,8 +13,8 @@ install:
     - codium
     - vivaldi-stable
     - google-chrome-stable
-    - git
+
+    #flutter dependencies
     - cmake
     - ninja-build
     - gtk3-devel
-    - mesa-libGLU-devel
