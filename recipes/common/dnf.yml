@@ -16,6 +16,7 @@ install:
     - audacity.x86_64
 
     #flutter dependencies
+    - clang
     - cmake
     - ninja-build
     - gtk3-devel
