@@ -49,10 +49,9 @@ echo "🚀 Starting Joplin installation..."
 
 # 1. Get the latest version to download
 echo "🔍 Checking for latest Joplin version..."
-TEMP_JSON=$(mktemp)
-curl -sSfL "https://api.github.com/repos/laurent22/joplin/releases/latest" -o "$TEMP_JSON"
-RELEASE_VERSION=$(grep -Po '"tag_name": ?"v\K.*?(?=")' "$TEMP_JSON" || echo "")
-rm "$TEMP_JSON"
+# We avoid using the GitHub API (api.github.com) to prevent rate limiting issues in CI.
+# Instead, we follow the redirect from the latest release page to get the tag name.
+RELEASE_VERSION=$(curl -sSfI "https://github.com/laurent22/joplin/releases/latest" | grep -i "^location:" | grep -oP 'v\K[^/\s\r]+' || echo "")
 
 if [[ -z "$RELEASE_VERSION" ]]; then
     echo "❌ Could not determine latest Joplin version."
