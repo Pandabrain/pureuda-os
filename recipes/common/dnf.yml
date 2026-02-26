@@ -13,7 +13,13 @@ install:
     - codium
     - vivaldi-stable
     - google-chrome-stable
-    - audacity.x86_64
+    - audacity
+    - gnome-calculator
+    - haruna
+    - discord
+    - libreoffice
+    - flatseal
+    - bazaar
 
     #flutter dependencies
     - clang
