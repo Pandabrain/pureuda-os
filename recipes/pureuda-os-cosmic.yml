@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: pureuda-os-cosmic
+description: This is my personal Cosmic OS image.
+base-image: ghcr.io/ublue-os/cosmic
+image-version: stable
+modules:
+  - from-file: common/files.yml
+  - from-file: common/dnf.yml
+  - from-file: common/scripts.yml
+  - from-file: common/flatpaks.yml
+  - from-file: common/signing.yml
+  - from-file: common/justfiles.yml
