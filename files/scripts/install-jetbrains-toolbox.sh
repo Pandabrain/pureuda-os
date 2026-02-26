@@ -34,26 +34,6 @@ curl -sSfL "$URL" |
 #sudo ln -sf "$INSTALL_ROOT/jetbrains-toolbox" /usr/local/bin/jetbrains-toolbox
 
 # ----------------------------------------------------------------------
-# 5️⃣ Autostart helper – placed in /etc/profile.d/
-# ----------------------------------------------------------------------
-AUTOSTART_SCRIPT="/etc/profile.d/jetbrains-toolbox-start.sh"
-tee "$AUTOSTART_SCRIPT" > /dev/null <<'EOF'
-# JetBrains Toolbox autostart (runs once per login session)
-if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
-    # Only launch if the official desktop file hasn't been created yet
-    if [[ ! -f "$HOME/.local/share/applications/jetbrains-toolbox.desktop" ]]; then
-        /opt/jetbrains-toolbox/bin/jetbrains-toolbox --nosplash &
-    fi
-fi
-EOF
-
-# Ensure the script is executable (profile.d scripts are sourced, not executed)
-chmod 644 "$AUTOSTART_SCRIPT"
-
-# ----------------------------------------------------------------------
-# 6️⃣ Finish up
+# 5️⃣ Finish up
 # ----------------------------------------------------------------------
 echo "✅ JetBrains Toolbox installed to $INSTALL_ROOT"
-echo "   Launcher symlink: /usr/local/bin/jetbrains-toolbox"
-echo "   Autostart hook: $AUTOSTART_SCRIPT"
-echo "You may need to log out/in (or source /etc/profile) for the autostart to take effect."
