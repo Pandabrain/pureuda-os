@@ -1,8 +1,9 @@
 # pureuda-os & pureuda-os-gaming &nbsp; [![bluebuild build badge](https://github.com/pandabrain/pureuda-os/actions/workflows/build.yml/badge.svg)](https://github.com/pandabrain/pureuda-os/actions/workflows/build.yml)
 
-This repository builds two separate OS images:
+This repository builds three separate OS images:
 - **pureuda-os**: Based on Aurora DX
 - **pureuda-os-gaming**: Based on Bazzite DX
+- **pureuda-os-cosmic**: Based on Fedora Atomic Cosmic
 
 See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
 
@@ -51,6 +52,25 @@ To rebase an existing atomic Fedora installation to the latest build:
   systemctl reboot
   ```
 
+### pureuda-os-cosmic (Fedora Atomic Cosmic based)
+
+- First rebase to the unsigned image:
+  ```
+  rpm-ostree rebase ostree-unverified-registry:ghcr.io/pandabrain/pureuda-os-cosmic:latest
+  ```
+- Reboot:
+  ```
+  systemctl reboot
+  ```
+- Then rebase to the signed image:
+  ```
+  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/pandabrain/pureuda-os-cosmic:latest
+  ```
+- Reboot again:
+  ```
+  systemctl reboot
+  ```
+
 The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in the recipes, so you won't get accidentally updated to the next major version.
 
 ## ISO
@@ -67,4 +87,7 @@ cosign verify --key cosign.pub ghcr.io/pandabrain/pureuda-os
 
 # For pureuda-os-gaming
 cosign verify --key cosign.pub ghcr.io/pandabrain/pureuda-os-gaming
+
+# For pureuda-os-cosmic
+cosign verify --key cosign.pub ghcr.io/pandabrain/pureuda-os-cosmic
 ```

@@ -44,6 +44,7 @@ jobs:
         recipe:
           - pureuda-os.yml
           - pureuda-os-gaming.yml
+          - pureuda-os-cosmic.yml
     steps:
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
