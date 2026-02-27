@@ -1,0 +1,7 @@
+type: dnf
+repos:
+  cleanup: true
+
+install:
+  packages:
+    - bazaar
