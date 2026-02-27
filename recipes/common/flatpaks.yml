@@ -3,6 +3,7 @@ configurations:
   - notify: true
     scope: system
     install:
+       - io.github.kolunmi.Bazaar
        - com.discordapp.Discord
        - org.jellyfin.JellyfinDesktop
        - org.telegram.desktop
@@ -12,6 +13,7 @@ configurations:
        - org.freecad.FreeCAD
        - com.bambulab.BambuStudio
        - it.mijorus.gearlever
+       - app.zen_browser.zen
     remove:
       - org.mozilla.Thunderbird
       - org.kde.kontakt
