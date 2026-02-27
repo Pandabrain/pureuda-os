@@ -19,6 +19,9 @@ install:
     - discord
     - libreoffice
     - flatseal
+    - inkscape
+    - gimp
+    - deskflow
 
     #flutter dependencies
     - clang

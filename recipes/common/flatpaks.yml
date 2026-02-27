@@ -3,15 +3,13 @@ configurations:
   - notify: true
     scope: system
     install:
+       - com.discordapp.Discord
        - org.jellyfin.JellyfinDesktop
        - org.telegram.desktop
        - io.github.flattool.Warehouse
        - com.ranfdev.DistroShelf
        - io.podman_desktop.PodmanDesktop
-       - org.inkscape.Inkscape
-       - org.gimp.GIMP
        - org.freecad.FreeCAD
-       - org.deskflow.deskflow
        - com.bambulab.BambuStudio
        - it.mijorus.gearlever
     remove:
