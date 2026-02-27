@@ -19,7 +19,6 @@ install:
     - discord
     - libreoffice
     - flatseal
-    - bazaar
 
     #flutter dependencies
     - clang
