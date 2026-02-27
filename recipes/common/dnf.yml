@@ -21,6 +21,7 @@ install:
     - inkscape
     - gimp
     - deskflow
+    - gnome-calculator
 
     #flutter dependencies
     - clang
