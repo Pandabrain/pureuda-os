@@ -3,7 +3,7 @@
 name: pureuda-os-cosmic
 description: This is my personal Cosmic OS image.
 base-image: ghcr.io/blue-build/base-images/fedora-cosmic
-image-version: stable
+image-version: latest
 modules:
   - from-file: common/files.yml
   - from-file: common/dnf.yml
