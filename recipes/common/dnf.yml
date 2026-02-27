@@ -16,7 +16,6 @@ install:
     - audacity
     - gnome-calculator
     - haruna
-    - discord
     - libreoffice
     - flatseal
     - inkscape
