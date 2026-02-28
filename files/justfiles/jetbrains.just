@@ -1,4 +1,5 @@
 # Initialize JetBrains Toolbox
+
 # Starting the Toolbox for the first time creates its own desktop file and autostart entry.
 initialize-jetbrains-toolbox:
     #!/usr/bin/env bash
