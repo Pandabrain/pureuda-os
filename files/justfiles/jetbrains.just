@@ -3,7 +3,7 @@
 # Starting the Toolbox for the first time creates its own desktop file and autostart entry.
 initialize-jetbrains-toolbox:
     #!/usr/bin/env bash
-    if [ -x "/opt/jetbrains-toolbox/jetbrains-toolbox" ]; then
+    if [ -x "/opt/jetbrains-toolbox/bin/jetbrains-toolbox" ]; then
         echo "🚀 Starting JetBrains Toolbox..."
         "/opt/jetbrains-toolbox/jetbrains-toolbox" > /dev/null 2>&1 &
         echo "✅ JetBrains Toolbox has been started in the background."
