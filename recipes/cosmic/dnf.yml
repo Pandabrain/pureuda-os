@@ -11,6 +11,7 @@ install:
     - fish
     - tailscale
     - starship
+    - eog
 
     - origami-update-applet
     - topgrade
