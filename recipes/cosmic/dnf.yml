@@ -11,6 +11,7 @@ install:
     - fish
     - tailscale
     - starship
+    - eog
 
     - origami-update-applet
     - topgrade
@@ -21,3 +22,5 @@ install:
     - fcitx5-gtk
     - fcitx5-qt
     - fcitx5-hangul
+
+    - steam
