@@ -25,4 +25,3 @@ install:
     - fcitx5-hangul
 
     - steam
-    - libfdk-aac.i686

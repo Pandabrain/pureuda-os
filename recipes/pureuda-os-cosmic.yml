@@ -13,5 +13,6 @@ modules:
   - from-file: common/justfiles.yml
 
   - from-file: cosmic/files.yml
+  - from-file: cosmic/fix-dnf.yml
   - from-file: cosmic/dnf.yml
   - from-file: cosmic/systemd.yml
