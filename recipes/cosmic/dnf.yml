@@ -4,6 +4,7 @@ repos:
   copr:
     - atim/starship
     - lilay/origami-linux
+    - lilay/topgrade
 
 install:
   packages:
