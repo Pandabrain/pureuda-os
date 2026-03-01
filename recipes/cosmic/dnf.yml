@@ -3,14 +3,20 @@ repos:
   cleanup: true
   copr:
     - atim/starship
+    - lilay/origami-linux
 
 install:
   packages:
     - fish
     - tailscale
+    - starship
+
+    - origami-update-applet
+    - topgrade
+
+
     - fcitx5
     - fcitx5-configtool
     - fcitx5-gtk
     - fcitx5-qt
     - fcitx5-hangul
-    - starship
