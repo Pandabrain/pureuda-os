@@ -23,6 +23,7 @@ install:
     - deskflow
     - gnome-calculator
     - gnome-font-viewer
+    - mission-center
 
     #flutter dependencies
     - clang
