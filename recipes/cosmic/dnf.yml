@@ -5,6 +5,7 @@ repos:
 install:
   packages:
     - fish
+    - tailscale
     - fcitx5
     - fcitx5-configtool
     - fcitx5-gtk
