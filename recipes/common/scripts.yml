@@ -7,3 +7,4 @@ scripts:
   - install-jetbrains-toolbox.sh
   - install-joplin.sh
   - configure-gearlever.sh
+  - update-plymouth.sh
