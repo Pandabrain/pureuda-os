@@ -1,6 +1,8 @@
 type: dnf
 repos:
   cleanup: true
+  copr:
+    - atim/starship
 
 install:
   packages:
@@ -11,3 +13,4 @@ install:
     - fcitx5-gtk
     - fcitx5-qt
     - fcitx5-hangul
+    - starship
