@@ -1,6 +1,7 @@
 type: dnf
 repos:
   cleanup: true
+  nonfree: rpmfusion
   copr:
     - atim/starship
     - lilay/origami-linux
