@@ -26,3 +26,4 @@ install:
     - fcitx5-hangul
 
     - steam
+    - mangohud
