@@ -13,6 +13,7 @@ install:
     - tailscale
     - starship
     - eog
+    - ptyxis
 
     - origami-update-applet
     - topgrade

@@ -24,6 +24,8 @@ install:
     - gnome-calculator
     - gnome-font-viewer
     - mission-center
+    - meld
+    - okular
 
     #flutter dependencies
     - clang
