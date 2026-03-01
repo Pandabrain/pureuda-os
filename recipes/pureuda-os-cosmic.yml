@@ -14,3 +14,4 @@ modules:
 
   - from-file: cosmic/files.yml
   - from-file: cosmic/dnf.yml
+  - from-file: cosmic/systemd.yml
