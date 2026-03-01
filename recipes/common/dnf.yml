@@ -3,6 +3,7 @@ repos:
   cleanup: true 
   files:
     - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+    - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
   keys:
     - https://repo.vivaldi.com/archive/linux_signing_key.pub
     - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
@@ -23,7 +24,6 @@ install:
     - deskflow
     - gnome-calculator
     - gnome-font-viewer
-    - mission-center
     - meld
     - okular
 

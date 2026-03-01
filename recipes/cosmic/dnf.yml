@@ -18,12 +18,17 @@ install:
     - origami-update-applet
     - topgrade
 
-
     - fcitx5
     - fcitx5-configtool
     - fcitx5-gtk
     - fcitx5-qt
     - fcitx5-hangul
 
+
     - steam
     - mangohud
+    - gamescope
+
+    # from terra
+    - terra-release
+    - mission-center
