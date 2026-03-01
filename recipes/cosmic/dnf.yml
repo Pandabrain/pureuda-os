@@ -1,6 +1,10 @@
 type: dnf
+repos:
+  cleanup: true
+
 install:
   packages:
+    - fish
     - fcitx5
     - fcitx5-configtool
     - fcitx5-gtk
