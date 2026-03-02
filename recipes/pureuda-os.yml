@@ -12,5 +12,4 @@ modules:
   - from-file: common/justfiles.yml
   - from-file: common/fonts.yml
   - from-file: common/custom-kernel.yml
-  - from-file: common/fix-dnf.yml
   - from-file: common/systemd.yml
