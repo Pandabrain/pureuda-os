@@ -2,8 +2,8 @@ type: custom-kernel
 source: local
 kernel: cachyos-lto
 secrets:
-  - type: env
-    source: MOK_PRV
+  - type: file
+    source: /tmp/certs/MOK.priv
     mount:
       type: file
       destination: /tmp/certs/MOK.priv
