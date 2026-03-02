@@ -1,6 +1,5 @@
 type: script
 scripts:
-  - fix-dnf-conflicts.sh
   - install-proton-vpn.sh
   - install-gamescope-helpers.sh
   - install-proton-pass.sh
