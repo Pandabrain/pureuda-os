@@ -9,5 +9,4 @@ modules:
   - from-file: common/dnf.yml
   - from-file: common/scripts.yml
   - from-file: common/flatpaks.yml
-  - from-file: common/signing.yml
   - from-file: common/justfiles.yml
