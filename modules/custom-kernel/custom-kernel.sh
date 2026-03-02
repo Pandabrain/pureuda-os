@@ -7,6 +7,8 @@ err() { printf '[custom-kernel] Error: %s\n' "$*" >&2; }
 log "Starting custom-kernel module..."
 
 # ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
 
 KERNEL_TYPE=$(printf '%s' "$1" | jq -r '.kernel // "cachyos-lto"')
 INITRAMFS=$(printf '%s' "$1"   | jq -r '.initramfs // false')
@@ -23,9 +25,9 @@ elif [ -f "${SIGNING_KEY}" ] && [ -f "${SIGNING_CERT}" ] && [ -n "${MOK_PASSWORD
     log "SecureBoot signing enabled."
 else
     err "Invalid signing config:"
-    err "  sign.key:          ${SIGNING_KEY:-<empty>} ($( [ -f "${SIGNING_KEY}" ] && echo "exists" || echo "not found" ))"
-    err "  sign.cert:         ${SIGNING_CERT:-<empty>} ($( [ -f "${SIGNING_CERT}" ] && echo "exists" || echo "not found" ))"
-    err "  sign.mok-password: ${MOK_PASSWORD:-<empty>} ($( [ -n "${MOK_PASSWORD}" ] && echo "set" || echo "empty" ))"
+    err "  sign.key:          ${SIGNING_KEY:-<empty>}"
+    err "  sign.cert:         ${SIGNING_CERT:-<empty>}"
+    err "  sign.mok-password: ${MOK_PASSWORD:-<empty>}"
     exit 1
 fi
 
