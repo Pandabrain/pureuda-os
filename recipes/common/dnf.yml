@@ -60,3 +60,8 @@ install:
     - ninja-build
     - gtk3-devel
     - egl-utils
+
+remove:
+  auto-remove: true
+  packages:
+    - zram-generator-defaults
