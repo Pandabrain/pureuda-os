@@ -48,20 +48,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Extract MOK Key
-        shell: bash
-        run: |
-          mkdir -p .secure_files
-          echo "${{ secrets.MOK_PRV }}" > .secure_files/MOK.priv
-
-      - name: Install Cosign
-        shell: bash
-        run: |
-          COSIGN_VERSION="v3.0.2"
-          curl -Lo cosign https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64
-          chmod +x cosign
-          sudo mv cosign /usr/local/bin/
-
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.11
@@ -73,3 +59,5 @@ jobs:
 
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
+        env:
+          MOK_PRV: ${{ secrets.MOK_PRV }}
