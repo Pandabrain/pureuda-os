@@ -42,5 +42,32 @@ fi
 echo "🔗 Downloading and installing Proton Mail from: $URL"
 dnf install -y "$URL"
 
+# Extract and install icons into standard hicolor theme paths
+# This ensures that icons are available even in environments like COSMIC
+workdir=$(mktemp -d)
+trap 'rm -rf "$workdir"' EXIT
+cd "$workdir"
+
+# Extract icon from RPM
+# We know from previous analysis that it contains ./usr/share/pixmaps/proton-mail.png
+# and also assets in /usr/lib/proton-mail/
+rpm2cpio "$URL" | cpio -idmv "./usr/share/pixmaps/proton-mail.png" 2>/dev/null || true
+
+install_root="/usr/share/icons/hicolor"
+mkdir -p \
+  "$install_root/256x256/apps" \
+  "$install_root/128x128/apps"
+
+if [[ -f usr/share/pixmaps/proton-mail.png ]]; then
+  # Install into hicolor
+  install -m 0644 usr/share/pixmaps/proton-mail.png "$install_root/256x256/apps/proton-mail.png"
+  install -m 0644 usr/share/pixmaps/proton-mail.png "$install_root/128x128/apps/proton-mail.png"
+fi
+
+# Try to update icon caches if tool is present
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -f "$install_root" || true
+fi
+
 # Final installation message
-echo "✅ Proton Mail installation completed successfully."
+echo "✅ Proton Mail installation and icon extraction completed successfully."
