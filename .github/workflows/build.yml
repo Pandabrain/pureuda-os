@@ -3,7 +3,7 @@ on:
   schedule:
     - cron:
         "00 06 * * *" # build at 06:00 UTC every day
-    
+
   # Pushes – only when they land on main or test
   push:
     branches:
@@ -45,15 +45,6 @@ jobs:
           #- pureuda-os-gaming.yml
           - pureuda-os-cosmic.yml
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Create MOK key file
-        run: |
-          mkdir -p .secure_files
-          echo "${{ secrets.MOK_PRV }}" > .secure_files/MOK.priv
-          chmod 600 .secure_files/MOK.priv
-
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.11
