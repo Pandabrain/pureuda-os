@@ -19,11 +19,15 @@ MOK_PASSWORD=$(printf '%s' "$1"| jq -r '.sign["mok-password"] // ""')
 SECURE_BOOT=false
 
 # If the signing key is not found but MOK_PRV env var is present, create the file.
-if [ ! -f "${SIGNING_KEY}" ] && [ -n "${MOK_PRV:-}" ]; then
-    log "SIGNING_KEY not found at '${SIGNING_KEY}', but MOK_PRV is set. Creating temporary key file..."
-    mkdir -p "$(dirname "${SIGNING_KEY}")"
-    printf '%s' "${MOK_PRV}" >"${SIGNING_KEY}"
-    chmod 600 "${SIGNING_KEY}"
+if [ ! -f "${SIGNING_KEY}" ]; then
+    if [ -n "${MOK_PRV:-}" ]; then
+        log "SIGNING_KEY not found at '${SIGNING_KEY}', but MOK_PRV is set. Creating temporary key file..."
+        mkdir -p "$(dirname "${SIGNING_KEY}")"
+        printf '%s' "${MOK_PRV}" >"${SIGNING_KEY}"
+        chmod 600 "${SIGNING_KEY}"
+    else
+        log "SIGNING_KEY not found at '${SIGNING_KEY}' and MOK_PRV is not set."
+    fi
 fi
 
 if [ -z "${SIGNING_KEY}" ] && [ -z "${SIGNING_CERT}" ] && [ -z "${MOK_PASSWORD}" ]; then
@@ -33,9 +37,10 @@ elif [ -f "${SIGNING_KEY}" ] && [ -f "${SIGNING_CERT}" ] && [ -n "${MOK_PASSWORD
     log "SecureBoot signing enabled."
 else
     err "Invalid signing config:"
-    err "  sign.key:          ${SIGNING_KEY:-<empty>}"
-    err "  sign.cert:         ${SIGNING_CERT:-<empty>}"
-    err "  sign.mok-password: ${MOK_PASSWORD:-<empty>}"
+    err "  sign.key:          ${SIGNING_KEY:-<empty>} ($( [ -f "${SIGNING_KEY}" ] && echo "exists" || echo "not found" ))"
+    err "  sign.cert:         ${SIGNING_CERT:-<empty>} ($( [ -f "${SIGNING_CERT}" ] && echo "exists" || echo "not found" ))"
+    err "  sign.mok-password: ${MOK_PASSWORD:-<empty>} ($( [ -n "${MOK_PASSWORD}" ] && echo "set" || echo "empty" ))"
+    err "  MOK_PRV env:       $( [ -n "${MOK_PRV:-}" ] && echo "set" || echo "not set" )"
     exit 1
 fi
 
