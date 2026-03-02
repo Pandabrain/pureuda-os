@@ -42,5 +42,37 @@ fi
 echo "🔗 Downloading and installing Proton Pass from: $URL"
 dnf install -y "$URL"
 
+# Extract and install icons into standard hicolor theme paths
+# This ensures that icons are available even in environments like COSMIC
+workdir=$(mktemp -d)
+trap 'rm -rf "$workdir"' EXIT
+cd "$workdir"
+
+# Extract icons from RPM
+rpm2cpio "$URL" | cpio -idmv \
+  "./usr/share/pixmaps/proton-pass.png" \
+  "./usr/lib/proton-pass/resources/assets/logo.svg" 2>/dev/null || true
+
+install_root="/usr/share/icons/hicolor"
+mkdir -p \
+  "$install_root/scalable/apps" \
+  "$install_root/256x256/apps" \
+  "$install_root/128x128/apps"
+
+# Prefer scalable SVG if available
+if [[ -f usr/lib/proton-pass/resources/assets/logo.svg ]]; then
+  install -m 0644 usr/lib/proton-pass/resources/assets/logo.svg "$install_root/scalable/apps/proton-pass.svg"
+fi
+# Also drop the PNG in common sizes
+if [[ -f usr/share/pixmaps/proton-pass.png ]]; then
+  install -m 0644 usr/share/pixmaps/proton-pass.png "$install_root/256x256/apps/proton-pass.png"
+  install -m 0644 usr/share/pixmaps/proton-pass.png "$install_root/128x128/apps/proton-pass.png"
+fi
+
+# Try to update icon caches if tool is present
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -f "$install_root" || true
+fi
+
 # Final installation message
-echo "✅ Proton Pass installation completed successfully."
+echo "✅ Proton Pass installation and icon extraction completed successfully."
