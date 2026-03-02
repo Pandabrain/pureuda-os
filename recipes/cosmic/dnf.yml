@@ -6,6 +6,7 @@ repos:
     - atim/starship
     - lilay/origami-linux
     - lilay/topgrade
+    - bieszczaders/kernel-cachyos-addons
 
 install:
   packages:
@@ -28,3 +29,8 @@ install:
     - steam
     - mangohud
     - gamescope
+
+      #cachy kernel packages
+    - cachyos-settings
+    - scx-scheds
+    - scx-tools

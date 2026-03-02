@@ -45,6 +45,12 @@ jobs:
           #- pureuda-os-gaming.yml
           - pureuda-os-cosmic.yml
     steps:
+      - name: Extract MOK Key
+        shell: bash
+        run: |
+          mkdir -p .secure_files
+          echo "${{ secrets.MOK_PRV }}" > .secure_files/MOK.priv
+
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.11
