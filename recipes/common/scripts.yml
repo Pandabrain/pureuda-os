@@ -9,3 +9,4 @@ scripts:
   - install-joplin.sh
   - configure-gearlever.sh
   - update-plymouth.sh
+  - adios-ioscheduler.sh
