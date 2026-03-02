@@ -22,7 +22,7 @@ install:
     - gimp
     - deskflow
     - gnome-calculator
-    - gnome-font-viewers
+    - gnome-font-viewer
     - meld
     - okular
 
@@ -30,7 +30,7 @@ install:
     - terra-release
     - discord
     - mission-center
-    - cooler-control
+    - coolercontrol
 
     #flutter dependencies
     - clang
