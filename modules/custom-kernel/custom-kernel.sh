@@ -18,6 +18,14 @@ SIGNING_CERT=$(printf '%s' "$1"| jq -r '.sign.cert // ""')
 MOK_PASSWORD=$(printf '%s' "$1"| jq -r '.sign["mok-password"] // ""')
 SECURE_BOOT=false
 
+# If the signing key is not found but MOK_PRV env var is present, create the file.
+if [ ! -f "${SIGNING_KEY}" ] && [ -n "${MOK_PRV:-}" ]; then
+    log "SIGNING_KEY not found at '${SIGNING_KEY}', but MOK_PRV is set. Creating temporary key file..."
+    mkdir -p "$(dirname "${SIGNING_KEY}")"
+    printf '%s' "${MOK_PRV}" >"${SIGNING_KEY}"
+    chmod 600 "${SIGNING_KEY}"
+fi
+
 if [ -z "${SIGNING_KEY}" ] && [ -z "${SIGNING_CERT}" ] && [ -z "${MOK_PASSWORD}" ]; then
     log "SecureBoot signing disabled."
 elif [ -f "${SIGNING_KEY}" ] && [ -f "${SIGNING_CERT}" ] && [ -n "${MOK_PASSWORD}" ]; then
