@@ -45,6 +45,9 @@ jobs:
           #- pureuda-os-gaming.yml
           - pureuda-os-cosmic.yml
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Extract MOK Key
         shell: bash
         run: |
