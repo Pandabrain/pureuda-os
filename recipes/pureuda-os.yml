@@ -13,4 +13,5 @@ modules:
   - from-file: common/fonts.yml
   - from-file: common/custom-kernel.yml
   - from-file: common/systemd.yml
-  - from-file: common/steam.yml
+  - from-file: common/fix-dnf-for-steam
+  - from-file: common/steam-dnf.yml
