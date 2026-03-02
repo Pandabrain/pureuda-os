@@ -2,8 +2,6 @@ type: dnf
 repos:
   cleanup: true
   nonfree: rpmfusion
-  files:
-    - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
   copr:
     - atim/starship
     - lilay/origami-linux
@@ -30,7 +28,3 @@ install:
     - steam
     - mangohud
     - gamescope
-
-    # from terra
-    - terra-release
-    - mission-center

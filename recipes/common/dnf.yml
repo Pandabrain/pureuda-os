@@ -3,6 +3,7 @@ repos:
   cleanup: true 
   files:
     - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+    - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
   keys:
     - https://repo.vivaldi.com/archive/linux_signing_key.pub
     - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
@@ -16,18 +17,25 @@ install:
     - audacity
     - gnome-calculator
     - haruna
-    - libreoffice
     - flatseal
     - inkscape
     - gimp
     - deskflow
     - gnome-calculator
-    - gnome-font-viewer
+    - gnome-font-viewers
     - meld
     - okular
+
+      #from terra
+    - terra-release
+    - discord
+    - mission-center
+    - cooler-control
 
     #flutter dependencies
     - clang
     - cmake
     - ninja-build
     - gtk3-devel
+    - mesa-libEGL-devel
+    - mesa-libGL-devel
