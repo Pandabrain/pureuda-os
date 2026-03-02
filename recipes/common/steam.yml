@@ -1,0 +1,13 @@
+- type: script
+  scripts:
+    - fix-dnf-conflicts.sh
+
+- type: dnf
+  repos:
+    cleanup: true
+    nonfree: rpmfusion
+  install:
+    packages:
+      - steam
+      - mangohud
+      - gamescope
