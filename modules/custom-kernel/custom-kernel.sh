@@ -460,7 +460,6 @@ if [ "${INITRAMFS}" = "true" ]; then
         -f "${_tmp}" \
         -v || exit 1
     install -D -m 0600 "${_tmp}" "/usr/lib/modules/${KERNEL_VERSION}/initramfs.img"
-    ln -sf "vmlinuz" "/usr/lib/modules/${KERNEL_VERSION}/vmlinuz"
     rm -f "${_tmp}"
 fi
 
