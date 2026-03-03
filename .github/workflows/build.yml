@@ -41,7 +41,7 @@ jobs:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
         recipe:
-          - pureuda-os.yml
+          - base.yml
     steps:
       # checkout the repository manually before calling bluebuild/github-action
       - name: Checkout repository
