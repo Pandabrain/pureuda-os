@@ -41,11 +41,11 @@ jobs:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
         recipe:
-          - pureuda-os.yml
+          - base.yml
     steps:
       # checkout the repository manually before calling bluebuild/github-action
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # create the private key file from repository secret
       - name: Create MOK private key file
