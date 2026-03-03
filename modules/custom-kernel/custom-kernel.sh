@@ -460,6 +460,15 @@ if [ "${INITRAMFS}" = "true" ]; then
         -f "${_tmp}" \
         -v || exit 1
     install -D -m 0600 "${_tmp}" "/usr/lib/modules/${KERNEL_VERSION}/initramfs.img"
+    # Fedora Atomic/OSTree expects a vmlinuz symlink to the kernel image in the module directory.
+    # We find the actual kernel image (e.g., vmlinuz-6.x.y...) and link it as 'vmlinuz'.
+    _kernel_image=$(find "/usr/lib/modules/${KERNEL_VERSION}" -maxdepth 1 -name "vmlinuz-*" -print -quit)
+    if [ -n "${_kernel_image}" ]; then
+        ln -sf "$(basename "${_kernel_image}")" "/usr/lib/modules/${KERNEL_VERSION}/vmlinuz"
+        log "Created vmlinuz symlink for ${KERNEL_VERSION}"
+    else
+        err "Could not find kernel image to symlink in /usr/lib/modules/${KERNEL_VERSION}"
+    fi
     rm -f "${_tmp}"
 fi
 
