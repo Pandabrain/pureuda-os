@@ -1,4 +1,0 @@
-type: systemd
-system:
-  masked:
-    - bootc-fetch-apply-updates.timer

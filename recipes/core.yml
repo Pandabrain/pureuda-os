@@ -1,0 +1,129 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/module-list-v1.json
+modules:
+  - type: systemd
+    system:
+      masked:
+        - NetworkManager-wait-online.service
+        - flatpak-add-fedora-repos.service
+        - bootc-fetch-apply-updates.timer
+    user:
+      enabled:
+        - podman.socket
+
+  - type: script
+    scripts:
+      - install-apps.sh
+
+  - type: dnf
+    repos:
+      cleanup: true
+      copr:
+        - bieszczaders/kernel-cachyos-addons
+        - ligenix/cosmic-ext
+        - sneexy/zen-browser
+        - lilay/tealdeer
+      files:
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+        - https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
+    install:
+      packages:
+        - terra-release
+        - https://gitlab.com/api/v4/projects/79678744/packages/generic/noctua/latest/noctua.fc%OS_VERSION%.x86_64.rpm
+        - cosmic-ext-calculator
+        - cosmic-ext-disks
+        - cosmic-ext-applet-clipboard-manager
+        - https://gitlab.com/api/v4/projects/79697288/packages/generic/cosmic-ext-applet-sysinfo/latest/cosmic-ext-applet-sysinfo.fc%OS_VERSION%.x86_64.rpm
+        - https://gitlab.com/api/v4/projects/79697895/packages/generic/cosmic-ext-applet-logomenu/latest/cosmic-ext-applet-logomenu.fc%OS_VERSION%.x86_64.rpm
+        - https://gitlab.com/api/v4/projects/77221939/packages/generic/origami-update-applet/latest/origami-update-applet.fc%OS_VERSION%.x86_64.rpm
+        - https://gitlab.com/api/v4/projects/76137389/packages/generic/cosmic-initial-setup/latest/cosmic-initial-setup.fc%OS_VERSION%.x86_64.rpm
+        - NetworkManager-openvpn-gnome
+        - v4l-utils
+        - fish
+        - lazygit
+        - helix
+        - procs
+        - du-dust
+        - neovim
+        - python3-neovim
+        - zellij
+        - topgrade
+        - zen-browser
+        - rsms-inter-fonts
+        - google-noto-sans-myanmar-fonts
+        - google-noto-serif-myanmar-fonts
+        - bibata-cursor-theme
+        - cloudflare-warp
+        - lolcat
+        - figlet
+        - cowsay
+        - btop
+        - fastfetch
+        - podman-compose
+        - aria2
+        - cava
+        - bat
+        - ripgrep
+        - zoxide
+        - yazi
+        - eza
+        - hyperfine
+        - starship
+        - cbonsai
+        - sudo-rs
+        - uutils-coreutils
+        - byobu
+        - micro
+        - steam-devices
+        - cachyos-settings
+        - scx-scheds
+        - scx-tools
+        - rclone
+        - ShellCheck
+        - lm_sensors
+        - surge
+        - termflix
+        - repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
+          packages:
+            - tealdeer
+    remove:
+      auto-remove: true
+      packages:
+        - zram-generator-defaults
+        - firefox
+        - firefox-langpacks
+        - gnome-system-monitor
+        - ark
+        - htop
+        - toolbox
+        - google-noto-color-emoji-fonts
+        - gnome-disk-utility
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - JetBrainsMono
+      url-fonts:
+        - name: NotoColorEmoji
+          url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
+        - name: Maple-Mono-NF
+          url: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-NF-unhinted.zip
+
+  - type: default-flatpaks
+    configurations:
+      - notify: false
+        scope: user
+        repo:
+          name: flathub
+          title: Flathub
+      - notify: false
+        scope: user
+        repo:
+          name: cosmic
+          title: COSMIC
+          url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
+
+  - type: script
+    scripts:
+      - adios-ioscheduler.sh
+      - install-theme.sh
+      - cleanup.sh
