@@ -3,7 +3,7 @@ modules:
   - type: systemd
     system:
       masked:
-        - NetworkManager-wait-online.service
+        #- NetworkManager-wait-online.service
         - flatpak-add-fedora-repos.service
         - bootc-fetch-apply-updates.timer
     user:
@@ -19,8 +19,8 @@ modules:
       cleanup: true
       copr:
         - bieszczaders/kernel-cachyos-addons
-        - ligenix/cosmic-ext
-        - sneexy/zen-browser
+        #- ligenix/cosmic-ext
+        #- sneexy/zen-browser
         - lilay/tealdeer
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
@@ -28,39 +28,40 @@ modules:
     install:
       packages:
         - terra-release
-        - https://gitlab.com/api/v4/projects/79678744/packages/generic/noctua/latest/noctua.fc%OS_VERSION%.x86_64.rpm
-        - cosmic-ext-calculator
-        - cosmic-ext-disks
-        - cosmic-ext-applet-clipboard-manager
-        - https://gitlab.com/api/v4/projects/79697288/packages/generic/cosmic-ext-applet-sysinfo/latest/cosmic-ext-applet-sysinfo.fc%OS_VERSION%.x86_64.rpm
+        #- https://gitlab.com/api/v4/projects/79678744/packages/generic/noctua/latest/noctua.fc%OS_VERSION%.x86_64.rpm
+        #- cosmic-ext-calculator #completely broken
+        #- cosmic-ext-disks
+        #- cosmic-ext-applet-clipboard-manager
+        #- https://gitlab.com/api/v4/projects/79697288/packages/generic/cosmic-ext-applet-sysinfo/latest/cosmic-ext-applet-sysinfo.fc%OS_VERSION%.x86_64.rpm
         - https://gitlab.com/api/v4/projects/79697895/packages/generic/cosmic-ext-applet-logomenu/latest/cosmic-ext-applet-logomenu.fc%OS_VERSION%.x86_64.rpm
         - https://gitlab.com/api/v4/projects/77221939/packages/generic/origami-update-applet/latest/origami-update-applet.fc%OS_VERSION%.x86_64.rpm
-        - https://gitlab.com/api/v4/projects/76137389/packages/generic/cosmic-initial-setup/latest/cosmic-initial-setup.fc%OS_VERSION%.x86_64.rpm
-        - NetworkManager-openvpn-gnome
+        #- https://gitlab.com/api/v4/projects/76137389/packages/generic/cosmic-initial-setup/latest/cosmic-initial-setup.fc%OS_VERSION%.x86_64.rpm
+        #unknown if I need this package
+        #- NetworkManager-openvpn-gnome
         - v4l-utils
         - fish
         - lazygit
-        - helix
+        #- helix
         - procs
         - du-dust
-        - neovim
-        - python3-neovim
+        #- neovim
+        #- python3-neovim
         - zellij
         - topgrade
-        - zen-browser
+        #- zen-browser
         - rsms-inter-fonts
-        - google-noto-sans-myanmar-fonts
-        - google-noto-serif-myanmar-fonts
+        #- google-noto-sans-myanmar-fonts
+        #- google-noto-serif-myanmar-fonts
         - bibata-cursor-theme
-        - cloudflare-warp
+        #- cloudflare-warp
         - lolcat
-        - figlet
-        - cowsay
+        #- figlet
+        #- cowsay
         - btop
         - fastfetch
         - podman-compose
-        - aria2
-        - cava
+        #- aria2
+        #- cava
         - bat
         - ripgrep
         - zoxide
@@ -68,59 +69,80 @@ modules:
         - eza
         - hyperfine
         - starship
-        - cbonsai
+        #- cbonsai
         - sudo-rs
         - uutils-coreutils
-        - byobu
-        - micro
+        #- byobu
+        #- micro
         - steam-devices
         - cachyos-settings
         - scx-scheds
         - scx-tools
-        - rclone
+        #- rclone
         - ShellCheck
         - lm_sensors
         - surge
-        - termflix
-        - repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
-          packages:
-            - tealdeer
+        #- termflix
+        - tealdeer
+        #- repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
+        #  packages:
+        #    - tealdeer
     remove:
       auto-remove: true
       packages:
         - zram-generator-defaults
-        - firefox
-        - firefox-langpacks
         - gnome-system-monitor
-        - ark
-        - htop
-        - toolbox
         - google-noto-color-emoji-fonts
-        - gnome-disk-utility
 
   - type: fonts
     fonts:
       nerd-fonts:
         - JetBrainsMono
+      google-fonts:
+        - Noto Color Emoji
+        - Noto Sans Korean
+        - Noto Serif Korean
+        - Noto Sans Japanese
+        - Noto Serif Japanese
       url-fonts:
-        - name: NotoColorEmoji
-          url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
+      #  - name: NotoColorEmoji
+      #    url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
         - name: Maple-Mono-NF
           url: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-NF-unhinted.zip
 
   - type: default-flatpaks
     configurations:
       - notify: false
+        scope: system
+        repo:
+          name: flathub
+          title: Flathub
+        install:
+          - io.github.kolunmi.Bazaar
+          - io.github.flattool.Warehouse
+          - com.ranfdev.DistroShelf
+          - org.telegram.desktop
+          - io.podman_desktop.PodmanDesktop
+          - it.mijorus.gearlever
+      - notify: false
         scope: user
         repo:
           name: flathub
           title: Flathub
+        install:
+          - app.zen_browser.zen
+          - org.jellyfin.JellyfinDesktop
+          - org.freecad.FreeCAD
+          - com.bambulab.BambuStudio
+          - org.onlyoffice.desktopeditors
       - notify: false
         scope: user
         repo:
           name: cosmic
           title: COSMIC
           url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
+        install:
+          - io.github.cosmic_utils.minimon-applet
 
   - type: script
     scripts:
