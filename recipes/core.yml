@@ -19,8 +19,8 @@ modules:
       cleanup: true
       copr:
         - bieszczaders/kernel-cachyos-addons
-        - ligenix/cosmic-ext
-        - sneexy/zen-browser
+        #- ligenix/cosmic-ext
+        #- sneexy/zen-browser
         - lilay/tealdeer
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
@@ -48,7 +48,7 @@ modules:
         #- python3-neovim
         - zellij
         - topgrade
-        - zen-browser
+        #- zen-browser
         - rsms-inter-fonts
         #- google-noto-sans-myanmar-fonts
         #- google-noto-serif-myanmar-fonts
@@ -129,6 +129,7 @@ modules:
           name: flathub
           title: Flathub
         install:
+          - app.zen_browser.zen
           - org.jellyfin.JellyfinDesktop
           - org.freecad.FreeCAD
           - com.bambulab.BambuStudio
