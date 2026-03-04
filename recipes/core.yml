@@ -3,7 +3,7 @@ modules:
   - type: systemd
     system:
       masked:
-        - NetworkManager-wait-online.service
+        #- NetworkManager-wait-online.service
         - flatpak-add-fedora-repos.service
         - bootc-fetch-apply-updates.timer
     user:
