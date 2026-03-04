@@ -51,12 +51,12 @@ end
 # --- Wrappers ----------------------------------------------------------------
 function fastfetch
     if test (count $argv) -eq 0
-        set -l config_dir "/usr/share/fastfetch/presets/origami"
-        if test -f "$config_dir/origami-ascii.txt"; and test -f "$config_dir/origami-fastfetch.jsonc"
+        set -l config_dir "/usr/share/fastfetch/presets/pureuda-os"
+        if test -f "$config_dir/pureuda-os-ascii.txt"; and test -f "$config_dir/pureuda-os-fastfetch.jsonc"
             command fastfetch \
-                -l "$config_dir/origami-ascii.txt" \
+                -l "$config_dir/pureuda-os-ascii.txt" \
                 --logo-color-1 blue \
-                -c "$config_dir/origami-fastfetch.jsonc"
+                -c "$config_dir/pureuda-os-fastfetch.jsonc"
         else
             command fastfetch
         end

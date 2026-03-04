@@ -61,13 +61,13 @@ _nag_and_exec() {
 # --- Wrappers ----------------------------------------------------------------
 fastfetch() {
     if [ $# -eq 0 ]; then
-        local config_dir="/usr/share/fastfetch/presets/origami"
+        local config_dir="/usr/share/fastfetch/presets/pureuda-os"
         # Safety check: only load custom config if files exist
-        if [ -f "$config_dir/origami-ascii.txt" ] && [ -f "$config_dir/origami-fastfetch.jsonc" ]; then
+        if [ -f "$config_dir/pureuda-os-ascii.txt" ] && [ -f "$config_dir/pureuda-os-fastfetch.jsonc" ]; then
             command fastfetch \
-                -l "$config_dir/origami-ascii.txt" \
-                --logo-color-1 blue \
-                -c "$config_dir/origami-fastfetch.jsonc"
+                -l "$config_dir/pureuda-os-ascii.txt" \
+                --logo-color-1 purple \
+                -c "$config_dir/pureuda-os-fastfetch.jsonc"
         else
             command fastfetch
         fi
