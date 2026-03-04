@@ -83,9 +83,10 @@ modules:
         - lm_sensors
         - surge
         #- termflix
-        - repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
-          packages:
-            - tealdeer
+        - tealdeer
+        #- repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
+        #  packages:
+        #    - tealdeer
     remove:
       auto-remove: true
       packages:
