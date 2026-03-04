@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: origami
-description: "Origami is a next-generation Linux distribution inspired by the art of Japanese paper folding. Built on Fedora Atomic, Origami elegantly folds together cutting-edge tools, beautiful design, and thoughtful defaults to create a lightweight, customizable, and visually stunning operating system using the Cosmic desktop environment. With a focus on simplicity, speed, and creativity, Origami empowers users to shape their digital environment as effortlessly as folding a masterpiece."
+name: pureuda-os
+description: "Pureuda OS is an experimental Linux image forked from Origami Linux. Based on Fedora Cosmic Atomic, powered by grapes."
 base-image: ghcr.io/blue-build/base-images/fedora-cosmic
 image-version: latest
 #blue-build-tag: main
@@ -23,18 +23,18 @@ modules:
     sign:
       key: /tmp/certs/MOK.priv
       cert: /usr/share/cert/MOK.pem
-      mok-password: origami
+      mok-password: pureudaos
 
   - from-file: core.yml
 
   - type: os-release
     properties:
-      ID: origami
+      ID: pureuda-os
       ID_LIKE: fedora
-      NAME: Origami Linux
-      PRETTY_NAME: "Origami Linux 2026.03"
-      HOME_URL: "https://origami.wf/"
-      BUG_REPORT_URL: "https://gitlab.com/groups/origami-linux/-/issues"
-      DEFAULT_HOSTNAME: origami
+      NAME: Pureuda OS
+      PRETTY_NAME: "Pureuda OS 2026.03"
+      HOME_URL: "https://github.com/Pandabrain/pureuda-os/"
+      BUG_REPORT_URL: "https://github.com/Pandabrain/pureuda-os/issues"
+      DEFAULT_HOSTNAME: pureuda-os
 
   - from-file: finalize.yml
