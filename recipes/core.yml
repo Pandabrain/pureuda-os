@@ -112,10 +112,27 @@ modules:
   - type: default-flatpaks
     configurations:
       - notify: false
+        scope: system
+        repo:
+          name: flathub
+          title: Flathub
+        install:
+          - io.github.kolunmi.Bazaar
+          - io.github.flattool.Warehouse
+          - com.ranfdev.DistroShelf
+          - org.telegram.desktop
+          - io.podman_desktop.PodmanDesktop
+          - it.mijorus.gearlever
+      - notify: false
         scope: user
         repo:
           name: flathub
           title: Flathub
+        install:
+          - org.jellyfin.JellyfinDesktop
+          - org.freecad.FreeCAD
+          - com.bambulab.BambuStudio
+          - org.onlyoffice.desktopeditors
       - notify: false
         scope: user
         repo:
