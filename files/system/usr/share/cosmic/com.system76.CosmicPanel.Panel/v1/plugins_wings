@@ -1,5 +1,4 @@
 Some(([
-    "dev.cappsy.CosmicExtAppletLogoMenu",
     "io.github.cosmic_utils.minimon-applet"
 ], [
     "wf.origami.UpdateApplet",
