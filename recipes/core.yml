@@ -19,17 +19,21 @@ modules:
       cleanup: true
       copr:
         - bieszczaders/kernel-cachyos-addons
+        - lilay/topgrade
         #- ligenix/cosmic-ext
         #- sneexy/zen-browser
-        #- lilay/tealdeer
+        - lilay/tealdeer
+        - atim/starship
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
         - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
         #- https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
+        - https://releases.warp.dev/linux/keys/warp.asc
     install:
       packages:
+        - fedora-workstation-repositories
         - terra-release
         #- https://gitlab.com/api/v4/projects/79678744/packages/generic/noctua/latest/noctua.fc%OS_VERSION%.x86_64.rpm
         #- cosmic-ext-calculator #completely broken
@@ -50,7 +54,10 @@ modules:
         #- neovim
         #- python3-neovim
         - zellij
-        - topgrade
+        #- topgrade
+        - repo: copr:copr.fedorainfracloud.org:lilay:topgrade
+          packages:
+            - topgrade
         #- zen-browser
         - rsms-inter-fonts
         #- google-noto-sans-myanmar-fonts
@@ -71,33 +78,77 @@ modules:
         - yazi
         - eza
         - hyperfine
-        - starship
+        #- starship
+        - repo: copr:copr.fedorainfracloud.org:atim:starship
+          packages:
+            - starship
         #- cbonsai
         - sudo-rs
         - uutils-coreutils
         #- byobu
         #- micro
         - steam-devices
+
         - cachyos-settings
         - scx-scheds
         - scx-tools
+
         #- rclone
         - ShellCheck
         - lm_sensors
         - surge
         #- termflix
-        - tealdeer
-        #- repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
-        #  packages:
-        #    - tealdeer
+        #- tealdeer
+        - repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
+          packages:
+            - tealdeer
+        - repo: vivaldi
+          packages:
+            - vivaldi-stable
+        - codium
+        - repo: google-chrome
+          packages:
+            - google-chrome-stable
+        - repo: copr:copr.fedorainfracloud.org:codifryed:CoolerControl
+          packages:
+            - coolercontrol
+        - audacity
+        - gnome-calculator
+        - haruna
+        - flatseal
+        - inkscape
+        - gimp
+        - deskflow
+        - gnome-font-viewer
+        - meld
+        - okular
+        - tailscale
+        - eog
+        - ptyxis
 
-        - vivaldi-stable
+        - fcitx5
+        - fcitx5-configtool
+        - fcitx5-gtk
+        - fcitx5-qt
+        - fcitx5-hangul
+
+        - discord
+        - mission-center
+
+        #flutter dependencies
+        - clang
+        - cmake
+        - ninja-build
+        - gtk3-devel
+        - egl-utils
+
+        - warp-terminal
     remove:
       auto-remove: true
       packages:
         - zram-generator-defaults
         - gnome-system-monitor
-        - google-noto-color-emoji-fonts
+        #- google-noto-color-emoji-fonts
 
   - type: fonts
     fonts:
