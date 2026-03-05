@@ -1,5 +1,5 @@
 Some([
-    "com.system76.CosmicPanelAppButton",
+    "dev.cappsy.CosmicExtAppletLogoMenu",
     "com.system76.CosmicAppletWorkspaces",
     "com.system76.CosmicAppList",
 ])
