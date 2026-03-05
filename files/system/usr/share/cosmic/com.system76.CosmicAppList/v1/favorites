@@ -1,6 +1,9 @@
 [
-    "zen",
+    "vivaldi",
     "com.system76.CosmicFiles",
     "com.system76.CosmicTerm",
+    "com.system76.CosmicEdit"
+    "io.github.kolunmi.Bazaar"
     "com.system76.CosmicStore"
+    "com.system76.CosmicSettings"
 ]

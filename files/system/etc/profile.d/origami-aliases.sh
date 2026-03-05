@@ -77,8 +77,8 @@ fastfetch() {
 }
 
 # --- Modern replacements -----------------------------------------------------
-alias htop='btop'
-alias cmatrix='termflix'
+#alias htop='btop'
+#alias cmatrix='termflix'
 alias update='topgrade'
 alias docker='podman'
 alias docker-compose='podman-compose'
@@ -117,9 +117,9 @@ _register_uutils_aliases
 # aliased elsewhere (e.g. grep='grep --color').
 unalias vim tmux find grep nano git ps du 2>/dev/null
 
-tmux() {
-    _nag_and_exec '🌀 Tip: Try using "zellij or byobu" for a modern multiplexing experience.' tmux "$@"
-}
+#tmux() {
+#    _nag_and_exec '🌀 Tip: Try using "zellij or byobu" for a modern multiplexing experience.' tmux "$@"
+#}
 
 find() {
     _nag_and_exec '🧭 Tip: Try using "fd" next time for a simpler and faster search.' find "$@"
@@ -145,10 +145,14 @@ du() {
     _nag_and_exec '🌬️ Tip: "dust" makes disk usage checks faster and easier than du.' du "$@"
 }
 
-vim() {
-    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of vim).' nvim "$@"
-}
+#vim() {
+#    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of vim).' nvim "$@"
+#}
 
-nvim() {
-    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of nvim).' nvim "$@"
+#nvim() {
+#    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of nvim).' nvim "$@"
+#}
+
+htop() {
+    _nag_and_exec '📝 Tip: Try using btop next time: run "btop" (instead of htop).' htop "$@"
 }

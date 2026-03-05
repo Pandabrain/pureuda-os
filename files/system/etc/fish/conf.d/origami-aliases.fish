@@ -67,14 +67,14 @@ end
 
 # --- Modern replacements -----------------------------------------------------
 # Note: These are applied early but will be overridden by nag functions if names overlap
-alias htop btop
+#alias htop btop
 alias update topgrade
 alias docker podman
 alias docker-compose podman-compose
 alias cat bat
 alias sudo sudo-rs
 alias su su-rs
-alias cmatrix termflix
+#alias cmatrix termflix
 
 # --- Directory listings via eza ----------------------------------------------
 alias la 'eza -la --icons'
@@ -126,9 +126,9 @@ function grep
     _nag_and_exec '🔍 Tip: Try using "rg" for a simpler and faster search.' grep $argv
 end
 
-function nano
-    _nag_and_exec '📝 Tip: Give "micro" a try for a friendlier terminal editor.' nano $argv
-end
+#function nano
+#    _nag_and_exec '📝 Tip: Give "micro" a try for a friendlier terminal editor.' nano $argv
+#end
 
 function git
     _nag_and_exec '🐙 Tip: Try "lazygit" for a slick TUI when working with git.' git $argv
@@ -142,10 +142,14 @@ function du
     _nag_and_exec '🌬️ Tip: "dust" makes disk usage checks faster and easier than du.' du $argv
 end
 
-function vim
-    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of vim).' nvim $argv
-end
+#function vim
+#    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of vim).' nvim $argv
+#end
 
-function nvim
-    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of nvim).' nvim $argv
+#function nvim
+#    _nag_and_exec '📝 Tip: Try using Helix next time: run "hx" (instead of nvim).' nvim $argv
+#end
+
+function htop
+    _nag_and_exec '📝 Tip: Try using btop next time: run "btop" (instead of htop).' htop $argv
 end

@@ -21,10 +21,13 @@ modules:
         - bieszczaders/kernel-cachyos-addons
         #- ligenix/cosmic-ext
         #- sneexy/zen-browser
-        - lilay/tealdeer
+        #- lilay/tealdeer
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
-        - https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
+        - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+        #- https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
+      keys:
+        - https://repo.vivaldi.com/archive/linux_signing_key.pub
     install:
       packages:
         - terra-release
@@ -87,6 +90,8 @@ modules:
         #- repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
         #  packages:
         #    - tealdeer
+
+        - vivaldi-stable
     remove:
       auto-remove: true
       packages:
