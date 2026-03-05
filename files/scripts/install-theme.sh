@@ -8,7 +8,6 @@ set -euo pipefail
 #rm -rf /usr/share/backgrounds/fedora-workstation
 #rm -rf /usr/share/backgrounds/images
 #rm -rf /usr/share/backgrounds/f43
-#TODO: check contents of these and decide if they actually need to go
 #rm -f /usr/share/backgrounds/default.jxl
 #rm -f /usr/share/backgrounds/default-dark.jxl
 #rm -f /usr/share/backgrounds/default.xml
