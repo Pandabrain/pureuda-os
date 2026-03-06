@@ -147,6 +147,8 @@ modules:
 
         - warp-terminal
 
+        - pipewire-libs.i686
+        - fdk-aac-free.i686
         - steam
         - mangohud
         - gamescope
