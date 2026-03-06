@@ -147,19 +147,27 @@ modules:
 
         - warp-terminal
 
-        - pipewire-libs.i686
-        - libfdk-aac.i686
-        - steam
-        - mangohud
-        - gamescope
-        - steam-devices
-
     remove:
       auto-remove: true
       packages:
         - zram-generator-defaults
         - gnome-system-monitor
         #- google-noto-color-emoji-fonts
+
+  - type: script
+    scripts:
+      - fix-dnf-conflicts-for-steam.sh
+
+  - type: dnf
+    repos:
+      cleanup: true
+      nonfree: rpmfusion
+    install:
+      packages:
+        - steam
+        - mangohud
+        - gamescope
+        - steam-devices
 
   - type: fonts
     fonts:
