@@ -148,7 +148,7 @@ modules:
         - warp-terminal
 
         - pipewire-libs.i686
-        - fdk-aac-free.i686
+        - libfdk-aac.i686
         - steam
         - mangohud
         - gamescope
@@ -216,7 +216,7 @@ modules:
       - adios-ioscheduler.sh
       #- install-theme.sh
       - install-proton-vpn.sh
-      #- install-gamescope-helpers.sh
+      - install-gamescope-helpers.sh
       - install-proton-pass.sh
       - install-proton-mail.sh
       - install-jetbrains-toolbox.sh
