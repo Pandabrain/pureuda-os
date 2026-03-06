@@ -24,7 +24,7 @@ modules:
         #- sneexy/zen-browser
         - lilay/tealdeer
         - atim/starship
-        - odifryed/CoolerControl
+        - codifryed/CoolerControl
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
         - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
