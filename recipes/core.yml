@@ -207,5 +207,12 @@ modules:
   - type: script
     scripts:
       - adios-ioscheduler.sh
-      - install-theme.sh
+      #- install-theme.sh
+      - install-proton-vpn.sh
+      #- install-gamescope-helpers.sh
+      - install-proton-pass.sh
+      - install-proton-mail.sh
+      - install-jetbrains-toolbox.sh
+      - install-joplin.sh
+      - configure-gearlever.sh
       - cleanup.sh
