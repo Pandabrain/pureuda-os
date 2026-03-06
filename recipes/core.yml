@@ -24,6 +24,7 @@ modules:
         #- sneexy/zen-browser
         - lilay/tealdeer
         - atim/starship
+        - odifryed/CoolerControl
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
         - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
@@ -31,8 +32,10 @@ modules:
       keys:
         - https://repo.vivaldi.com/archive/linux_signing_key.pub
         - https://releases.warp.dev/linux/keys/warp.asc
+        - https://packagecloud.io/eugeny/tabby/gpgkey
     install:
       packages:
+        - tabby-terminal
         - fedora-workstation-repositories
         - terra-release
         #- https://gitlab.com/api/v4/projects/79678744/packages/generic/noctua/latest/noctua.fc%OS_VERSION%.x86_64.rpm
@@ -95,7 +98,6 @@ modules:
 
         #- rclone
         - ShellCheck
-        - lm_sensors
         - surge
         #- termflix
         #- tealdeer
@@ -111,6 +113,8 @@ modules:
         - repo: google-chrome
           packages:
             - google-chrome-stable
+        #user-space driver support for coolercontrol
+        - lm_sensors
         - repo: copr:copr.fedorainfracloud.org:codifryed:CoolerControl
           packages:
             - coolercontrol
