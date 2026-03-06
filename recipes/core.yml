@@ -102,6 +102,8 @@ modules:
         - repo: copr:copr.fedorainfracloud.org:lilay:tealdeer
           packages:
             - tealdeer
+        #this is a vivaldi dependency and needs to be installed explicitly because vivaldi is only allowed to install from the vivaldi repository
+        - liberation-fonts
         - repo: vivaldi
           packages:
             - vivaldi-stable
