@@ -128,6 +128,7 @@ modules:
         - tailscale
         - eog
         - ptyxis
+        - cifs-utils
 
         - fcitx5
         - fcitx5-configtool
@@ -148,6 +149,8 @@ modules:
 
         - warp-terminal
 
+        - android-tools
+
     remove:
       auto-remove: true
       packages:
@@ -155,20 +158,20 @@ modules:
         - gnome-system-monitor
         #- google-noto-color-emoji-fonts
 
-  - type: script
-    scripts:
-      - fix-dnf-conflicts-for-steam.sh
-
-  - type: dnf
-    repos:
-      cleanup: true
-      nonfree: rpmfusion
-    install:
-      packages:
-        - steam
-        - mangohud
-        - gamescope
-        - steam-devices
+#  - type: script
+#    scripts:
+#      - fix-dnf-conflicts-for-steam.sh
+#
+#  - type: dnf
+#    repos:
+#      cleanup: true
+#      nonfree: rpmfusion
+#    install:
+#      packages:
+#        - steam
+#        - mangohud
+#        - gamescope
+#        - steam-devices
 
   - type: fonts
     fonts:
@@ -224,11 +227,12 @@ modules:
     scripts:
       - adios-ioscheduler.sh
       #- install-theme.sh
-      - install-proton-vpn.sh
-      - install-gamescope-helpers.sh
-      - install-proton-pass.sh
-      - install-proton-mail.sh
-      - install-jetbrains-toolbox.sh
-      - install-joplin.sh
-      - configure-gearlever.sh
-      - cleanup.sh
+
+      #- install-proton-vpn.sh
+      #- install-gamescope-helpers.sh
+      #- install-proton-pass.sh
+      #- install-proton-mail.sh
+      #- install-jetbrains-toolbox.sh
+      #- install-joplin.sh
+      #- configure-gearlever.sh
+      #- cleanup.sh
