@@ -2,6 +2,8 @@
 modules:
   - type: systemd
     system:
+      enabled:
+        - snapd.service
       masked:
         #- NetworkManager-wait-online.service
         - flatpak-add-fedora-repos.service
@@ -166,6 +168,7 @@ modules:
   - type: script
     scripts:
       - fix-dnf-conflicts-for-steam.sh
+      - setup-snapd.sh
 
   - type: dnf
     repos:
