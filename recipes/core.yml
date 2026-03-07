@@ -46,6 +46,7 @@ modules:
         #- https://gitlab.com/api/v4/projects/76137389/packages/generic/cosmic-initial-setup/latest/cosmic-initial-setup.fc%OS_VERSION%.x86_64.rpm
         #unknown if I need this package
         #- NetworkManager-openvpn-gnome
+        - https://repo.protonvpn.com/fedora-%OS_VERSION%-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm
         - v4l-utils
         - fish
         - lazygit
@@ -152,6 +153,8 @@ modules:
         - android-tools
 
         - snapd
+
+
 
     remove:
       auto-remove: true
