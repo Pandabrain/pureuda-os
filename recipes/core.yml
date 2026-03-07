@@ -158,14 +158,15 @@ modules:
         - gnome-system-monitor
         #- google-noto-color-emoji-fonts
 
-  - type: script
-    scripts:
-      - fix-dnf-conflicts-for-steam.sh
-
   - type: dnf
     repos:
       cleanup: true
       nonfree: rpmfusion
+    replace:
+      - from-repo: fedora
+        packages:
+          - old: libfdk-aac
+            new: fdk-aac-free
     install:
       packages:
         - steam
