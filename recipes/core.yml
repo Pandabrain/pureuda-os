@@ -151,6 +151,8 @@ modules:
 
         - android-tools
 
+        - snapd
+
     remove:
       auto-remove: true
       packages:
