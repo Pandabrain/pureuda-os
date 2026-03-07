@@ -2,7 +2,7 @@
 
 # 푸르다 OS
 
-푸르다 OS (Pureuda OS) is my personal custom Linux image, built with [BlueBuild](https://blue-build.org). 
+푸르다 OS (Pureuda OS) is my personal custom Linux image, built with [BlueBuild](https://blue-build.org) using Fedora Atomic Cosmic as a base.
 
 > [!IMPORTANT]
 > This is my personal image and is primarily intended for my own use. It contains a large amount of pre-installed software and configurations that may not be suitable for everyone and are subject to change at any time without notice.
