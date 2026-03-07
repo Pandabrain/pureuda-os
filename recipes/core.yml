@@ -235,4 +235,4 @@ modules:
 
       - install-joplin.sh
       - configure-gearlever.sh
-      - cleanup.sh
+      #- cleanup.sh
