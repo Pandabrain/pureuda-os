@@ -9,9 +9,9 @@
 
 ## 🍴 Credits & Fork Information
 
-This project is a fork of **[Origami Linux](https://origami.wf)**. I would like to thank the Origami Linux team for their incredible groundwork, especially for the performance improvements they have implemented.
+This project is a fork of **[Origami Linux](https://origami.wf)**. I would like to thank the Origami Linux team for their groundwork.
 
-If you are looking for a properly maintained and built Linux distribution for general use, I highly recommend visiting the **[Origami Linux website](https://origami.wf)**.
+If you are looking for a properly maintained and built Linux distribution for general use, I highly recommend visiting the **[Origami Linux website](https://origami.wf)**. And give their OS a try!
 
 ## 🚀 How to Use
 
