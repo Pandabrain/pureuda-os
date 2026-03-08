@@ -85,6 +85,7 @@ alias docker-compose='podman-compose'
 alias cat='bat'
 alias sudo='sudo-rs '
 alias su='su-rs'
+alias gearlever='flatpak run it.mijorus.gearlever'
 
 # --- Directory listings via eza ----------------------------------------------
 alias la='eza -la --icons'
