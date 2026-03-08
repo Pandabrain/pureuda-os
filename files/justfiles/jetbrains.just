@@ -1,6 +1,7 @@
 # Install JetBrains Toolbox
 #
 # Downloads, extracts and installs the JetBrains Toolbox to ~/.local/share/JetBrains/Toolbox/
+
 # Then starts the Toolbox for the first time which creates its own desktop file and autostart entry.
 install-jetbrains-toolbox:
     #!/usr/bin/env bash
@@ -20,7 +21,7 @@ install-jetbrains-toolbox:
 
     echo "🔗 Download URL: $URL"
     echo "📦 Extracting Toolbox into $INSTALL_DIR ..."
-    
+
     # Download and extract the tarball
     curl -sSfL "$URL" | tar -xz -C "$INSTALL_DIR" --strip-components=1
 
