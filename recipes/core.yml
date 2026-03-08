@@ -14,6 +14,14 @@ modules:
   #  scripts:
   #    - install-apps.sh
 
+  - type: justfiles
+    validate: true
+    install: true
+    #if include is omitted, all just files in files/justfiles are being included
+    #include:
+    #  - path/to/justfile.just
+
+
   - type: dnf
     repos:
       cleanup: true
