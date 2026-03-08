@@ -78,7 +78,7 @@ jobs:
           BB_BUILD_PUSH: "true"
           BB_PASSWORD: ${{ github.token }}
           BB_USERNAME: ${{ github.actor }}
-          BB_REGISTRY: "ghcr.io"
+          #BB_REGISTRY: "ghcr.io"
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
           GH_PR_EVENT_NUMBER: ${{ github.event.number }}
           RECIPE_PATH: ${{ steps.build_vars.outputs.recipe_path }}
@@ -88,5 +88,10 @@ jobs:
           # Use GH_TOKEN for registry authentication if needed by bluebuild
           export GH_TOKEN="${{ github.token }}"
           export BB_PASSWORD="${{ github.token }}"
-          # If pushing to a different registry, change BB_REGISTRY and BB_REGISTRY_NAMESPACE
+          
+          # Dynamically set BB_REGISTRY by stripping the protocol from github.server_url
+          # This avoids hardcoding the registry URL
+          FORGEJO_URL="${{ github.server_url }}"
+          export BB_REGISTRY="${FORGEJO_URL#*://}"
+
           bluebuild build -v "${RECIPE_PATH}"
