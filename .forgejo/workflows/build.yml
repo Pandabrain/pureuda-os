@@ -13,7 +13,7 @@ on:
 jobs:
   bluebuild:
     name: Build Custom Image
-    runs-on: docker
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -22,12 +22,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-
-      - name: Install dependencies
-        run: |
-          apt-get update
-          apt-get install -y jq curl
-          apt-get install -y docker.io
 
       - name: Install Cosign
         run: |
