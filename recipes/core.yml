@@ -2,8 +2,6 @@
 modules:
   - type: systemd
     system:
-      enabled:
-        - snapd.service
       masked:
         #- NetworkManager-wait-online.service
         - flatpak-add-fedora-repos.service
@@ -170,6 +168,11 @@ modules:
       - fix-dnf-conflicts-for-steam.sh
       - setup-snapd.sh
 
+  - type: systemd
+    system:
+      enabled:
+        - snapd.service
+
   - type: dnf
     repos:
       cleanup: true
@@ -237,7 +240,6 @@ modules:
       - adios-ioscheduler.sh
       #- install-theme.sh
       - install-gamescope-helpers.sh
-      - install-jetbrains-toolbox.sh
 
-      #this just removes a couple of .desktop files but i want to keep them
+      #this just removes a couple of .desktop files but I want to keep them
       #- cleanup.sh
