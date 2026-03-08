@@ -1,0 +1,92 @@
+name: bluebuild
+on:
+  schedule:
+    - cron: "00 06 * * *"
+  push:
+    branches:
+      - main
+      - test
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  bluebuild:
+    name: Build Custom Image
+    runs-on: docker
+    strategy:
+      fail-fast: false
+      matrix:
+        recipe:
+          - base.yml
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq curl
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION=$(curl -s https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r .tag_name)
+          curl -L "https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64" -o cosign
+          chmod +x cosign
+          sudo mv cosign /usr/bin/cosign
+
+      - name: Determine Vars
+        id: build_vars
+        run: |
+          set -euo pipefail
+          # Mirroring the logic to get latest CLI tag
+          REPO_TAG=$(curl -fLsS https://api.github.com/repos/blue-build/cli/tags | jq -r '.[0].name')
+          CLI_VERSION_TAG="v0.9"
+          echo "cli_version=${CLI_VERSION_TAG}" >> "${GITHUB_OUTPUT}"
+          echo "repo_tag=${REPO_TAG}" >> "${GITHUB_OUTPUT}"
+          
+          RECIPE="${{ matrix.recipe }}"
+          if [ -f "./config/${RECIPE}" ]; then
+            RECIPE_PATH="./config/${RECIPE}"
+          else
+            RECIPE_PATH="./recipes/${RECIPE}"
+          fi
+          echo "recipe_path=${RECIPE_PATH}" >> "${GITHUB_OUTPUT}"
+
+      - name: Install BlueBuild
+        env:
+          CLI_VERSION_TAG: ${{ steps.build_vars.outputs.cli_version }}
+        run: |
+          set -euo pipefail
+          CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:${CLI_VERSION_TAG}-installer"
+          docker pull "${CLI_INSTALLER_IMAGE}"
+          docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
+          docker cp blue-build-installer:/out/bluebuild ./bluebuild
+          sudo mv ./bluebuild /usr/bin/bluebuild
+          docker rm blue-build-installer
+          bluebuild --version
+
+      - name: Create MOK private key file
+        run: |
+          mkdir -p .secure_files
+          echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
+          chmod 600 .secure_files/MOK.priv
+
+      - name: Build Image
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+          BB_BUILD_PUSH: "true"
+          BB_PASSWORD: ${{ github.token }}
+          BB_USERNAME: ${{ github.actor }}
+          BB_REGISTRY: "ghcr.io"
+          BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
+          GH_PR_EVENT_NUMBER: ${{ github.event.number }}
+          RECIPE_PATH: ${{ steps.build_vars.outputs.recipe_path }}
+          RUST_LOG_STYLE: always
+          CLICOLOR_FORCE: "1"
+        run: |
+          # Use GH_TOKEN for registry authentication if needed by bluebuild
+          export GH_TOKEN="${{ github.token }}"
+          export BB_PASSWORD="${{ github.token }}"
+          # If pushing to a different registry, change BB_REGISTRY and BB_REGISTRY_NAMESPACE
+          bluebuild build -v "${RECIPE_PATH}"
