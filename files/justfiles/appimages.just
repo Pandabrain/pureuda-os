@@ -1,33 +1,32 @@
 #To create metadata AppImages:
-
+#
 # Download an AppImage (e.g. https://github.com/opencloud-eu/desktop/releases)
 # Download appimagetool (for creating the appimage after unpacking and changing it) from https://github.com/AppImage/appimagetool/releases
-
+#
 # make AppImage you want to unpackk executable
 #chmod +x ./OpenCloud_Desktop-v3.0.3-linux-gcc-x86_64.AppImage
-
+#
 # extract the AppImage
 #./OpenCloud_Desktop-v3.0.3-linux-gcc-x86_64.AppImage --appimage-extract
-
+#
 # go into the extracted folder "squashfs-root" and edit the file "AppRun" to something like the following to avoid it crashing if someone attempts to open the fake AppImage:
-
+#
 ##!/bin/bash
 #echo "This is a skeleton AppImage for GearLever integration."
 #echo "Please use GearLever to update/download the full version."
 #echo "Or download the newest version manually from https://github.com/opencloud-eu/desktop/releases"
 #exit 0
-
+#
 # open the .desktop file and look for a X-AppImage-Version= entry. Make the version lower than the most recent one so it can trigger an update.
 # it is better to reduce the patch version number rather then the build number because the build number does not seem to be used on github, so gearlever might think that 3.0.3.1 is the same as 3.0.3.2.
 #X-AppImage-Version=3.0.2.2073
-
+#
 #delete all the folders except "squashfs-root/usr/share/icons/" and leave the files in the root folder. you should be left with something like these files: "AppRun, appname.desktop, AppRun.wrapped, appname.png, .DirIcon and the usr folder"
-
+#
 #repack the AppImage with appimagetool. I integrated appimagetool with gearlever, you may need to adjust the path to the appimagetool and/or make it executable if you did not use gearlever.
 # adjust the ARCH variable if you are targeting a different architecture. Adjust the version of the new AppImage to whatever you set it to in the .desktop file. GearLever may deduct the version number from the filename if it fails to read it from the .desktop file.
 #ARCH=x86_64 ~/AppImages/appimagetool.appimage squashfs-root OpenCloud_Desktop-v3.0.2-linux-gcc-x86_64.AppImage
-
-
+#
 
 # Install Joplin AppImage via gearlever
 install-joplin-appimage:
