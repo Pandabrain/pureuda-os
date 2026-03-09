@@ -32,7 +32,7 @@ jobs:
       - name: Install BlueBuild
         run: |
           set -euo pipefail
-          CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:latest-installer"
+          CLI_INSTALLER_IMAGE="https://ghcr.io/blue-build/cli:latest-installer"
           docker pull "${CLI_INSTALLER_IMAGE}"
           docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
           docker cp blue-build-installer:/out/bluebuild ./bluebuild
