@@ -74,8 +74,8 @@ jobs:
         env:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
           BB_BUILD_PUSH: "true"
-          #BB_PASSWORD: ${{ github.token }}
-          #BB_USERNAME: ${{ github.actor }}
+          BB_PASSWORD: ${{ github.token }}
+          BB_USERNAME: ${{ github.actor }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
           GH_PR_EVENT_NUMBER: ${{ github.event.number }}
