@@ -26,7 +26,7 @@ jobs:
         id: build_vars
         run: |
           set -euo pipefail
-          CLI_VERSION_TAG="v0.9"
+          CLI_VERSION_TAG="v0.12"
           echo "cli_version=${CLI_VERSION_TAG}" >> "${GITHUB_OUTPUT}"
           
           TIMESTAMP=$(date +%Y%m%d)
@@ -54,13 +54,14 @@ jobs:
       - name: Build ISO
         id: build
         run: |
-          mkdir -p ./output
+          OUTPUT_DIR="${{ github.workspace }}/output"
+          mkdir -p "${OUTPUT_DIR}"
           bluebuild generate-iso \
-            --output-dir ./output \
+            --output-dir "${OUTPUT_DIR}" \
             --iso-name "pureuda-os-${{ steps.build_vars.outputs.timestamp }}.iso" \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           
-          ISO_PATH=$(find ./output -name "*.iso" | head -n 1)
+          ISO_PATH=$(find "${OUTPUT_DIR}" -name "*.iso" | head -n 1)
           if [ -z "${ISO_PATH}" ]; then
             echo "Error: ISO not found in output directory"
             exit 1
