@@ -15,12 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Install Cosign
-        run: |
-          COSIGN_VERSION=$(curl -s https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r .tag_name)
-          curl -L "https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64" -o cosign
-          chmod +x cosign
-          mv cosign /usr/bin/cosign
+      - name: Generate build variables
+        id: build_vars
+        run: echo "timestamp=$(date +%Y%m%d%H%M%S)" >> "${GITHUB_OUTPUT}"
 
       - name: Determine Vars
         id: build_vars
@@ -44,12 +41,6 @@ jobs:
           mv ./bluebuild /usr/bin/bluebuild
           docker rm blue-build-installer
           bluebuild --version
-
-      - name: Create MOK private key file
-        run: |
-          mkdir -p .secure_files
-          echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
-          chmod 600 .secure_files/MOK.priv
 
       - name: Build ISO
         id: build
