@@ -34,14 +34,17 @@ jobs:
       - name: Build ISO
         id: build
         run: |
-          mkdir -p output
-          OUTPUT_DIR="$(pwd)/output"
+          # Use a directory within the GITHUB_WORKSPACE which is always writeable
+          mkdir -p "${{ github.workspace }}/output"
+          
+          # Run bluebuild and explicitly point to the workspace
           bluebuild generate-iso \
-            --output-dir "${OUTPUT_DIR}" \
+            --output-dir "${{ github.workspace }}/output" \
             --iso-name "pureuda-os-${{ steps.build_vars.outputs.timestamp }}.iso" \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           
-          ISO_PATH=$(find "${OUTPUT_DIR}" -name "*.iso" | head -n 1)
+          # Find the ISO using the absolute path
+          ISO_PATH=$(find "${{ github.workspace }}/output" -name "*.iso" | head -n 1)
           if [ -z "${ISO_PATH}" ]; then
             echo "Error: ISO not found in output directory"
             exit 1
