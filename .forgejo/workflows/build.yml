@@ -84,4 +84,5 @@ jobs:
           CLICOLOR_FORCE: "1"
         run: |
           #echo "${{ github.token }}" | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ github.actor }} --password-stdin
-          bluebuild build -v "${RECIPE_PATH}"
+          bluebuild build -v "${RECIPE_PATH}" --registry ${{ secrets.CONTAINER_REGISTRY }} -U ${{ github.actor }} -P ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
+
