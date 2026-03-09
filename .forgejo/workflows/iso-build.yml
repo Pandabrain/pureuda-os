@@ -23,11 +23,12 @@ jobs:
         run: |
           set -euo pipefail
           CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:latest-installer"
+          CONTAINER_NAME="blue-build-installer-isobuilder"
           docker pull "${CLI_INSTALLER_IMAGE}"
-          docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
-          docker cp blue-build-installer:/out/bluebuild ./bluebuild
+          docker create --name "${CONTAINER_NAME}" "${CLI_INSTALLER_IMAGE}"
+          docker cp "${CONTAINER_NAME}":/out/bluebuild ./bluebuild
           mv ./bluebuild /usr/bin/bluebuild
-          docker rm blue-build-installer
+          docker rm "${CONTAINER_NAME}"
           bluebuild --version
 
       - name: Build ISO
