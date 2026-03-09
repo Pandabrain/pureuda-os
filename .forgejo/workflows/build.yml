@@ -30,30 +30,10 @@ jobs:
           chmod +x cosign
           mv cosign /usr/bin/cosign
 
-      - name: Determine Vars
-        id: build_vars
-        run: |
-          set -euo pipefail
-          # Mirroring the logic to get latest CLI tag
-          REPO_TAG=$(curl -fLsS https://api.github.com/repos/blue-build/cli/tags | jq -r '.[0].name')
-          CLI_VERSION_TAG="v0.9"
-          echo "cli_version=${CLI_VERSION_TAG}" >> "${GITHUB_OUTPUT}"
-          echo "repo_tag=${REPO_TAG}" >> "${GITHUB_OUTPUT}"
-          
-          RECIPE="${{ matrix.recipe }}"
-          if [ -f "./config/${RECIPE}" ]; then
-            RECIPE_PATH="./config/${RECIPE}"
-          else
-            RECIPE_PATH="./recipes/${RECIPE}"
-          fi
-          echo "recipe_path=${RECIPE_PATH}" >> "${GITHUB_OUTPUT}"
-
       - name: Install BlueBuild
-        env:
-          CLI_VERSION_TAG: ${{ steps.build_vars.outputs.cli_version }}
         run: |
           set -euo pipefail
-          CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:${CLI_VERSION_TAG}-installer"
+          CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:latest-installer"
           docker pull "${CLI_INSTALLER_IMAGE}"
           docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
           docker cp blue-build-installer:/out/bluebuild ./bluebuild
@@ -76,7 +56,7 @@ jobs:
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
           GH_PR_EVENT_NUMBER: ${{ github.event.number }}
-          RECIPE_PATH: ${{ steps.build_vars.outputs.recipe_path }}
+          RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
