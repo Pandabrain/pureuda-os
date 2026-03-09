@@ -41,13 +41,24 @@ jobs:
           # Run bluebuild pointing to the temp directory
           # We use --output-dir with the full temp path
           bluebuild generate-iso \
+            -v \
             --output-dir "${BUILD_DIR}/output" \
             --iso-name "pureuda-os-${{ steps.build_vars.outputs.timestamp }}.iso" \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           
           # Move the finished ISO back to your workspace so the Release step can find it
           mkdir -p "${GITHUB_WORKSPACE}/output"
-          cp "${BUILD_DIR}/output/"*.iso "${GITHUB_WORKSPACE}/output/"
+          
+          # Try to find the ISO in the expected output-dir or in a build/ directory in CWD
+          # Some versions of bluebuild or its sub-tools might default to 'build/'
+          FOUND_ISO=$(find "${BUILD_DIR}/output" "${GITHUB_WORKSPACE}" -name "*.iso" | head -n 1)
+          
+          if [ -z "${FOUND_ISO}" ]; then
+            echo "Error: Could not find any .iso file after build!"
+            exit 1
+          fi
+          
+          cp "${FOUND_ISO}" "${GITHUB_WORKSPACE}/output/"
           
           ISO_PATH=$(find "${GITHUB_WORKSPACE}/output" -name "*.iso" | head -n 1)
           echo "iso_path=${ISO_PATH}" >> "${GITHUB_OUTPUT}"
