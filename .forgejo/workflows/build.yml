@@ -18,9 +18,9 @@ jobs:
       image: ghcr.io/blue-build/cli:v0.9
     strategy:
       fail-fast: false
-    matrix:
-      recipe:
-        - base.yml
+      matrix:
+        recipe:
+          - base.yml
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
