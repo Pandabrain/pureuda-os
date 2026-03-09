@@ -69,7 +69,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v2
+        uses: actions/forgejo-release@v2
         with:
           tag_name: iso-${{ steps.build_vars.outputs.timestamp }}
           name: ISO Release ${{ steps.build_vars.outputs.timestamp }}
