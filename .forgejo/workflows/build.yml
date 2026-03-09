@@ -17,7 +17,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
     strategy:
       fail-fast: false
       matrix:
@@ -71,6 +70,10 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
+      - name: Registry Login Check
+        run: |
+          echo "${{ github.token }}" | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ github.actor }} --password-stdin
+
       - name: Build Image
         env:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
@@ -84,8 +87,4 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          # Use GH_TOKEN for registry authentication if needed by bluebuild
-          export GH_TOKEN="${{ github.token }}"
-          export BB_PASSWORD="${{ github.token }}"
-
           bluebuild build -v "${RECIPE_PATH}"
