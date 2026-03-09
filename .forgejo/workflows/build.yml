@@ -83,5 +83,5 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          echo "${{ github.token }}" | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ github.actor }} --password-stdin
+          #echo "${{ github.token }}" | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ github.actor }} --password-stdin
           bluebuild build -v "${RECIPE_PATH}"
