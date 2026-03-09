@@ -27,7 +27,7 @@ jobs:
         uses: sigstore/cosign-installer@v4.1.0
         with:
           install-dir: /usr/bin
-          #use-sudo: true
+          use-sudo: true
 
       - name: Install BlueBuild
         run: |
