@@ -1,0 +1,23 @@
+include:
+  - local: .gitlab-ci-common.yml
+stages:
+  - build
+  - iso
+
+build-base-image:
+  extends: .bluebuild-job-template
+  stage: build
+  variables:
+    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami"
+  script:
+    - bluebuild build --verbose --build-chunked-oci --compression-format zstd --push ./recipes/base.yml
+    - !reference [.install-crane, script]
+    - crane tag "$IMAGE_NAME:latest" cachy
+
+build-base-iso:
+  extends: .iso-job-template
+  needs:
+    - build-base-image
+  variables:
+    ISO_NAME: "origami-x86_64.iso"
+    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami"

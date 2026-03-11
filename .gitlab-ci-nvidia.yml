@@ -1,0 +1,23 @@
+include:
+  - local: .gitlab-ci-common.yml
+stages:
+  - build
+  - iso
+
+build-nvidia-image:
+  extends: .bluebuild-job-template
+  stage: build
+  variables:
+    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami-nvidia"
+  script:
+    - bluebuild build --verbose --rechunk-clear-plan --build-chunked-oci --compression-format zstd --push ./recipes/nvidia.yml
+    - !reference [.install-crane, script]
+    - crane tag "$IMAGE_NAME:latest" cachy
+
+build-nvidia-iso:
+  extends: .iso-job-template
+  needs:
+    - build-nvidia-image
+  variables:
+    ISO_NAME: "origami-nvidia-x86_64.iso"
+    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami-nvidia"
