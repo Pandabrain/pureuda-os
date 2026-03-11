@@ -4,7 +4,7 @@ default:
   interruptible: true
 workflow:
   rules:
-    - if: $GITLAB_CI_KILLSWITCH == "true"
+    - if: $GITLAB_CI_ENABLED != "true"
       when: never
     - if: $CI_COMMIT_BRANCH == "main" || $CI_PIPELINE_SOURCE == "schedule" || $CI_COMMIT_TAG
       changes:

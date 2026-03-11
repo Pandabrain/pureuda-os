@@ -64,6 +64,6 @@ Compared to the original Fedora COSMIC Atomic image, Pureuda OS includes the fol
 - **Container Support**: Podman Compose and Podman Desktop included.
 - **Flatpak Integration**: Pre-configured Flathub and COSMIC flatpak repositories with a selection of essential apps.
 
-## 🛠️ GitLab CI Killswitch
+## 🛠️ GitLab CI Enable Switch
 
-To disable the GitLab CI pipeline globally, set the project CI/CD variable `GITLAB_CI_KILLSWITCH` to `true`.
+To enable the GitLab CI pipeline, set the project CI/CD variable `GITLAB_CI_ENABLED` to `true`. If the variable is missing or set to any other value, the pipeline will not run.
