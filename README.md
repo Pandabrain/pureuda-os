@@ -63,3 +63,7 @@ Compared to the original Fedora COSMIC Atomic image, Pureuda OS includes the fol
 - **LUKS Automation**: Includes a **blujust** script (part of the base image) to easily setup automatic LUKS unlocking via **TPM2**.
 - **Container Support**: Podman Compose and Podman Desktop included.
 - **Flatpak Integration**: Pre-configured Flathub and COSMIC flatpak repositories with a selection of essential apps.
+
+## 🛠️ GitLab CI Killswitch
+
+To disable the GitLab CI pipeline globally, set the project CI/CD variable `GITLAB_CI_KILLSWITCH` to `true`.
