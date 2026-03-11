@@ -1,8 +1,7 @@
 name: bluebuild
 on:
   schedule:
-    - cron:
-        "00 06 * * *" # build at 06:00 UTC every day
+    - cron: "0 6 * * *" # build at 06:00 UTC every day
 
   # Pushes – only when they land on main or test
   push:
