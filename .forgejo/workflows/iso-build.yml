@@ -23,28 +23,44 @@ jobs:
         run: |
           set -euo pipefail
           CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:latest-installer"
+          CONTAINER_NAME="blue-build-installer-isobuilder"
           docker pull "${CLI_INSTALLER_IMAGE}"
-          docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
-          docker cp blue-build-installer:/out/bluebuild ./bluebuild
+          docker create --name "${CONTAINER_NAME}" "${CLI_INSTALLER_IMAGE}"
+          docker cp "${CONTAINER_NAME}":/out/bluebuild ./bluebuild
           mv ./bluebuild /usr/bin/bluebuild
-          docker rm blue-build-installer
+          docker rm "${CONTAINER_NAME}"
           bluebuild --version
 
       - name: Build ISO
         id: build
         run: |
-          OUTPUT_DIR="${{ github.workspace }}/output"
-          mkdir -p "${OUTPUT_DIR}"
+          # Define a temporary working area that isn't restricted
+          BUILD_DIR="/tmp/bluebuild-workspace"
+          mkdir -p "${BUILD_DIR}/output"
+          
+          # Run bluebuild pointing to the temp directory
+          # We use --output-dir with the full temp path
           bluebuild generate-iso \
-            --output-dir "${OUTPUT_DIR}" \
+            -v \
+            --output-dir "${BUILD_DIR}/output" \
             --iso-name "pureuda-os-${{ steps.build_vars.outputs.timestamp }}.iso" \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           
-          ISO_PATH=$(find "${OUTPUT_DIR}" -name "*.iso" | head -n 1)
-          if [ -z "${ISO_PATH}" ]; then
-            echo "Error: ISO not found in output directory"
+          # Move the finished ISO back to your workspace so the Release step can find it
+          mkdir -p "${GITHUB_WORKSPACE}/output"
+          
+          # Try to find the ISO in the expected output-dir or in a build/ directory in CWD
+          # Some versions of bluebuild or its sub-tools might default to 'build/'
+          FOUND_ISO=$(find "${BUILD_DIR}/output" "${GITHUB_WORKSPACE}" -name "*.iso" | head -n 1)
+          
+          if [ -z "${FOUND_ISO}" ]; then
+            echo "Error: Could not find any .iso file after build!"
             exit 1
           fi
+          
+          cp "${FOUND_ISO}" "${GITHUB_WORKSPACE}/output/"
+          
+          ISO_PATH=$(find "${GITHUB_WORKSPACE}/output" -name "*.iso" | head -n 1)
           echo "iso_path=${ISO_PATH}" >> "${GITHUB_OUTPUT}"
           echo "iso_name=$(basename ${ISO_PATH})" >> "${GITHUB_OUTPUT}"
 
