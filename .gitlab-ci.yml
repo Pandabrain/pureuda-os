@@ -2,8 +2,6 @@ stages:
   - triggers
 default:
   interruptible: true
-variables:
-  TEST_PIPELINE_BRANCH: "test"
 workflow:
   rules:
     - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
@@ -19,69 +17,12 @@ trigger-base-image-build:
     include: .gitlab-ci-base.yml
     strategy: depend
   rules:
-    - if: "$CI_COMMIT_REF_NAME == $TEST_PIPELINE_BRANCH"
-      when: never
     - if: $CI_COMMIT_TAG
     - if: $CI_PIPELINE_SOURCE == "schedule"
     - changes:
         - recipes/base.yml
         - recipes/core.yml
         - .gitlab-ci-base.yml
-        - .gitlab-ci.yml
-        - "files/**/*"
-        - "modules/**/*"
-
-# --- Trigger Nvidia Pipeline ---
-trigger-nvidia-image-build:
-  stage: triggers
-  trigger:
-    include: .gitlab-ci-nvidia.yml
-    strategy: depend
-  rules:
-    - if: "$CI_COMMIT_REF_NAME == $TEST_PIPELINE_BRANCH"
-      when: never
-    - if: $CI_COMMIT_TAG
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-    - changes:
-        - recipes/nvidia.yml
-        - recipes/core.yml
-        - .gitlab-ci-nvidia.yml
-        - .gitlab-ci.yml
-        - "files/**/*"
-        - "modules/**/*"
-
-# --- Trigger Test Pipeline ---
-trigger-test-base-image-build:
-  stage: triggers
-  trigger:
-    include: .gitlab-ci-test-base.yml
-    strategy: depend
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: "$CI_COMMIT_REF_NAME == $TEST_PIPELINE_BRANCH"
-      changes:
-        - recipes/test-base.yml
-        - recipes/core.yml
-        - .gitlab-ci-test-base.yml
-        - .gitlab-ci.yml
-        - "files/**/*"
-        - "modules/**/*"
-
-# --- Trigger Test Nvidia Pipeline ---
-trigger-test-nvidia-image-build:
-  stage: triggers
-  trigger:
-    include: .gitlab-ci-test-nvidia.yml
-    strategy: depend
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: "$CI_COMMIT_REF_NAME == $TEST_PIPELINE_BRANCH"
-      changes:
-        - recipes/test-nvidia.yml
-        - recipes/core.yml
-        - .gitlab-ci-test-nvidia.yml
         - .gitlab-ci.yml
         - "files/**/*"
         - "modules/**/*"

@@ -8,7 +8,7 @@ build-base-image:
   extends: .bluebuild-job-template
   stage: build
   variables:
-    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami"
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE/pureuda-os"
   script:
     - bluebuild build --verbose --build-chunked-oci --compression-format zstd --push ./recipes/base.yml
     - !reference [.install-crane, script]
@@ -19,5 +19,5 @@ build-base-iso:
   needs:
     - build-base-image
   variables:
-    ISO_NAME: "origami-x86_64.iso"
-    IMAGE_NAME: "registry.gitlab.com/origami-linux/images/origami"
+    ISO_NAME: "pureuda-os-x86_64.iso"
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE/pureuda-os"
