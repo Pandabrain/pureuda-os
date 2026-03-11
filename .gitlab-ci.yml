@@ -4,11 +4,11 @@ default:
   interruptible: true
 workflow:
   rules:
-    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
-      when: never
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: "$CI_COMMIT_BRANCH"
-    - if: "$CI_COMMIT_TAG"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_PIPELINE_SOURCE == "schedule" || $CI_COMMIT_TAG
+      changes:
+        - "**/*"
+        - "!README.md"
+    - when: never
 
 # --- Trigger Base Pipeline ---
 trigger-base-image-build:
@@ -19,7 +19,8 @@ trigger-base-image-build:
   rules:
     - if: $CI_COMMIT_TAG
     - if: $CI_PIPELINE_SOURCE == "schedule"
-    - changes:
+    - if: $CI_COMMIT_BRANCH == "main"
+      changes:
         - recipes/base.yml
         - recipes/core.yml
         - .gitlab-ci-base.yml

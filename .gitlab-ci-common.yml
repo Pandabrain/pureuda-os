@@ -35,19 +35,26 @@
   before_script:
     - *setup_env
 
-# --- Reusable ISO build/upload job (Tag/Release Only) ---
+# --- Reusable ISO build/upload job (Tag/Release/Schedule Only) ---
 .iso-job-template:
   extends: .bluebuild-job-template
   stage: iso
   rules:
-    # This ensures the ISO is ONLY built when you push a Git tag (e.g., v2026.03)
+    # Build ISO when pushing a Git tag (e.g., v2026.03) or on a special schedule
     - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $BUILD_ISO == "true"
   before_script:
     - !reference [.bluebuild-job-template, before_script]
   script:
-    # 1. Parse the Version from the Git Tag
-    - echo "Pipeline triggered by Git tag $CI_COMMIT_TAG"
-    - export RELEASE_VERSION="${CI_COMMIT_TAG#v}"
+    # 1. Parse the Version or handle Schedule
+    - |
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        echo "Pipeline triggered by Git tag $CI_COMMIT_TAG"
+        export RELEASE_VERSION="${CI_COMMIT_TAG#v}"
+      elif [ "$CI_PIPELINE_SOURCE" == "schedule" ]; then
+        echo "Pipeline triggered by schedule"
+        export RELEASE_VERSION="$(date +%Y.%m.%d)-schedule"
+      fi
     - export RELEASE_ISO="${ISO_NAME%.iso}-${RELEASE_VERSION}.iso"
     - echo "Building release ISO $RELEASE_ISO..."
 
@@ -58,7 +65,7 @@
     - sha256sum $RELEASE_ISO | tee $RELEASE_ISO.sha256
 
   artifacts:
-    name: "pureuda-os-iso-$CI_COMMIT_TAG"
+    name: "pureuda-os-iso-$RELEASE_VERSION"
     when: always
     expire_in: 2 years
     paths:
