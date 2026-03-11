@@ -20,8 +20,6 @@
 
 .bluebuild-job-template:
   interruptible: true
-  tags:
-    - saas-linux-2xlarge-amd64
   image:
     name: ghcr.io/blue-build/cli
     entrypoint: [""]
