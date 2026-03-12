@@ -25,7 +25,7 @@ install-jetbrains-toolbox:
     # Download and extract the tarball
     curl -sSfL "$URL" | tar -xz -C "$INSTALL_DIR" --strip-components=1
 
-    EXECUTABLE="$INSTALL_DIR/jetbrains-toolbox"
+    EXECUTABLE="$INSTALL_DIR/bin/jetbrains-toolbox"
     if [ -x "$EXECUTABLE" ]; then
         echo "🚀 Starting JetBrains Toolbox..."
         "$EXECUTABLE" > /dev/null 2>&1 &
