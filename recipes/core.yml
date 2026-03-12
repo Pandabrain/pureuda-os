@@ -235,6 +235,7 @@ modules:
           - org.onlyoffice.desktopeditors
           - md.obsidian.Obsidian
           - me.amankhanna.opendeck
+          - org.zulip.Zulip
       - notify: false
         scope: user
         repo:
