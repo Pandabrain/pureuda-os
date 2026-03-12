@@ -6,7 +6,7 @@ install-suggested-snaps:
         exit 1
     fi
 
-    APPS=("snapd, snap-store" "proton-mail" "proton-pass" "termius-app")
+    APPS=("snapd" "snap-store" "proton-mail" "proton-pass" "termius-app")
 
     echo "🚀 The following snaps will be installed:"
     for app in "${APPS[@]}"; do
