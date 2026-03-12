@@ -6,17 +6,17 @@ initialize-snap:
         exit 1
     fi
 
-    APPS=("snapd" "snap-store")
-
-    echo "🚀 The following snaps will be installed to initialize support:"
-    for app in "${APPS[@]}"; do
-        echo "  - $app"
-    done
-
-    read -p "❓ Do you want to proceed with the initialization? [y/N] " confirm
-    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    read -p "❓ Do you want to initialize snap? [y/N] " confirm_init
+    if [[ ! "$confirm_init" =~ ^[Yy]$ ]]; then
         echo "❌ Initialization cancelled."
         exit 0
+    fi
+
+    APPS=("snapd")
+
+    read -p "❓ Do you also want the snap-store (official GUI for snap) installed? [y/N] " confirm_store
+    if [[ "$confirm_store" =~ ^[Yy]$ ]]; then
+        APPS+=("snap-store")
     fi
 
     for app in "${APPS[@]}"; do
