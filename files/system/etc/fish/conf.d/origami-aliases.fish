@@ -78,13 +78,13 @@ alias su su-rs
 alias gearlever 'flatpak run it.mijorus.gearlever'
 
 # --- Directory listings via eza ----------------------------------------------
-alias la 'eza -la --icons'
+alias la 'eza -la --icons --group'
 alias lt 'eza --tree --level=2 --icons'
 function ls
-    command eza --icons $argv
+    command eza --icons --group $argv
 end
 function ll
-    command eza -l --icons $argv
+    command eza -l --icons --group $argv
 end
 
 # --- Interactive tooling -----------------------------------------------------

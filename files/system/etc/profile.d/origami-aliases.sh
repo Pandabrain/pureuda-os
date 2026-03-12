@@ -88,10 +88,10 @@ alias su='su-rs'
 alias gearlever='flatpak run it.mijorus.gearlever'
 
 # --- Directory listings via eza ----------------------------------------------
-alias la='eza -la --icons'
+alias la='eza -la --icons --group'
 alias lt='eza --tree --level=2 --icons'
-ls() { command eza --icons "$@"; }
-ll() { command eza -l --icons "$@"; }
+ls() { command eza --icons --group "$@"; }
+ll() { command eza -l --icons --group "$@"; }
 
 # --- Interactive tooling -----------------------------------------------------
 _eval_if_available fzf --bash
