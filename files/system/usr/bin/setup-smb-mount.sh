@@ -79,17 +79,8 @@ echo "Reloading systemd and starting mount..."
 systemctl daemon-reload
 systemctl enable --now "$unit_name"
 
-# 6. Open in file explorer
-# We use xdg-open but we need to run it as the non-root user
-# Assuming the user running this with sudo is the one who wants it opened
-if [ -n "${SUDO_USER:-}" ]; then
-    echo "Opening $mount_point in file explorer as $SUDO_USER..."
-    # We use -u $SUDO_USER to run as the actual user
-    # DBUS_SESSION_BUS_ADDRESS is often needed for xdg-open to work properly from sudo
-    sudo -u "$SUDO_USER" dbus-run-session -- xdg-open "$mount_point" || sudo -u "$SUDO_USER" xdg-open "$mount_point" || echo "Could not open file explorer automatically."
-else
-    echo "Opening $mount_point in file explorer..."
-    xdg-open "$mount_point" || echo "Could not open file explorer automatically."
-fi
+# 6. List contents of the mount point, so the user can see if it worked right away
+echo "Contents of $mount_point: (if this shows nothing, the share is either empty or the mount was not setup correctly)"
+ls -lh "$mount_point"
 
 echo "SMB share successfully mounted at $mount_point"
