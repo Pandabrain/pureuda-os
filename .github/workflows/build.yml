@@ -31,12 +31,12 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    # Guard clause – abort early if we’re not on main or test or if ENABLE_WORKFLOW secret is not set to true.
+    # Guard clause – abort early if we’re not on main or test or if ENABLE_WORKFLOW variable is not set to true.
     # This protects run from building on other branches when triggered by cron schedule.
     if: |
       (github.ref == 'refs/heads/main' ||
       github.ref == 'refs/heads/test') &&
-      secrets.ENABLE_WORKFLOW == 'true'
+      vars.ENABLE_WORKFLOW == 'true'
     strategy:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
