@@ -247,7 +247,7 @@ modules:
   - type: script
     scripts:
       - adios-ioscheduler.sh
-      #- install-theme.sh
+      - install-theme.sh
       - install-gamescope-helpers.sh
 
       #this just removes a couple of .desktop files but I want to keep them
