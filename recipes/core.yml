@@ -234,6 +234,7 @@ modules:
           - com.bambulab.BambuStudio
           - org.onlyoffice.desktopeditors
           - md.obsidian.Obsidian
+          - me.amankhanna.opendeck
       - notify: false
         scope: user
         repo:
