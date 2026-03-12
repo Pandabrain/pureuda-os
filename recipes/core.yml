@@ -250,5 +250,5 @@ modules:
       - install-theme.sh
       - install-gamescope-helpers.sh
 
-      #this just removes a couple of .desktop files but I want to keep them
+      #this just removes a couple of .desktop files, but I want to keep them
       #- cleanup.sh
