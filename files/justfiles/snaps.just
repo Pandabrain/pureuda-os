@@ -27,7 +27,7 @@ initialize-snap:
     echo "🔧 Setting up snapd void directory..."
     sudo mkdir -p /var/lib/snapd/void
     sudo chmod 700 /var/lib/snapd/void
-    
+
     echo "🔄 Restarting snapd..."
     sudo systemctl restart snapd
     echo "✅ Snap initialization complete."
