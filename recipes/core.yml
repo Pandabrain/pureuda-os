@@ -174,12 +174,12 @@ modules:
   - type: script
     scripts:
       - fix-dnf-conflicts-for-steam.sh
-      - setup-snapd.sh
+  #    - setup-snapd.sh
 
-  - type: systemd
-    system:
-      enabled:
-        - snapd.service
+  #- type: systemd
+  #  system:
+  #    enabled:
+  #      - snapd.service
 
   - type: dnf
     repos:
