@@ -1,10 +1,10 @@
 (
     order: [
-        CpuTemp,
         CpuUsage,
+        CpuTemp,
         MemoryUsage,
+        GpuInfo,
         DiskUsage,
         NetworkUsage,
-        GpuInfo,
     ],
 )
