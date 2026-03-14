@@ -19,10 +19,10 @@
 #exit 0
 #
 # open the .desktop file and look for a X-AppImage-Version= entry. Make the version lower than the most recent one so it can trigger an update.
-# it is better to reduce the patch version number rather then the build number because the build number does not seem to be used on github, so gearlever might think that 3.0.3.1 is the same as 3.0.3.2.
+# it is better to reduce the patch version number rather then the build number because the build number does not seem to be used on github (in this example), so gearlever might think that 3.0.3.1 is the same as 3.0.3.2.
 #X-AppImage-Version=3.0.2.2073
 #
-#delete all the folders except "squashfs-root/usr/share/icons/" and leave the files in the root folder. you should be left with something like these files: "AppRun, appname.desktop, AppRun.wrapped, appname.png, .DirIcon and the usr folder"
+#delete all the folders except "squashfs-root/usr/share/icons/" and all files but the following: "AppRun, <appname>.desktop, <appname>.png and .DirIcon". So you should be left with those four files and the usr folder"
 #
 #repack the AppImage with appimagetool. I integrated appimagetool with gearlever, you may need to adjust the path to the appimagetool and/or make it executable if you did not use gearlever.
 # adjust the ARCH variable if you are targeting a different architecture. Adjust the version of the new AppImage to whatever you set it to in the .desktop file. GearLever may deduct the version number from the filename if it fails to read it from the .desktop file.
