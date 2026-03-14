@@ -97,6 +97,8 @@ modules:
         - uutils-coreutils
         #- byobu
         #- micro
+        - baobab
+        - qdirstat
 
         - cachyos-settings
         - scx-scheds
@@ -161,6 +163,9 @@ modules:
         - android-tools
 
         - snapd
+
+        - lutris
+        - heroic-games-launcher
 
 
 
