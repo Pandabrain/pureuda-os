@@ -222,6 +222,7 @@ modules:
           - org.telegram.desktop
           - io.podman_desktop.PodmanDesktop
           - it.mijorus.gearlever
+          - org.gnome.gitlab.somas.Apostrophe
       - notify: false
         scope: user
         repo:
