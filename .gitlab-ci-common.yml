@@ -57,7 +57,7 @@
     - echo "Building release ISO $RELEASE_ISO..."
 
     # 2. Build ISO directly with the versioned name
-    - bluebuild generate-iso --secure-boot-url "$CI_PROJECT_URL/-/raw/$CI_COMMIT_REF_NAME/MOK.der" --enrollment-password pureudaos --iso-name $RELEASE_ISO image $IMAGE_NAME
+    - bluebuild generate-iso --secure-boot-url "$CI_PROJECT_URL/-/raw/$CI_COMMIT_REF_NAME/MOK.der" --enrollment-password bluebuild --iso-name $RELEASE_ISO image $IMAGE_NAME
 
     # 3. Generate SHA256
     - sha256sum $RELEASE_ISO | tee $RELEASE_ISO.sha256
