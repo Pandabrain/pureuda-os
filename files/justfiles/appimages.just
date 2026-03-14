@@ -15,6 +15,7 @@
 #echo "This is a skeleton AppImage for GearLever integration."
 #echo "Please use GearLever to update/download the full version."
 #echo "Or download the newest version manually from https://github.com/opencloud-eu/desktop/releases"
+#echo "To add update capability to gearlever, set update source to Github, repo url to https://github.com/opencloud-eu/desktop and repo filename to OpenCloud_Desktop-*-linux-gcc-x86_64.AppImage
 #exit 0
 #
 # open the .desktop file and look for a X-AppImage-Version= entry. Make the version lower than the most recent one so it can trigger an update.
