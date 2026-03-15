@@ -6,7 +6,6 @@ $battery\
 $os\
 $shell\
 $shlvl\
-$sudo\
 $username\
 $sudo\
 $hostname\
@@ -20,7 +19,7 @@ $git_status\
 $git_metrics\
 $hg_branch\
 $hg_state\
-$pijul\
+pijul_channel\
 [](fg:yellow bg:green)\
 $c\
 $cobol\
@@ -145,6 +144,13 @@ format = '[ $indicator]($style)'
 style = 'bg:red fg:crust'
 disabled = false
 
+[shlvl]
+disabled = false
+style = 'bg:red fg:crust'
+
+[hostname]
+style = 'bg:red fg:crust'
+
 [sudo]
 disabled = false
 style = 'bg:red fg:crust'
@@ -172,69 +178,404 @@ truncation_symbol = "…/"
 
 [direnv]
 disabled = false
+style = "bg:peach fg:crust"
+
+[battery]
+full_symbol = " "
+charging_symbol = "󱐋 "
+discharging_symbol = " "
+empty_symbol = " "
 
 [[battery.display]]
 threshold = 100
-style = 'bold red'
+style = "bold red"
 
 [git_branch]
 symbol = ""
-style = "bg:yellow"
+style = "bg:yellow fg:crust"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
 [git_status]
-style = "bg:yellow"
+style = "bg:yellow fg:crust"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+
+[git_metrics]
+style = "bg:yellow fg:crust"
+format = '([+$added]($style))([-$deleted]($style))'
+disabled = false
+
+[hg_branch]
+style = "bg:yellow fg:crust"
+format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
+symbol = ""
+
+[hg_state]
+style = "bg:yellow fg:crust"
+format = '[[($state( $progress_current/$progress_total))](fg:crust bg:yellow)]($style)'
+
+[pijul_channel]
+style = "bg:yellow fg:crust"
+format = '[[ $symbol $channel ](fg:crust bg:yellow)]($style)'
+symbol = ""
 
 [nodejs]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [c]
 symbol = " "
-style = "bg:green"
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[cobol]
+symbol = "⚙ "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[crystal]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[daml]
+symbol = "λ "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[dart]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[dotnet]
+symbol = "󰪮 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[elixir]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[elm]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[erlang]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[fennel]
+symbol = "󰈄 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[gleam]
+symbol = "󰶰 "
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [php]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [java]
 symbol = " "
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [kotlin]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [haskell]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[haxe]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[julia]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[mojo]
+symbol = "🔥 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[lua]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[ocaml]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[odin]
+symbol = "󰰂 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[perl]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[purescript]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[raku]
+symbol = "🦋 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[rlang]
+symbol = "󰟔 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[red]
+symbol = "󱄛 "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[ruby]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[scala]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[solidity]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[swift]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[vlang]
+symbol = " "
+style = "bg:green fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [python]
 symbol = ""
-style = "bg:green"
+style = "bg:green fg:crust"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
 
 [docker_context]
 symbol = ""
-style = "bg:sapphire"
+style = "bg:sapphire "
 format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
+
+[aws]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $profile)(\($region\))(\[$duration\]) ](fg:crust bg:sapphire)]($style)'
+
+[azure]
+symbol = "󰠅 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $subscription) ](fg:crust bg:sapphire)]($style)'
+
+[buf]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[bun]
+symbol = "󰛦 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[cmake]
+symbol = "△ "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[container]
+symbol = "⬢ "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol [$name] ](fg:crust bg:sapphire)]($style)'
+
+[deno]
+symbol = "🦕 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[fortran]
+symbol = "󱈚 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[fossil_branch]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol$branch ](fg:crust bg:sapphire)]($style)'
+
+[fossil_metrics]
+style = "bg:sapphire fg:crust"
+format = '([+$added]($style))([-$deleted]($style))'
+
+[gcloud]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $project)(\($region\)) ](fg:crust bg:sapphire)]($style)'
+
+[guix_shell]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol ](fg:crust bg:sapphire)]($style)'
+
+[gradle]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[helm]
+symbol = "⎈ "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[kubernetes]
+symbol = "󱃾 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $context)( \($namespace\)) ](fg:crust bg:sapphire)]($style)'
+
+[meson]
+symbol = "󰔚 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[mise]
+symbol = "󰉼 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[nats]
+symbol = "󱓗 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[netns]
+symbol = "󰓅 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $name) ](fg:crust bg:sapphire)]($style)'
+
+[nix_shell]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $state)( \($name\)) ](fg:crust bg:sapphire)]($style)'
+
+[opa]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[openstack]
+symbol = "󰐎 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $project)(\($region\)) ](fg:crust bg:sapphire)]($style)'
+
+[package]
+symbol = "󰏗 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[pixi]
+symbol = "󰄛 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[pulumi]
+symbol = " "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $stack) ](fg:crust bg:sapphire)]($style)'
+
+[quarto]
+symbol = "󰄛 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[singularity]
+symbol = "󰊭 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[spack]
+symbol = "🅂 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[terraform]
+symbol = "󱁢 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $workspace) ](fg:crust bg:sapphire)]($style)'
+
+[typst]
+symbol = "t "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[vagrant]
+symbol = "⍱ "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[vcsh]
+symbol = "󰘔 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $repo) ](fg:crust bg:sapphire)]($style)'
+
+[xmake]
+symbol = "󰔚 "
+style = "bg:sapphire fg:crust"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
 
 [conda]
 symbol = "  "
@@ -245,7 +586,7 @@ ignore_base = false
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:lavender"
+style = "bg:lavender fg:crust"
 format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
 [line_break]
@@ -263,7 +604,7 @@ vimcmd_visual_symbol = '[❮](bold fg:yellow)'
 [cmd_duration]
 show_milliseconds = true
 format = " in $duration "
-style = "bg:lavender"
+style = "bg:lavender fg:crust"
 disabled = false
 show_notifications = true
 min_time_to_notify = 45000
