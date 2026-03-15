@@ -48,23 +48,6 @@ function _nag_and_exec
     command "$target" $argv
 end
 
-# --- Wrappers ----------------------------------------------------------------
-function fastfetch
-    if test (count $argv) -eq 0
-        set -l config_dir "/usr/share/fastfetch/presets/pureuda-os"
-        if test -f "$config_dir/pureuda-os-ascii.txt"; and test -f "$config_dir/pureuda-os-fastfetch.jsonc"
-            command fastfetch \
-                -l "$config_dir/pureuda-os-ascii.txt" \
-                --logo-color-1 blue \
-                -c "$config_dir/pureuda-os-fastfetch.jsonc"
-        else
-            command fastfetch
-        end
-    else
-        command fastfetch $argv
-    end
-end
-
 # --- Modern replacements -----------------------------------------------------
 # Note: These are applied early but will be overridden by nag functions if names overlap
 #alias htop btop
