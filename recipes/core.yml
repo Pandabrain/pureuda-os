@@ -158,7 +158,7 @@ modules:
         - gtk3-devel
         - egl-utils
 
-        - warp-terminal
+        #- warp-terminal
 
         - android-tools
 
