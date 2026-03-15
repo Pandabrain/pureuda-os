@@ -260,6 +260,7 @@ modules:
       #this just removes a couple of .desktop files, but I want to keep them
       #- cleanup.sh
 
+  #index.theme seems to be overridden by something above, let's copy it again
   - type: files
     files:
       - source: system/usr/share/icons/default
