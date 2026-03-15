@@ -1,31 +1,110 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+$battery\
 [](red)\
 $os\
+$shell\
+$shlvl\
+$sudo\
 $username\
+$sudo\
+$hostname\
 [](bg:peach fg:red)\
 $directory\
+$direnv\
 [](bg:yellow fg:peach)\
 $git_branch\
+$git_commit\
 $git_status\
+$git_metrics\
+$hg_branch\
+$hg_state\
+$pijul\
 [](fg:yellow bg:green)\
 $c\
-$rust\
+$cobol\
+$cpp\
+$crystal\
+$daml\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
 $golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
 $haskell\
+$haxe\
+$java\
+$julia\
+$kotlin\
+$mojo\
+$nim\
+$lua\
+$nodejs\
+$ocaml\
+$odin\
+$perl\
+$php\
+$purescript\
 $python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$vlang\
+$zig\
 [](fg:green bg:sapphire)\
+$aws\
+$azure\
+$buf\
+$bun\
+$cmake\
 $conda\
+$container\
+$deno\
+$docker_context\
+$fortran\
+$fossil_branch\
+$fossil_metrics\
+$gcloud\
+$guix_shell\
+$gradle\
+$helm\
+$kubernetes\
+$meson\
+$mise\
+$nats\
+$netns\
+$nix_shell\
+$opa\
+$openstack\
+$package\
+$pixi\
+$pulumi\
+$quarto\
+$singularity\
+$spack\
+$terraform\
+$typst\
+$vagrant\
+$vcsh\
+$xmake\
 [](fg:sapphire bg:lavender)\
 $time\
 [ ](fg:lavender)\
+$jobs\
+$memory_usage\
+$localip\
 $cmd_duration\
 $line_break\
+$status\
 $character"""
 
 palette = 'catppuccin_mocha'
@@ -56,6 +135,22 @@ Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
+[status]
+disabled = false
+format = '[\[$status\]]($style)'
+
+[shell]
+unknown_indicator = 'unkown shell'
+format = '[ $indicator]($style)'
+style = 'bg:red fg:crust'
+disabled = false
+
+[sudo]
+disabled = false
+style = 'bg:red fg:crust'
+symbol = ''
+format = '[$symbol]($style)'
+
 [username]
 show_always = true
 style_user = "bg:red fg:crust"
@@ -74,6 +169,13 @@ truncation_symbol = "…/"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+
+[direnv]
+disabled = false
+
+[[battery.display]]
+threshold = 100
+style = 'bold red'
 
 [git_branch]
 symbol = ""
@@ -165,6 +267,7 @@ style = "bg:lavender"
 disabled = false
 show_notifications = true
 min_time_to_notify = 45000
+min_time = 100
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
