@@ -259,3 +259,8 @@ modules:
 
       #this just removes a couple of .desktop files, but I want to keep them
       #- cleanup.sh
+
+  - type: files
+    files:
+      - source: system/usr/share/icons/default
+        destination: /usr/share/icons/default/
