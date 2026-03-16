@@ -1,0 +1,61 @@
+name: bluebuild-new-method
+on:
+  #schedule:
+  #  - cron: "0 6 * * *"
+  push:
+    branches:
+  #    - main
+      - test
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  bluebuild:
+    name: Build Custom Image
+    runs-on: fedora-nodejs24
+    strategy:
+      fail-fast: false
+      matrix:
+        recipe:
+          - base.yml
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Create MOK private key file
+        run: |
+          mkdir -p .secure_files
+          echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
+          chmod 600 .secure_files/MOK.priv
+
+      - name: Build Image
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+          BB_BUILD_PUSH: "true"
+          BB_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
+          BB_USERNAME: ${{ github.actor }}
+          BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+          BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
+          GH_PR_EVENT_NUMBER: ${{ github.event.number }}
+          RECIPE_PATH: ./recipes/${{ matrix.recipe }}
+          RUST_LOG_STYLE: always
+          CLICOLOR_FORCE: "1"
+        run: |
+          docker run --rm \
+            -v "$(pwd):/build" \
+            -w /build \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -e COSIGN_PRIVATE_KEY \
+            -e BB_BUILD_PUSH \
+            -e BB_PASSWORD \
+            -e BB_USERNAME \
+            -e BB_REGISTRY \
+            -e BB_REGISTRY_NAMESPACE \
+            -e GH_PR_EVENT_NUMBER \
+            -e RECIPE_PATH \
+            -e RUST_LOG_STYLE \
+            -e CLICOLOR_FORCE \
+            ghcr.io/blue-build/cli:latest \
+            build -v "${RECIPE_PATH}"
+
