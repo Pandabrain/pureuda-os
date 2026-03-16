@@ -42,7 +42,7 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          apt install docker
+          apt install docker.io
           docker run --rm \
             -v "$(pwd):/build" \
             -w /build \
