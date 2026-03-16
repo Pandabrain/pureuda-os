@@ -15,7 +15,7 @@ jobs:
     name: Build Custom Image
     runs-on: docker
     container:
-      image: ubuntu:latest
+      image: ubuntu:act-latest
     strategy:
       fail-fast: false
       matrix:
