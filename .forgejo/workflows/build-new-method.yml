@@ -13,7 +13,7 @@ on:
 jobs:
   bluebuild:
     name: Build Custom Image
-    runs-on: fedora-nodejs24
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +42,6 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          sudo dnf install -y podman-docker
           docker run --rm \
             -v "$(pwd):/build" \
             -w /build \
