@@ -13,7 +13,9 @@ on:
 jobs:
   bluebuild:
     name: Build Custom Image
-    runs-on: debian-node20
+    runs-on: docker
+    container:
+      image: ubuntu:latest
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +44,6 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          apt install docker.io
           docker run --rm \
             -v "$(pwd):/build" \
             -w /build \
