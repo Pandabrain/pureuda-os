@@ -21,7 +21,7 @@ modules:
     #include:
     #  - path/to/justfile.just
 
-  - typ: dnf
+  - type: dnf
     install:
       packages:
         #proton vpn is not getting installed by the link below, but it does add the repos. It needs to be in its own module and run first, so the repo is available on the next dnf install command
