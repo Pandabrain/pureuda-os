@@ -15,7 +15,7 @@ jobs:
     name: Build Custom Image
     runs-on: docker
     container:
-      image: ubuntu:latest
+      image: ghcr.io/blue-build/cli:latest
     strategy:
       fail-fast: false
       matrix:
