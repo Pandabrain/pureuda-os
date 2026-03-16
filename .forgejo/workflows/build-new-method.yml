@@ -15,15 +15,13 @@ jobs:
     name: Build Custom Image
     runs-on: docker
     container:
-      image: ubuntu:act-latest
+      image: ubuntu:latest
     strategy:
       fail-fast: false
       matrix:
         recipe:
           - base.yml
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
 
       - name: Create MOK private key file
         run: |
