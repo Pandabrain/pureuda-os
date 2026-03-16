@@ -42,7 +42,7 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          dnf install -y podman-docker
+          sudo dnf install -y podman-docker
           docker run --rm \
             -v "$(pwd):/build" \
             -w /build \
