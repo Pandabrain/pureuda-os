@@ -16,7 +16,7 @@ jobs:
     runs-on: docker
     container:
       image: ghcr.io/blue-build/cli:latest
-      options: --user root -v /var/run/docker.sock:/var/run/docker.sock
+      options: --user root #-v /var/run/docker.sock:/var/run/docker.sock
     strategy:
       fail-fast: false
       matrix:
