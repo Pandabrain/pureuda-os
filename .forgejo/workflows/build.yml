@@ -13,33 +13,29 @@ on:
 jobs:
   bluebuild:
     name: Build Custom Image
-    runs-on: ubuntu-latest
+    runs-on: docker
+    container:
+      image: ghcr.io/blue-build/cli:latest
+      #options: --user root #-v /var/run/docker.sock:/var/run/docker.sock
     strategy:
       fail-fast: false
       matrix:
         recipe:
           - base.yml
     steps:
+      - name: Install node
+        run: |
+          dnf install -y nodejs
+
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Install Cosign
-        run: |
-          COSIGN_VERSION=$(curl -s https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r .tag_name)
-          curl -L "https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64" -o cosign
-          chmod +x cosign
-          mv cosign /usr/bin/cosign
-
-      - name: Install BlueBuild
-        run: |
-          set -euo pipefail
-          CLI_INSTALLER_IMAGE="ghcr.io/blue-build/cli:latest-installer"
-          docker pull "${CLI_INSTALLER_IMAGE}"
-          docker create --name blue-build-installer "${CLI_INSTALLER_IMAGE}"
-          docker cp blue-build-installer:/out/bluebuild ./bluebuild
-          mv ./bluebuild /usr/bin/bluebuild
-          docker rm blue-build-installer
-          bluebuild --version
+      #if nodejs installation should fail, you can simply remove the installation and the checkout action above
+      # and just run git commands manually (:
+      #      - name: Checkout repository
+      #        run: |
+      #          git clone ${{ github.server_url }}/${{ github.repository }} .
+      #          git checkout ${{ github.sha }}
 
       - name: Create MOK private key file
         run: |
@@ -61,4 +57,3 @@ jobs:
           CLICOLOR_FORCE: "1"
         run: |
           bluebuild build -v "${RECIPE_PATH}"
-
