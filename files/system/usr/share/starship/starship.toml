@@ -2,7 +2,7 @@
 
 format = """
 $battery\
-[](red)\
+[](section1)\
 $os\
 $shell\
 $shlvl\
@@ -106,11 +106,11 @@ $line_break\
 $status\
 $character"""
 
-palette = 'catppuccin_mocha'
+palette = 'pureuda_os'
 
 [os]
 disabled = false
-style = "bg:red fg:crust"
+style = "bg:section1 fg:crust"
 
 [os.symbols]
 Windows = ""
@@ -141,12 +141,12 @@ format = '[\[$status\]]($style)'
 [shell]
 unknown_indicator = 'unkown shell'
 format = '[ $indicator]($style)'
-style = 'bg:red fg:crust'
+style = 'bg:section2 fg:crust'
 disabled = false
 
 [shlvl]
 disabled = false
-style = 'bg:red fg:crust'
+style = 'bg:section2 fg:crust'
 
 [hostname]
 style = 'bg:red fg:crust'
@@ -154,7 +154,7 @@ style = 'bg:red fg:crust'
 [sudo]
 disabled = false
 style = 'bg:red fg:crust'
-symbol = ''
+symbol = ''
 format = '[$symbol]($style)'
 
 [username]
@@ -200,8 +200,9 @@ style = "bg:yellow fg:crust"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
 [git_metrics]
-style = "bg:yellow fg:crust"
-format = '([+$added]($style))([-$deleted]($style))'
+added_style = "bg:yellow fg:crust"
+deleted_style = "bg:yellow fg:crust"
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
 disabled = false
 
 [hg_branch]
@@ -459,8 +460,10 @@ style = "bg:sapphire fg:crust"
 format = '[[ $symbol$branch ](fg:crust bg:sapphire)]($style)'
 
 [fossil_metrics]
-style = "bg:sapphire fg:crust"
-format = '([+$added]($style))([-$deleted]($style))'
+added_style = "bg:yellow fg:crust"
+deleted_style = "bg:yellow fg:crust"
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = false
 
 [gcloud]
 symbol = " "
@@ -610,6 +613,43 @@ show_notifications = true
 min_time_to_notify = 45000
 min_time = 100
 
+[palettes.pureuda_os]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#9B31FD"
+maroon = "#eba0ac"
+peach = "#AB52FE"
+yellow = "#BB73FE"
+green = "#CB94FF"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#DBB4FF"
+section1 = "#51A2DA"
+section2 = "#6486e3"
+section3 = "#766AEC"
+section4 = "#894ef5"
+section5 = "#894ef5"
+section6 = "#894ef5"
+section7 = "#894ef5"
+section8 = "#894ef5"
+section9 = "#894ef5"
+section10 = "#894ef5"
+lavender = "#DEBBFF"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
@@ -623,7 +663,7 @@ green = "#a6e3a1"
 teal = "#94e2d5"
 sky = "#89dceb"
 sapphire = "#74c7ec"
-blue = "#89b4fa"
+section1 = "#89b4fa"
 lavender = "#b4befe"
 text = "#cdd6f4"
 subtext1 = "#bac2de"
@@ -651,7 +691,7 @@ green = "#a6d189"
 teal = "#81c8be"
 sky = "#99d1db"
 sapphire = "#85c1dc"
-blue = "#8caaee"
+section1 = "#8caaee"
 lavender = "#babbf1"
 text = "#c6d0f5"
 subtext1 = "#b5bfe2"
@@ -679,7 +719,7 @@ green = "#40a02b"
 teal = "#179299"
 sky = "#04a5e5"
 sapphire = "#209fb5"
-blue = "#1e66f5"
+section1 = "#1e66f5"
 lavender = "#7287fd"
 text = "#4c4f69"
 subtext1 = "#5c5f77"
@@ -707,7 +747,7 @@ green = "#a6da95"
 teal = "#8bd5ca"
 sky = "#91d7e3"
 sapphire = "#7dc4e4"
-blue = "#8aadf4"
+section1 = "#8aadf4"
 lavender = "#b7bdf8"
 text = "#cad3f5"
 subtext1 = "#b8c0e0"
