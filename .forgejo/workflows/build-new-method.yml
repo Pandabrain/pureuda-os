@@ -16,12 +16,15 @@ jobs:
     runs-on: docker
     container:
       image: ghcr.io/blue-build/cli:latest
+      options: --user root -v /var/run/docker.sock:/var/run/docker.sock
     strategy:
       fail-fast: false
       matrix:
         recipe:
           - base.yml
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
       - name: Create MOK private key file
         run: |
@@ -42,20 +45,5 @@ jobs:
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
         run: |
-          docker run --rm \
-            -v "$(pwd):/build" \
-            -w /build \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -e COSIGN_PRIVATE_KEY \
-            -e BB_BUILD_PUSH \
-            -e BB_PASSWORD \
-            -e BB_USERNAME \
-            -e BB_REGISTRY \
-            -e BB_REGISTRY_NAMESPACE \
-            -e GH_PR_EVENT_NUMBER \
-            -e RECIPE_PATH \
-            -e RUST_LOG_STYLE \
-            -e CLICOLOR_FORCE \
-            ghcr.io/blue-build/cli:latest \
-            build -v "${RECIPE_PATH}"
+          bluebuild build -v "${RECIPE_PATH}"
 
