@@ -23,9 +23,10 @@ modules:
 
   - typ: dnf
     install:
-      #proton vpn is not getting installed by the link below, but it does add the repos. It needs to be in its own module and run first, so the repo is available on the next dnf install command
-      # running them together will not work because the module tries to install all at once, which fails due the missing repo from this rpm
-      - https://repo.protonvpn.com/fedora-%OS_VERSION%-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm
+      packages:
+        #proton vpn is not getting installed by the link below, but it does add the repos. It needs to be in its own module and run first, so the repo is available on the next dnf install command
+        # running them together will not work because the module tries to install all at once, which fails due the missing repo from this rpm
+        - https://repo.protonvpn.com/fedora-%OS_VERSION%-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm
 
   - type: dnf
     repos:
@@ -163,6 +164,7 @@ modules:
         - gtk3-devel
         - egl-utils
 
+        #warp repos are still being installed, in case I change my mind about warp
         #- warp-terminal
 
         - android-tools
