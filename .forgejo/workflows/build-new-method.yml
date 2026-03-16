@@ -16,17 +16,20 @@ jobs:
     runs-on: docker
     container:
       image: ghcr.io/blue-build/cli:latest
-      #options: --user root #-v /var/run/docker.sock:/var/run/docker.sock
+      options: --user root #-v /var/run/docker.sock:/var/run/docker.sock
     strategy:
       fail-fast: false
       matrix:
         recipe:
           - base.yml
     steps:
-      - name: Checkout repository
+      - name: Install node
         run: |
-          git clone ${{ github.server_url }}/${{ github.repository }} .
-          git checkout ${{ github.sha }}
+          dnf install nodejs
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
 
       - name: Create MOK private key file
         run: |
