@@ -23,6 +23,11 @@ jobs:
         recipe:
           - base.yml
     steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - name: Checkout repository
         uses: actions/checkout@v6
 
