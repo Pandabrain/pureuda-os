@@ -44,7 +44,7 @@ jobs:
           direction: upload
           release-dir: .
           release-notes: "Release ${{ env.RELEASE_TAG }}"
-          tag-name: ${{ env.RELEASE_TAG }}
+          tag-name: "${{ env.RELEASE_TAG }}-release"
           files: |
             pureuda-os-2026.03.17-1924.iso
             pureuda-os-2026.03.17-1924.iso-CHECKSUM
