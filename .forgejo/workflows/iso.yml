@@ -46,8 +46,3 @@ jobs:
           release-dir: iso
           release-notes: "Release ${{ env.RELEASE_TAG }}"
           tag: "${{ env.RELEASE_TAG }}"
-          files: |
-            pureuda-os-2026.03.17-1924.iso
-            pureuda-os-2026.03.17-1924.iso-CHECKSUM
-      #      pureuda-os-${{ env.RELEASE_TAG }}.iso
-      #      pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
