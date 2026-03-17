@@ -11,9 +11,9 @@ jobs:
     container:
       image: ghcr.io/blue-build/cli:latest
     steps:
-      - name: Install node
+      - name: Install dependencies
         run: |
-          dnf install -y nodejs
+          dnf install -y nodejs jq
 
       - name: Checkout repository
         uses: actions/checkout@v6
