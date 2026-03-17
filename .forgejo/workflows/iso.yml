@@ -39,6 +39,7 @@ jobs:
       - name: Create Forgejo Release
         uses: https://code.forgejo.org/actions/forgejo-release@v1
         with:
+          token: ${{ github.token }}
           direction: upload
           release-dir: .
           release-notes: "Release ${{ env.RELEASE_TAG }}"
@@ -46,7 +47,5 @@ jobs:
           files: |
             pureuda-os-2026.03.17-1924.iso
             pureuda-os-2026.03.17-1924.iso-CHECKSUM
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
       #      pureuda-os-${{ env.RELEASE_TAG }}.iso
       #      pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
