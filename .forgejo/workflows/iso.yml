@@ -63,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+          asset_path: ./pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
           asset_name: pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
           asset_content_type: text/plain
