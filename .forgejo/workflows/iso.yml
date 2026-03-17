@@ -37,7 +37,7 @@ jobs:
       #      image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
 
       - name: Create Forgejo Release
-        uses: https://code.forgejo.org/actions/forgejo-release@v1
+        uses: actions/forgejo-release@v2
         with:
           title: "iso-${{ env.RELEASE_TAG }}"
           token: ${{ github.token }}
