@@ -39,6 +39,7 @@ jobs:
       - name: Create Forgejo Release
         uses: https://code.forgejo.org/actions/forgejo-release@v1
         with:
+          title: "iso ${{ env.RELEASE_TAG }}"
           token: ${{ github.token }}
           direction: upload
           release-dir: .
