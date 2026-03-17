@@ -36,33 +36,13 @@ jobs:
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
 
-      - name: Create Release
-        id: create_release
-        uses: https://github.com/actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Create Forgejo Release
+        uses: https://code.forgejo.org/actions/forgejo-release@v1
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: Release ${{ env.RELEASE_TAG }}
-          draft: false
-          prerelease: false
-
-      - name: Upload ISO to Release
-        uses: https://github.com/actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pureuda-os-${{ env.RELEASE_TAG }}.iso
-          asset_name: pureuda-os-${{ env.RELEASE_TAG }}.iso
-          asset_content_type: application/x-iso9660
-
-      - name: Upload Checksum to Release
-        uses: https://github.com/actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
-          asset_name: pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
-          asset_content_type: text/plain
+          direction: upload
+          release-dir: .
+          release-notes: "Release ${{ env.RELEASE_TAG }}"
+          tag-name: ${{ env.RELEASE_TAG }}
+          files: |
+            pureuda-os-${{ env.RELEASE_TAG }}.iso
+            pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
