@@ -33,14 +33,8 @@ jobs:
           bluebuild generate-iso \
             --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
             --enrollment-password bluebuild \
-            --iso-name pureuda-os-${{ env.RELEASE_TAG }} \
-            --output-dir ${{ github.workspace }} \
+            --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
-
-      - name: List files for debugging
-        run: |
-          find ${{ github.workspace }} -maxdepth 2
-          find iso
 
       - name: Create Release
         id: create_release
@@ -69,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/pureuda-os-${{ env.RELEASE_TAG }}-CHECKSUM
-          asset_name: pureuda-os-${{ env.RELEASE_TAG }}-CHECKSUM
+          asset_path: ${{ github.workspace }}/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+          asset_name: pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
           asset_content_type: text/plain
