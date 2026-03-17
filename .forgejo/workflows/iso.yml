@@ -28,13 +28,13 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
-      - name: Generate ISO
-        run: |
-          bluebuild generate-iso \
-            --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
-            --enrollment-password bluebuild \
-            --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
-            image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
+      #- name: Generate ISO
+      #  run: |
+      #    bluebuild generate-iso \
+      #      --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
+      #      --enrollment-password bluebuild \
+      #      --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
+      #      image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
 
       - name: Create Forgejo Release
         uses: https://code.forgejo.org/actions/forgejo-release@v1
@@ -44,5 +44,7 @@ jobs:
           release-notes: "Release ${{ env.RELEASE_TAG }}"
           tag-name: ${{ env.RELEASE_TAG }}
           files: |
-            pureuda-os-${{ env.RELEASE_TAG }}.iso
-            pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+            pureuda-os-2026.03.17-1924.iso
+            pureuda-os-2026.03.17-1924.iso-CHECKSUM
+      #      pureuda-os-${{ env.RELEASE_TAG }}.iso
+      #      pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
