@@ -53,6 +53,16 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pureuda-os-${{ env.RELEASE_TAG }}.iso
+          asset_path: ./build/pureuda-os-${{ env.RELEASE_TAG }}.iso
           asset_name: pureuda-os-${{ env.RELEASE_TAG }}.iso
           asset_content_type: application/x-iso9660
+
+      - name: Upload Checksum to Release
+        uses: https://github.com/actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/pureuda-os-${{ env.RELEASE_TAG }}-CHECKSUM
+          asset_name: pureuda-os-${{ env.RELEASE_TAG }}-CHECKSUM
+          asset_content_type: text/plain
