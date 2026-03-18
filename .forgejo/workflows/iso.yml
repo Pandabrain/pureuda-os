@@ -7,10 +7,9 @@ on:
 jobs:
   generate-iso:
     name: Generate ISO
-    runs-on: docker
-    container:
-      image: ghcr.io/blue-build/cli:latest
-      options: --user root
+    runs-on: bluebuild
+    #container:
+    #  image: ghcr.io/blue-build/cli:latest
     steps:
       - name: Install dependencies
         run: |
@@ -44,7 +43,7 @@ jobs:
             --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
             --enrollment-password bluebuild \
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
-            --output-dir /tmp \
+            --output-dir iso \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           echo "ls -la"
           ls -la
@@ -76,6 +75,6 @@ jobs:
           title: "iso-${{ env.RELEASE_TAG }}"
           token: ${{ secrets.RELEASE_TOKEN }}
           direction: upload
-          release-dir: /tmp
+          release-dir: iso
           release-notes: "Release ${{ env.RELEASE_TAG }}"
           tag: "${{ env.RELEASE_TAG }}"
