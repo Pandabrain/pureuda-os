@@ -40,11 +40,22 @@ jobs:
           echo "Fetching packages for owner: $REPO_OWNER and repository: $REPO_NAME_ONLY"
           PACKAGES_URL="$API_URL/packages/$REPO_OWNER?type=container&q=$REPO_NAME_ONLY"
           echo "Requesting: $PACKAGES_URL"
-          PACKAGES=$(curl -v -s -f -H "Authorization: token $TOKEN" "$PACKAGES_URL" 2>&1)
+          RAW_PACKAGES=$(curl -v -s -H "Authorization: token $TOKEN" "$PACKAGES_URL" 2>&1)
           CURL_EXIT=$?
+          
+          # Extract only the body if it's JSON (or everything if not)
+          # We'll use this for debugging if jq fails
+          echo "Full API response (including headers for debugging):"
+          echo "$RAW_PACKAGES"
+          
+          # Try to extract the JSON body (assuming it's after the headers)
+          # In verbose mode, curl sends headers to stderr, so they should be in RAW_PACKAGES
+          # Let's try to get just the JSON body for jq
+          PACKAGES=$(curl -s -f -H "Authorization: token $TOKEN" "$PACKAGES_URL")
+          CURL_EXIT=$?
+          
           if [ $CURL_EXIT -ne 0 ]; then
             echo "Curl failed with exit code $CURL_EXIT"
-            echo "Response/Error: $PACKAGES"
             exit $CURL_EXIT
           fi
 
@@ -70,11 +81,14 @@ jobs:
             # But let's sort them ourselves to be 100% sure we keep the right ones
             VERSIONS_URL="$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions"
             echo "Requesting versions: $VERSIONS_URL"
-            VERSIONS=$(curl -v -s -f -H "Authorization: token $TOKEN" "$VERSIONS_URL" 2>&1)
+            RAW_VERSIONS=$(curl -v -s -H "Authorization: token $TOKEN" "$VERSIONS_URL" 2>&1)
+            echo "Full API response (versions):"
+            echo "$RAW_VERSIONS"
+            
+            VERSIONS=$(curl -s -f -H "Authorization: token $TOKEN" "$VERSIONS_URL")
             CURL_EXIT=$?
             if [ $CURL_EXIT -ne 0 ]; then
               echo "Curl (versions) failed with exit code $CURL_EXIT"
-              echo "Response/Error: $VERSIONS"
               exit $CURL_EXIT
             fi
             
