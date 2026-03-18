@@ -1,0 +1,689 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](section1)\
+$os\
+[ ](bg:section1)\
+[ ](fg:section1 bg:section2)\
+$shell\
+$shlvl\
+[ ](bg:section2)\
+[ ](fg:section2 bg:section3)\
+$sudo\
+$username\
+$hostname\
+[ ](bg:section3)\
+[ ](fg:section3 bg:section4)\
+$directory\
+$direnv\
+[ ](bg:section4)\
+[](fg:section4 bg:section5)\
+$git_branch\
+$git_commit\
+$git_status\
+$git_metrics\
+$hg_branch\
+$hg_state\
+$pijul_channel\
+[](fg:section5 bg:section6)\
+$c\
+$cobol\
+$cpp\
+$crystal\
+$daml\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$haskell\
+$haxe\
+$java\
+$julia\
+$kotlin\
+$mojo\
+$nim\
+$lua\
+$nodejs\
+$ocaml\
+$odin\
+$perl\
+$php\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$vlang\
+$zig\
+[](fg:section6 bg:section7)\
+$aws\
+$azure\
+$buf\
+$bun\
+$cmake\
+$conda\
+$container\
+$deno\
+$docker_context\
+$fortran\
+$fossil_branch\
+$fossil_metrics\
+$gcloud\
+$guix_shell\
+$gradle\
+$helm\
+$kubernetes\
+$meson\
+$mise\
+$nats\
+$netns\
+$nix_shell\
+$opa\
+$openstack\
+$package\
+$pixi\
+$pulumi\
+$quarto\
+$singularity\
+$spack\
+$terraform\
+$typst\
+$vagrant\
+$vcsh\
+$xmake\
+[](fg:section7 bg:section8)\
+$time\
+[ ](fg:section8)\
+$battery\
+$jobs\
+$memory_usage\
+$localip\
+$cmd_duration\
+$line_break\
+$status\
+$character"""
+
+palette = 'pureuda_os'
+
+[os]
+disabled = false
+style = "bg:section1 fg:darktext"
+
+[os.symbols]
+Windows = ""
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+
+[shell]
+unknown_indicator = ''
+format = '[$indicator]($style)'
+style = 'bg:section2 fg:darktext'
+disabled = false
+
+[shlvl]
+disabled = false
+style = 'bg:section2 fg:darktext'
+
+[sudo]
+disabled = false
+style = 'bg:section3 fg:red'
+symbol = 'SUDO '
+format = '[$symbol]($style)'
+
+[username]
+show_always = true
+style_user = "bg:section3 fg:darktext"
+style_root = "bg:section3 fg:darktext"
+format = '[$user]($style)'
+
+[hostname]
+style = 'bg:section3 fg:darktext'
+ssh_only = true
+format = '[@$ssh_symbol$hostname]($style)'
+
+[directory]
+style = "bg:section4 fg:darktext"
+format = "[$path]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[direnv]
+disabled = false
+style = "bg:section4 fg:darktext"
+
+[git_commit]
+style = "bg:section5 fg:darktext"
+
+[git_branch]
+symbol = ""
+style = "bg:section5 fg:darktext"
+format = '[[ $symbol $branch ](fg:darktext bg:section5)]($style)'
+
+[git_status]
+style = "bg:section5 fg:darktext"
+format = '[[($all_status$ahead_behind )](fg:darktext bg:section5)]($style)'
+
+[git_metrics]
+added_style = "bg:section5 fg:darktext"
+deleted_style = "bg:section5 fg:darktext"
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = false
+
+[hg_branch]
+style = "bg:section5 fg:darktext"
+format = '[[ $symbol $branch ](fg:darktext bg:section5)]($style)'
+symbol = ""
+
+[hg_state]
+style = "bg:section5 fg:darktext"
+format = '[[($state( $progress_current/$progress_total))](fg:darktext bg:section5)]($style)'
+
+[pijul_channel]
+style = "bg:section5 fg:darktext"
+format = '[[ $symbol $channel ](fg:darktext bg:section5)]($style)'
+symbol = ""
+
+[nodejs]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[c]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[cobol]
+symbol = "⚙ "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[crystal]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[daml]
+symbol = "λ "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[dart]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[dotnet]
+symbol = "󰪮 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[elixir]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[elm]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[erlang]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[fennel]
+symbol = "󰈄 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[gleam]
+symbol = "󰶰 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[php]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[java]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[haxe]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[julia]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[mojo]
+symbol = "🔥 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[lua]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[ocaml]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[odin]
+symbol = "󰰂 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[perl]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[purescript]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[raku]
+symbol = "🦋 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[rlang]
+symbol = "󰟔 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[red]
+symbol = "󱄛 "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[ruby]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[scala]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[solidity]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[swift]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[vlang]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+
+[python]
+symbol = ""
+style = "bg:section6 fg:darktext"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:darktext bg:section6)]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:section7 "
+format = '[[ $symbol( $context) ](fg:darktext bg:section7)]($style)'
+
+[aws]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $profile)(\($region\))(\[$duration\]) ](fg:darktext bg:section7)]($style)'
+
+[azure]
+symbol = "󰠅 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $subscription) ](fg:darktext bg:section7)]($style)'
+
+[buf]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[bun]
+symbol = "󰛦 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[cmake]
+symbol = "△ "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[container]
+symbol = "⬢ "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol [$name] ](fg:darktext bg:section7)]($style)'
+
+[deno]
+symbol = "🦕 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[fortran]
+symbol = "󱈚 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[fossil_branch]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol$branch ](fg:darktext bg:section7)]($style)'
+
+[fossil_metrics]
+added_style = "bg:section7 fg:darktext"
+deleted_style = "bg:section7 fg:darktext"
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = false
+
+[gcloud]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+
+[guix_shell]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol ](fg:darktext bg:section7)]($style)'
+
+[gradle]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[helm]
+symbol = "⎈ "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[kubernetes]
+symbol = "󱃾 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $context)( \($namespace\)) ](fg:darktext bg:section7)]($style)'
+
+[meson]
+symbol = "󰔚 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[mise]
+symbol = "󰉼 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[nats]
+symbol = "󱓗 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[netns]
+symbol = "󰓅 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $name) ](fg:darktext bg:section7)]($style)'
+
+[nix_shell]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $state)( \($name\)) ](fg:darktext bg:section7)]($style)'
+
+[opa]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[openstack]
+symbol = "󰐎 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+
+[package]
+symbol = "󰏗 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[pixi]
+symbol = "󰄛 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[pulumi]
+symbol = " "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $stack) ](fg:darktext bg:section7)]($style)'
+
+[quarto]
+symbol = "󰄛 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[singularity]
+symbol = "󰊭 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[spack]
+symbol = "🅂 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[terraform]
+symbol = "󱁢 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $workspace) ](fg:darktext bg:section7)]($style)'
+
+[typst]
+symbol = "t "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[vagrant]
+symbol = "⍱ "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[vcsh]
+symbol = "󰘔 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $repo) ](fg:darktext bg:section7)]($style)'
+
+[xmake]
+symbol = "󰔚 "
+style = "bg:section7 fg:darktext"
+format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+
+[conda]
+symbol = "  "
+style = "fg:darktext bg:section7"
+format = '[$symbol$environment ]($style)'
+ignore_base = false
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:section8 fg:darktext"
+format = '[[  $time ](fg:darktext bg:section8)]($style)'
+
+
+
+[battery]
+full_symbol = " "
+charging_symbol = "󱐋 "
+discharging_symbol = " "
+empty_symbol = " "
+
+[[battery.display]]
+threshold = 100
+style = "bold battery100"
+[[battery.display]]
+threshold = 90
+style = "bold fg:battery90"
+[[battery.display]]
+threshold = 80
+style = "bold fg:battery80"
+[[battery.display]]
+threshold = 70
+style = "bold fg:battery70"
+[[battery.display]]
+threshold = 60
+style = "bold fg:battery60"
+[[battery.display]]
+threshold = 50
+style = "bold fg:battery50"
+[[battery.display]]
+threshold = 40
+style = "bold fg:battery40"
+[[battery.display]]
+threshold = 30
+style = "bold fg:battery30"
+[[battery.display]]
+threshold = 20
+style = "bold fg:battery20"
+[[battery.display]]
+threshold = 10
+style = "bold fg:battery10"
+
+[status]
+disabled = false
+format = '[\[$status\]]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+
+[cmd_duration]
+show_milliseconds = true
+format = "[ in $duration]($style)"
+style = "fg:peach"
+disabled = false
+show_notifications = true
+min_time_to_notify = 45000
+min_time = 100
+
+[palettes.pureuda_os]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+lavender = "#babbf1"
+section1 = "#51a2da"
+section2 = "#838cec"
+section3 = "#9865f6"
+section4 = "#a649fd"
+section5 = "#ba71fe"
+section6 = "#c485fe"
+section7 = "#d8adff"
+section8 = "#dbb4ff"
+darktext = "#11111b"
+battery10 = "#ff0000"
+battery20 = "#ff2b0c"
+battery30 = "#ff5617"
+battery40 = "#ff8123"
+battery50 = "#ffab2e"
+battery60 = "#dec036"
+battery70 = "#bdd53d"
+battery80 = "#ade041"
+battery90 = "#9cea44"
+battery100 = "#7bff4b"
