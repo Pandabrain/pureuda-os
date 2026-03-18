@@ -40,9 +40,13 @@ jobs:
 
       - name: Generate Fake ISO
         run: |
-          ls
+          mkdir iso
           touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
           touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+          ls
+      - name: Generate Fake ISO
+        run: |
+          ls
 
       - name: Create Forgejo Release
         uses: https://forgejo.pandabrain.com/pandabrain/forgejo-release@v2.11.3
