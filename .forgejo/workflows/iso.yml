@@ -49,7 +49,7 @@ jobs:
           ls
 
       - name: Create Forgejo Release
-        uses: https://forgejo.pandabrain.com/pandabrain/forgejo-release@v2.11.3
+        uses: forgejo-release@v2.11.3
         with:
           url: https://forgejo.pandabrain.com #probably not needed
           repo: pandabrain/pureuda-os #probably not needed
