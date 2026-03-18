@@ -8,60 +8,82 @@ jobs:
   cleanup:
     runs-on: docker
     steps:
-      - name: Install dependencies
-        run: |
-          apt install -y jq curl
-
       - name: Cleanup old packages
         run: |
-          # Forgejo API base URL
-          API_URL="${{ github.api_url }}"
-          # Repository identifier: owner/repo
-          REPO="${{ github.repository }}"
-          # Authentication token
-          TOKEN="${{ secrets.CONTAINER_REGISTRY_TOKEN }}"
+          # Use Node.js for JSON processing as jq is not available
+          node << 'EOF'
+          const https = require('https');
+          const { execSync } = require('child_process');
 
-          echo "Checking packages for ${REPO} at ${API_URL}..."
+          const apiUrl = "${{ github.api_url }}";
+          const repo = "${{ github.repository }}";
+          const token = "${{ secrets.CONTAINER_REGISTRY_TOKEN }}";
+          const owner = repo.split('/')[0];
+          const limit = 5 * 24 * 60 * 60 * 1000; // 5 days in ms
+          const now = Date.now();
 
-          # List packages for this repository
-          # Note: Forgejo API for packages: /api/v1/repos/{owner}/{repo}/packages
-          # We need to filter by package type if necessary, but here we assume container packages.
-          
-          PACKAGES=$(curl -s -H "Authorization: token ${TOKEN}" "${API_URL}/repos/${REPO}/packages?type=container")
-          
-          # Filter packages: only those that actually belong to the container registry and are versions of the image
-          # Forgejo API returns a list of packages. We should make sure we're looking at the right ones.
-          
-          COUNT=$(echo "${PACKAGES}" | jq '. | length')
-          echo "Found ${COUNT} package versions."
+          async function request(url, method = 'GET') {
+            const options = {
+              method,
+              headers: {
+                'Authorization': `token ${token}`,
+                'User-Agent': 'node.js'
+              }
+            };
+            return new Promise((resolve, reject) => {
+              const req = https.request(url, options, (res) => {
+                let data = '';
+                res.on('data', (chunk) => data += chunk);
+                res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
+              });
+              req.on('error', reject);
+              req.end();
+            });
+          }
 
-          if [ "${COUNT}" -gt 5 ]; then
-            echo "More than 5 packages found. Checking for packages older than 5 days..."
+          async function run() {
+            console.log(`Checking packages for ${repo} at ${apiUrl}...`);
             
-            # Current date in seconds
-            NOW=$(date +%s)
-            # 5 days in seconds
-            LIMIT=$((5 * 24 * 60 * 60))
-            
-            # Iterate through packages and delete those older than 5 days
-            echo "${PACKAGES}" | jq -c '.[]' | while read -r pkg; do
-              CREATED_AT=$(echo "${pkg}" | jq -r '.created_at')
-              PKG_NAME=$(echo "${pkg}" | jq -r '.name')
-              PKG_VERSION=$(echo "${pkg}" | jq -r '.version.version')
+            // List packages
+            const packagesUrl = `${apiUrl}/repos/${repo}/packages?type=container`;
+            const { statusCode, body } = await request(packagesUrl);
+
+            if (statusCode !== 200) {
+              console.error(`Error fetching packages: ${statusCode} ${body}`);
+              process.exit(1);
+            }
+
+            const packages = JSON.parse(body);
+            const count = packages.length;
+            console.log(`Found ${count} package versions.`);
+
+            if (count > 5) {
+              console.log("More than 5 packages found. Checking for packages older than 5 days...");
               
-              # Convert ISO 8601 date to seconds
-              CREATED_SEC=$(date -d "${CREATED_AT}" +%s)
-              AGE=$((NOW - CREATED_SEC))
-              
-              if [ "${AGE}" -gt "${LIMIT}" ]; then
-                echo "Deleting package version ${PKG_NAME}:${PKG_VERSION} - Created at ${CREATED_AT}"
-                # Delete the package version
-                # Forgejo API: DELETE /api/v1/packages/{owner}/{type}/{name}/{version}
-                
-                OWNER=$(echo "${REPO}" | cut -d'/' -f1)
-                curl -s -X DELETE -H "Authorization: token ${TOKEN}" "${API_URL}/packages/${OWNER}/container/${PKG_NAME}/${PKG_VERSION}"
-              fi
-            done
-          else
-            echo "${COUNT} package versions found. No cleanup needed."
-          fi
+              for (const pkg of packages) {
+                const createdAt = new Date(pkg.created_at).getTime();
+                const age = now - createdAt;
+                const pkgName = pkg.name;
+                const pkgVersion = pkg.version.version;
+
+                if (age > limit) {
+                  console.log(`Deleting package version ${pkgName}:${pkgVersion} - Created at ${pkg.created_at}`);
+                  const deleteUrl = `${apiUrl}/packages/${owner}/container/${pkgName}/${pkgVersion}`;
+                  const { statusCode: delStatus } = await request(deleteUrl, 'DELETE');
+                  if (delStatus === 204 || delStatus === 200) {
+                    console.log(`Successfully deleted ${pkgName}:${pkgVersion}`);
+                  } else {
+                    console.error(`Failed to delete ${pkgName}:${pkgVersion}: ${delStatus}`);
+                  }
+                }
+              }
+            } else {
+              console.log(`${count} package versions found. No cleanup needed.`);
+            }
+          }
+
+          run().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          EOF
