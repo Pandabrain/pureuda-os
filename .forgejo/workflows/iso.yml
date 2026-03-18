@@ -33,6 +33,9 @@ jobs:
         run: |
           echo "ls -la"
           ls -la
+          echo "Workspace: $GITHUB_WORKSPACE"
+          mount | grep workspace
+          find ${{ github.workspace }} -maxdepth 2
           echo "ls -la ${{ github.workspace }}/iso"
           ls -la ${{ github.workspace }}/iso
 
