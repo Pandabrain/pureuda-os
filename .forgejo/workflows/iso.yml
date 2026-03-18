@@ -36,12 +36,16 @@ jobs:
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
             --output-dir iso \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
+          ls -R iso
 
       - name: Create Forgejo Release
         uses: actions/forgejo-release@v2.11.3
         with:
+          url: https://forgejo.pandabrain.com #probably not needed
+          repo: pandabrain/pureuda-os #probably not needed
+          sha: ${{ github.sha }} #probably not needed
           title: "iso-${{ env.RELEASE_TAG }}"
-          token: ${{ github.token }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           direction: upload
           release-dir: iso
           release-notes: "Release ${{ env.RELEASE_TAG }}"
