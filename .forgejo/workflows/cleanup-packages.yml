@@ -8,9 +8,9 @@ jobs:
   cleanup:
     runs-on: docker
     steps:
-#      - name: Install dependencies
-#        run: |
-#          dnf install -y jq curl
+      - name: Install dependencies
+        run: |
+          apt install -y jq curl
 
       - name: Cleanup old packages
         run: |
