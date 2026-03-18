@@ -30,8 +30,6 @@ jobs:
 
       - name: List files
         run: |
-          echo "ls -laR iso"
-          ls -laR iso
           echo "ls -la"
           ls -la
 
