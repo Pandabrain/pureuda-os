@@ -44,12 +44,31 @@ jobs:
           async function run() {
             console.log(`Checking packages for ${repo} at ${apiUrl}...`);
             
-            // List packages
-            const packagesUrl = `${apiUrl}/repos/${repo}/packages?type=container`;
-            const { statusCode, body } = await request(packagesUrl);
+            // Search for packages by owner and name
+            const searchUrl = `${apiUrl}/packages/${owner}?type=container&q=${repo.split('/')[1]}`;
+            const { statusCode: searchStatus, body: searchBody } = await request(searchUrl);
+
+            if (searchStatus !== 200) {
+              console.error(`Error searching packages: ${searchStatus} ${searchBody}`);
+              process.exit(1);
+            }
+
+            const searchResults = JSON.parse(searchBody);
+            // Forgejo's /packages/{owner} returns an array of packages
+            // Find the one that matches our repo name (the package name)
+            const pkgInfo = searchResults.find(p => p.name === repo.split('/')[1]);
+
+            if (!pkgInfo) {
+              console.log(`No container package found for ${repo}.`);
+              return;
+            }
+
+            // Get versions for this specific package
+            const versionsUrl = `${apiUrl}/packages/${owner}/container/${pkgInfo.name}`;
+            const { statusCode, body } = await request(versionsUrl);
 
             if (statusCode !== 200) {
-              console.error(`Error fetching packages: ${statusCode} ${body}`);
+              console.error(`Error fetching package versions: ${statusCode} ${body}`);
               process.exit(1);
             }
 
@@ -63,7 +82,7 @@ jobs:
               for (const pkg of packages) {
                 const createdAt = new Date(pkg.created_at).getTime();
                 const age = now - createdAt;
-                const pkgName = pkg.name;
+                const pkgName = pkgInfo.name; // Use pkgInfo.name from search result
                 const pkgVersion = pkg.version.version;
 
                 if (age > limit) {
