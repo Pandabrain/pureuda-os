@@ -6,103 +6,91 @@ on:
 
 jobs:
   cleanup:
-    runs-on: docker
+    runs-on: ubuntu-latest
     steps:
-      - name: Cleanup old packages
+      - name: Install dependencies
         run: |
-          # Use Node.js for JSON processing as jq is not available
-          node << 'EOF'
-          const https = require('https');
-          const { execSync } = require('child_process');
+          # Try to install jq and curl if not available
+          if ! command -v jq &> /dev/null; then
+            if command -v apt-get &> /dev/null; then
+              sudo apt-get update && sudo apt-get install -y jq curl || apt-get update && apt-get install -y jq curl
+            elif command -v apk &> /dev/null; then
+              apk add --no-cache jq curl
+            elif command -v dnf &> /dev/null; then
+              dnf install -y jq curl
+            fi
+          fi
 
-          const apiUrl = "${{ github.api_url }}";
-          const repo = "${{ github.repository }}";
-          const token = "${{ secrets.CONTAINER_REGISTRY_TOKEN }}";
-          const owner = repo.split('/')[0];
-          const limit = 5 * 24 * 60 * 60 * 1000; // 5 days in ms
-          const now = Date.now();
+      - name: Delete old package versions
+        shell: bash
+        env:
+          # Use the secret that was confirmed working in previous attempts
+          TOKEN: ${{ secrets.CONTAINER_REGISTRY_TOKEN }} 
+          API_URL: "${{ github.api_url }}"
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.repository }}
+        run: |
+          # 1. Get all packages for this repository
+          # Note: Forgejo API for listing packages for a user/org
+          # If we don't have the repository_id, we'll filter by name later
+          # Using github.repository as owner/repo name
+          REPO_NAME_ONLY="${REPO_NAME#*/}"
+          
+          echo "Fetching packages for owner: $REPO_OWNER and repository: $REPO_NAME_ONLY"
+          PACKAGES=$(curl -s -f -H "Authorization: token $TOKEN" \
+            "$API_URL/packages/$REPO_OWNER?type=container&q=$REPO_NAME_ONLY")
 
-          async function request(url, method = 'GET') {
-            const options = {
-              method,
-              headers: {
-                'Authorization': `token ${token}`,
-                'User-Agent': 'node.js'
-              }
-            };
-            return new Promise((resolve, reject) => {
-              const req = https.request(url, options, (res) => {
-                let data = '';
-                res.on('data', (chunk) => data += chunk);
-                res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
-              });
-              req.on('error', reject);
-              req.end();
-            });
-          }
+          if [ -z "$PACKAGES" ] || [ "$PACKAGES" == "[]" ]; then
+            echo "No container packages found for this repository."
+            exit 0
+          fi
 
-          async function run() {
-            console.log(`Checking packages for ${repo} at ${apiUrl}...`);
+          for row in $(echo "${PACKAGES}" | jq -r '.[] | @base64'); do
+            _jq() { echo ${row} | base64 --decode | jq -r ${1}; }
+            PKG_NAME=$(_jq '.name')
+            PKG_TYPE=$(_jq '.type')
+
+            # Double check name match
+            if [ "$PKG_NAME" != "$REPO_NAME_ONLY" ]; then
+              continue
+            fi
+
+            echo "Checking package: $PKG_NAME ($PKG_TYPE)"
+
+            # 2. Get all versions for this specific package
+            # Forgejo returns versions in reverse chronological order (newest first) by default
+            # But let's sort them ourselves to be 100% sure we keep the right ones
+            VERSIONS=$(curl -s -f -H "Authorization: token $TOKEN" \
+              "$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions")
             
-            // Search for packages by owner and name
-            const searchUrl = `${apiUrl}/packages/${owner}?type=container&q=${repo.split('/')[1]}`;
-            const { statusCode: searchStatus, body: searchBody } = await request(searchUrl);
+            # Sort by created_at descending and keep all but the first 5
+            DELETE_LIST=$(echo "$VERSIONS" | jq -c "sort_by(.created_at) | reverse | .[5:] | .[]")
+            COUNT=$(echo "$VERSIONS" | jq '. | length')
 
-            if (searchStatus !== 200) {
-              console.error(`Error searching packages: ${searchStatus} ${searchBody}`);
-              process.exit(1);
-            }
-
-            const searchResults = JSON.parse(searchBody);
-            // Forgejo's /packages/{owner} returns an array of packages
-            // Find the one that matches our repo name (the package name)
-            const pkgInfo = searchResults.find(p => p.name === repo.split('/')[1]);
-
-            if (!pkgInfo) {
-              console.log(`No container package found for ${repo}.`);
-              return;
-            }
-
-            // Get versions for this specific package
-            const versionsUrl = `${apiUrl}/packages/${owner}/container/${pkgInfo.name}`;
-            const { statusCode, body } = await request(versionsUrl);
-
-            if (statusCode !== 200) {
-              console.error(`Error fetching package versions: ${statusCode} ${body}`);
-              process.exit(1);
-            }
-
-            const packages = JSON.parse(body);
-            const count = packages.length;
-            console.log(`Found ${count} package versions.`);
-
-            if (count > 5) {
-              console.log("More than 5 packages found. Checking for packages older than 5 days...");
+            if [ "$COUNT" -gt 5 ] && [ -n "$DELETE_LIST" ]; then
+              echo "Found $COUNT versions. Evaluating for deletion..."
               
-              for (const pkg of packages) {
-                const createdAt = new Date(pkg.created_at).getTime();
-                const age = now - createdAt;
-                const pkgName = pkgInfo.name; // Use pkgInfo.name from search result
-                const pkgVersion = pkg.version.version;
+              for v_row in $(echo "${DELETE_LIST}" | jq -r '. | @base64'); do
+                _vjq() { echo ${v_row} | base64 --decode | jq -r ${1}; }
+                V_ID=$(_vjq '.id')
+                V_NAME=$(_vjq '.version')
+                V_DATE=$(_vjq '.created_at')
 
-                if (age > limit) {
-                  console.log(`Deleting package version ${pkgName}:${pkgVersion} - Created at ${pkg.created_at}`);
-                  const deleteUrl = `${apiUrl}/packages/${owner}/container/${pkgName}/${pkgVersion}`;
-                  const { statusCode: delStatus } = await request(deleteUrl, 'DELETE');
-                  if (delStatus === 204 || delStatus === 200) {
-                    console.log(`Successfully deleted ${pkgName}:${pkgVersion}`);
-                  } else {
-                    console.error(`Failed to delete ${pkgName}:${pkgVersion}: ${delStatus}`);
-                  }
-                }
-              }
-            } else {
-              console.log(`${count} package versions found. No cleanup needed.`);
-            }
-          }
+                # Convert date to seconds for comparison
+                # Note: Forgejo uses 'created_at' for versions
+                # Handle potential date format issues with 'date -d'
+                CREATED_TS=$(date -d "$V_DATE" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%S%z" "$V_DATE" +%s 2>/dev/null)
+                THRESHOLD_TS=$(date -d "5 days ago" +%s)
 
-          run().catch(err => {
-            console.error(err);
-            process.exit(1);
-          });
-          EOF
+                if [ "$CREATED_TS" -lt "$THRESHOLD_TS" ]; then
+                  echo "Deleting version $V_NAME (ID: $V_ID) - Created at $V_DATE (Older than 5 days)."
+                  curl -s -X DELETE -H "Authorization: token $TOKEN" \
+                    "$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions/$V_ID"
+                else
+                  echo "Keeping version $V_NAME - Not old enough yet ($V_DATE)."
+                fi
+              done
+            else
+              echo "Only $COUNT versions found or none left to delete after keeping top 5. Skipping."
+            fi
+          done
