@@ -28,24 +28,30 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
-      #- name: Generate ISO
-      #  run: |
-      #    bluebuild generate-iso \
-      #      --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
-      #      --enrollment-password bluebuild \
-      #      --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
-      #      --output-dir iso \
-      #      image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
-      #    ls -R iso
-
-      - name: Generate Fake ISO
+      - name: Generate ISO
         run: |
-          mkdir iso
-          touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
-          touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+          bluebuild generate-iso \
+            --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
+            --enrollment-password bluebuild \
+            --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
+            --output-dir iso \
+            image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
+          echo "ls -R iso"
+          ls -R iso
+          echo "ls"
           ls
+
+      #- name: Generate Fake ISO
+      #  run: |
+      #    mkdir iso
+      #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
+      #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
+      #    ls
       - name: Generate Fake ISO
         run: |
+          echo "ls -R iso"
+          ls -R iso
+          echo "ls"
           ls
 
       - name: Create Forgejo Release
