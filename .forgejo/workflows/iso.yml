@@ -33,6 +33,8 @@ jobs:
         run: |
           echo "ls -la"
           ls -la
+          echo "ls -la ${{ github.workspace }}/iso"
+          ls -la ${{ github.workspace }}/iso
 
       - name: Generate ISO
         run: |
