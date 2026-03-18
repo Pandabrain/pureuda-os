@@ -31,16 +31,20 @@ jobs:
 
       - name: List files
         run: |
+          echo "pwd"
+          pwd
           echo "ls -la"
           ls -la
 
       - name: Generate ISO
         run: |
+          echo "pwd"
+          pwd
           bluebuild generate-iso \
             --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
             --enrollment-password bluebuild \
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
-            --output-dir iso \
+            --output-dir /tmp \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           echo "ls -laR iso"
           ls -laR iso
@@ -58,6 +62,8 @@ jobs:
 
       - name: List files
         run: |
+          echo "pwd"
+          pwd
           echo "ls -laR iso"
           ls -laR iso
           echo "ls -la"
@@ -74,6 +80,6 @@ jobs:
           title: "iso-${{ env.RELEASE_TAG }}"
           token: ${{ secrets.RELEASE_TOKEN }}
           direction: upload
-          release-dir: iso
+          release-dir: /tmp
           release-notes: "Release ${{ env.RELEASE_TAG }}"
           tag: "${{ env.RELEASE_TAG }}"
