@@ -10,6 +10,7 @@ jobs:
     runs-on: docker
     container:
       image: ghcr.io/blue-build/cli:latest
+      options: --user root
     steps:
       - name: Install dependencies
         run: |
@@ -45,6 +46,8 @@ jobs:
           ls -laR iso
           echo "ls -la"
           ls -la
+          echo "ls -di iso"
+          ls -di iso
 
       #- name: Generate Fake ISO
       #  run: |
@@ -59,6 +62,8 @@ jobs:
           ls -laR iso
           echo "ls -la"
           ls -la
+          echo "ls -di iso"
+          ls -di iso
 
       - name: Create Forgejo Release
         uses: actions/forgejo-release@v2.11.3
