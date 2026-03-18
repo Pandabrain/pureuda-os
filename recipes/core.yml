@@ -157,7 +157,6 @@ modules:
         - fcitx5-hangul
         - fcitx5-mozc
 
-        - discord
         - mission-center
 
         #flutter dependencies
@@ -238,6 +237,7 @@ modules:
           - io.podman_desktop.PodmanDesktop
           - it.mijorus.gearlever
           - org.gnome.gitlab.somas.Apostrophe
+          - com.discordapp.Discord
       - notify: false
         scope: user
         repo:
