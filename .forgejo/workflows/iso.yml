@@ -28,6 +28,13 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
+      - name: List files
+        run: |
+          echo "ls -laR iso"
+          ls -laR iso
+          echo "ls -la"
+          ls -la
+
       - name: Generate ISO
         run: |
           bluebuild generate-iso \
@@ -36,10 +43,10 @@ jobs:
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
             --output-dir iso \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
-          echo "ls -R iso"
-          ls -R iso
-          echo "ls"
-          ls
+          echo "ls -laR iso"
+          ls -laR iso
+          echo "ls -la"
+          ls -la
 
       #- name: Generate Fake ISO
       #  run: |
@@ -47,12 +54,13 @@ jobs:
       #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
       #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
       #    ls
-      - name: Generate Fake ISO
+
+      - name: List files
         run: |
-          echo "ls -R iso"
-          ls -R iso
-          echo "ls"
-          ls
+          echo "ls -laR iso"
+          ls -laR iso
+          echo "ls -la"
+          ls -la
 
       - name: Create Forgejo Release
         uses: actions/forgejo-release@v2.11.3
