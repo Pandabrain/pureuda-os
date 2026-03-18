@@ -7,9 +7,9 @@ on:
 jobs:
   generate-iso:
     name: Generate ISO
-    runs-on: bluebuild
-    #container:
-    #  image: ghcr.io/blue-build/cli:latest
+    runs-on: docker
+    container:
+      image: ghcr.io/blue-build/cli:latest
     steps:
       - name: Install dependencies
         run: |
@@ -28,17 +28,12 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
-      - name: List files
+      - name: Generate ISO
         run: |
           echo "pwd"
           pwd
           echo "ls -la"
           ls -la
-
-      - name: Generate ISO
-        run: |
-          echo "pwd"
-          pwd
           bluebuild generate-iso \
             --secure-boot-url https://forgejo.pandabrain.com/pandabrain/pureuda-os/raw/branch/main/MOK.der \
             --enrollment-password bluebuild \
@@ -47,24 +42,19 @@ jobs:
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
           echo "ls -la"
           ls -la
-          echo "ls /tmp"
-          ls /tmp
+          echo "ls -la iso"
+          ls -la iso
 
+      # somehow, the runner cant see the bluebuild generated iamge. it can however see this empty iso file created here.
+      # I have never found a solution for that problem.
+      # (When mounting the workspace to the host and passing the hosts docker socket, the iso is still invisible to the runner job, but the host can now see it.
+      # interestingly, the output folder was created on both, the runner storage and the mounted path on the host. So weird)
       #- name: Generate Fake ISO
       #  run: |
       #    mkdir iso
       #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
       #    touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
       #    ls
-
-      - name: List files
-        run: |
-          echo "pwd"
-          pwd
-          echo "ls -la"
-          ls -la
-          echo "ls /tmp"
-          ls /tmp
 
       - name: Create Forgejo Release
         uses: actions/forgejo-release@v2.11.3
