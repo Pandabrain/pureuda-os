@@ -40,6 +40,7 @@ jobs:
 
       - name: Generate Fake ISO
         run: |
+          ls
           touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso
           touch iso/pureuda-os-${{ env.RELEASE_TAG }}.iso-CHECKSUM
 
