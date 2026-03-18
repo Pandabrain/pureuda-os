@@ -36,9 +36,17 @@ jobs:
           # Using github.repository as owner/repo name
           REPO_NAME_ONLY="${REPO_NAME#*/}"
           
+          echo "Using API_URL: $API_URL"
           echo "Fetching packages for owner: $REPO_OWNER and repository: $REPO_NAME_ONLY"
-          PACKAGES=$(curl -s -f -H "Authorization: token $TOKEN" \
-            "$API_URL/packages/$REPO_OWNER?type=container&q=$REPO_NAME_ONLY")
+          PACKAGES_URL="$API_URL/packages/$REPO_OWNER?type=container&q=$REPO_NAME_ONLY"
+          echo "Requesting: $PACKAGES_URL"
+          PACKAGES=$(curl -v -s -f -H "Authorization: token $TOKEN" "$PACKAGES_URL" 2>&1)
+          CURL_EXIT=$?
+          if [ $CURL_EXIT -ne 0 ]; then
+            echo "Curl failed with exit code $CURL_EXIT"
+            echo "Response/Error: $PACKAGES"
+            exit $CURL_EXIT
+          fi
 
           if [ -z "$PACKAGES" ] || [ "$PACKAGES" == "[]" ]; then
             echo "No container packages found for this repository."
@@ -60,8 +68,15 @@ jobs:
             # 2. Get all versions for this specific package
             # Forgejo returns versions in reverse chronological order (newest first) by default
             # But let's sort them ourselves to be 100% sure we keep the right ones
-            VERSIONS=$(curl -s -f -H "Authorization: token $TOKEN" \
-              "$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions")
+            VERSIONS_URL="$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions"
+            echo "Requesting versions: $VERSIONS_URL"
+            VERSIONS=$(curl -v -s -f -H "Authorization: token $TOKEN" "$VERSIONS_URL" 2>&1)
+            CURL_EXIT=$?
+            if [ $CURL_EXIT -ne 0 ]; then
+              echo "Curl (versions) failed with exit code $CURL_EXIT"
+              echo "Response/Error: $VERSIONS"
+              exit $CURL_EXIT
+            fi
             
             # Sort by created_at descending and keep all but the first 5
             DELETE_LIST=$(echo "$VERSIONS" | jq -c "sort_by(.created_at) | reverse | .[5:] | .[]")
@@ -84,8 +99,9 @@ jobs:
 
                 if [ "$CREATED_TS" -lt "$THRESHOLD_TS" ]; then
                   echo "Deleting version $V_NAME (ID: $V_ID) - Created at $V_DATE (Older than 5 days)."
-                  curl -s -X DELETE -H "Authorization: token $TOKEN" \
-                    "$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions/$V_ID"
+                  DELETE_URL="$API_URL/packages/$REPO_OWNER/$PKG_TYPE/$PKG_NAME/versions/$V_ID"
+                  echo "Requesting deletion: $DELETE_URL"
+                  curl -s -f -X DELETE -H "Authorization: token $TOKEN" "$DELETE_URL"
                 else
                   echo "Keeping version $V_NAME - Not old enough yet ($V_DATE)."
                 fi
