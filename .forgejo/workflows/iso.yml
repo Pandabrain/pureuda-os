@@ -46,12 +46,10 @@ jobs:
             --iso-name pureuda-os-${{ env.RELEASE_TAG }}.iso \
             --output-dir /tmp \
             image forgejo.pandabrain.com/pandabrain/pureuda-os:latest
-          echo "ls -laR iso"
-          ls -laR iso
           echo "ls -la"
           ls -la
-          echo "ls -di iso"
-          ls -di iso
+          echo "ls /tmp"
+          ls /tmp
 
       #- name: Generate Fake ISO
       #  run: |
@@ -64,12 +62,10 @@ jobs:
         run: |
           echo "pwd"
           pwd
-          echo "ls -laR iso"
-          ls -laR iso
           echo "ls -la"
           ls -la
-          echo "ls -di iso"
-          ls -di iso
+          echo "ls /tmp"
+          ls /tmp
 
       - name: Create Forgejo Release
         uses: actions/forgejo-release@v2.11.3
