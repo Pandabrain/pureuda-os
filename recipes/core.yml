@@ -158,6 +158,7 @@ modules:
         - fcitx5-mozc
 
         - mission-center
+        - fresh
 
         #flutter dependencies
         - clang
