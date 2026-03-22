@@ -33,13 +33,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      #if nodejs installation should fail, you can simply remove the installation of nodejs and the checkout action above
-      # and just run git commands manually:
+      #if nodejs installation or the checkout action should fail, you can simply replace the installation of nodejs and the checkout action above
+      # and just run git commands manually like so:
       #      - name: Checkout repository
       #        run: |
       #          git clone ${{ github.server_url }}/${{ github.repository }} .
       #          git checkout ${{ github.sha }}
 
+      #this is only used by my custom kernel module for signing the kernel to allow secure boot
+      # (this simply replicates what the origami linux project does on gitlab. doing it this way means, that the build
+      # still works with their gitlab pipeline and my forgejo pipeline at the same time without having to change the project itself)
       - name: Create MOK private key file
         run: |
           mkdir -p .secure_files
