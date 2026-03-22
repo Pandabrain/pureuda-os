@@ -207,21 +207,21 @@ modules:
         - gamescope
         - steam-devices
 
-  - type: fonts
-    fonts:
-      nerd-fonts:
-        - JetBrainsMono
-      google-fonts:
-        - Noto Color Emoji
-        - Noto Sans Korean
-        - Noto Serif Korean
-        - Noto Sans Japanese
-        - Noto Serif Japanese
-      url-fonts:
+  #- type: fonts
+    #fonts:
+      #nerd-fonts:
+      #  - JetBrainsMono
+      #google-fonts:
+      #  - Noto Color Emoji
+      #  - Noto Sans Korean
+      #  - Noto Serif Korean
+      #  - Noto Sans Japanese
+      #  - Noto Serif Japanese
+      #url-fonts:
       #  - name: NotoColorEmoji
       #    url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
-        - name: Maple-Mono-NF
-          url: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-NF-unhinted.zip
+      #  - name: Maple-Mono-NF
+      #    url: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-NF-unhinted.zip
 
   - type: default-flatpaks
     configurations:
