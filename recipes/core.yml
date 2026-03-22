@@ -98,7 +98,7 @@ modules:
         - yazi
         - lsd
         - hyperfine
-        - howdy
+        #- howdy # howdy fails because of dlib
         #- starship
         - repo: copr:copr.fedorainfracloud.org:atim:starship
           packages:
