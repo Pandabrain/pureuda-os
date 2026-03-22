@@ -30,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      #if nodejs installation should fail, you can simply remove the installation and the checkout action above
+      #if nodejs installation should fail, you can simply remove the installation of nodejs and the checkout action above
       # and just run git commands manually:
       #      - name: Checkout repository
       #        run: |
@@ -51,6 +51,7 @@ jobs:
           BB_USERNAME: ${{ github.actor }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
+          BB_REPOSITORY: ${{ github.repository }}
           GH_PR_EVENT_NUMBER: ${{ github.event.number }}
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
