@@ -96,7 +96,7 @@ modules:
         - ripgrep
         - zoxide
         - yazi
-        - eza
+        - lsd
         - hyperfine
         - howdy
         #- starship
