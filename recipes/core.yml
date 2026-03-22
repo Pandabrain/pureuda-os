@@ -179,8 +179,7 @@ modules:
         - lutris
         - heroic-games-launcher
 
-        - nix
-
+        #- nix //make nix work for fedora atomic
 
 
     remove:
