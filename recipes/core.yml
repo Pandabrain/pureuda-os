@@ -177,6 +177,8 @@ modules:
         - lutris
         - heroic-games-launcher
 
+        - nix
+
 
 
     remove:
