@@ -195,6 +195,7 @@ modules:
     system:
       enabled:
         - snapd.service
+        - coolercontrold.service
 
   - type: dnf
     repos:
