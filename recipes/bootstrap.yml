@@ -4,3 +4,6 @@ modules:
     files:
       - source: system
         destination: /
+      - source: system/etc/sudoers.d/60-silent-updates
+        destination: /etc/sudoers.d/60-silent-updates
+        mode: "0440"
