@@ -38,6 +38,7 @@ modules:
       copr:
         - bieszczaders/kernel-cachyos-addons
         - lilay/topgrade
+        - principis/howdy-beta
         #- ligenix/cosmic-ext
         #- sneexy/zen-browser
         - lilay/tealdeer
@@ -95,8 +96,9 @@ modules:
         - ripgrep
         - zoxide
         - yazi
-        - eza
+        - lsd
         - hyperfine
+        #- howdy # howdy fails because of dlib
         #- starship
         - repo: copr:copr.fedorainfracloud.org:atim:starship
           packages:
@@ -177,6 +179,7 @@ modules:
         - lutris
         - heroic-games-launcher
 
+        #- nix //make nix work for fedora atomic
 
 
     remove:
@@ -195,6 +198,7 @@ modules:
     system:
       enabled:
         - snapd.service
+        - coolercontrold.service
 
   - type: dnf
     repos:
@@ -218,8 +222,8 @@ modules:
         - Noto Sans Japanese
         - Noto Serif Japanese
       url-fonts:
-      #  - name: NotoColorEmoji
-      #    url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
+        - name: NotoColorEmoji
+          url: https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
         - name: Maple-Mono-NF
           url: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-NF-unhinted.zip
 

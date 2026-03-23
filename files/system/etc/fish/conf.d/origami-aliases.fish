@@ -60,14 +60,14 @@ alias su su-rs
 #alias cmatrix termflix
 alias gearlever 'flatpak run it.mijorus.gearlever'
 
-# --- Directory listings via eza ----------------------------------------------
-alias la 'eza -la --icons --group'
-alias lt 'eza --tree --level=2 --icons'
+# --- Directory listings via lsd ----------------------------------------------
+alias la 'lsd -la'
+alias lt 'lsd --tree'
 function ls
-    command eza --icons --group $argv
+    command lsd $argv
 end
 function ll
-    command eza -l --icons --group $argv
+    command lsd -l $argv
 end
 
 # --- Interactive tooling -----------------------------------------------------
