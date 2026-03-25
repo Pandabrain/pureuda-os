@@ -151,6 +151,7 @@ modules:
         - eog
         - ptyxis
         - cifs-utils
+        - pavucontrol
 
         - fcitx5
         - fcitx5-configtool
