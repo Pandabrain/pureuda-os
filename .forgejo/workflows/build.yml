@@ -102,6 +102,7 @@ jobs:
                   owner: {
                     login: '${{ forgejo.repository_owner }}'
                   },
+                  html_url: '${{ forgejo.server_url }}/${{ forgejo.repository}}',
                   default_branch: 'main'
                 };
               }
