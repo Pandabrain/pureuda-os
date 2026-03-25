@@ -5,13 +5,13 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "19 21 * * *"
-  #push:
-  #  branches:
-  #    - main
-  #    - test
-  #  paths-ignore:
-  #    - "**.md"
+    #- cron: "19 21 * * *"
+  push:
+    branches:
+      - main
+      - test
+    paths-ignore:
+      - "**.md"
   workflow_dispatch:
 
 jobs:
@@ -50,11 +50,6 @@ jobs:
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
 
-      - name: Log Forgejo context
-        run: |
-          echo "Forgejo context:"
-          echo "${{ toJSON(forgejo) }}"
-
       - name: Patch GITHUB_EVENT for scheduled runs
         run: |
           # bluebuild expects a repository field in the event JSON, which is missing on scheduled runs.
@@ -86,8 +81,6 @@ jobs:
           "
           # We point GITHUB_EVENT_PATH to the patched file for all subsequent steps
           echo "GITHUB_EVENT_PATH=/tmp/event.json" >> $GITHUB_ENV
-
-
 
       - name: Build Image
         env:
