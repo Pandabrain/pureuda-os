@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "58 9 * * *"
+    - cron: "04 10 * * *"
   #push:
     #branches:
     #  - main
@@ -55,10 +55,10 @@ jobs:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
           BB_BUILD_PUSH: "true"
           BB_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
-          BB_USERNAME: ${{ github.actor }}
+          BB_USERNAME: ${{ github.repository_owner }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
-          BB_REPOSITORY: ${{ github.event.repository.name || 'pureuda-os' }}
+          BB_REPOSITORY: ${{ github.repository }}
           GH_PR_EVENT_NUMBER: ${{ github.event.number || '' }}
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
