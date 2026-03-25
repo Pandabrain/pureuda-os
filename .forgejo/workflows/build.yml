@@ -5,13 +5,13 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    #- cron: "52 20 * * *"
-  push:
-    branches:
-      - main
-      - test
-    paths-ignore:
-      - "**.md"
+    - cron: "57 20 * * *"
+  #push:
+  #  branches:
+  #    - main
+  #    - test
+  #  paths-ignore:
+  #    - "**.md"
   workflow_dispatch:
 
 jobs:
@@ -67,7 +67,6 @@ jobs:
           fi
 
           # If the repository field is missing, add it.
-          # We use node to do the JSON manipulation since it was installed in a previous step.
           node -e "
             const fs = require('fs');
             let event = {};
@@ -81,13 +80,18 @@ jobs:
                   }, 
                   html_url: '${{ forgejo.server_url }}/${{ forgejo.repository}}',
                   default_branch: 'main'
-                
               };
-            } 
+            }
             fs.writeFileSync('/tmp/event.json', JSON.stringify(event, null, 2));
           "
           # We point GITHUB_EVENT_PATH to the patched file for all subsequent steps
           echo "GITHUB_EVENT_PATH=/tmp/event.json" >> $GITHUB_ENV
+
+      - name: Debug patched event
+        run: |
+          echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
+          echo "File contents:"
+          cat "$GITHUB_EVENT_PATH"
 
       - name: Build Image
         env:
