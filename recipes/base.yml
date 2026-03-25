@@ -34,8 +34,8 @@ modules:
       ID_LIKE: fedora
       NAME: Pureuda OS
       PRETTY_NAME: "Pureuda OS 2026.03"
-      HOME_URL: "https://github.com/Pandabrain/pureuda-os/"
-      BUG_REPORT_URL: "https://github.com/Pandabrain/pureuda-os/issues"
+      HOME_URL: "https://gitlab.com/pandabrain/pureuda-os/"
+      BUG_REPORT_URL: "https://gitlab.com/pandabrain/pureuda-os/-/boards"
       DEFAULT_HOSTNAME: pureuda-os
 
   - from-file: finalize.yml
