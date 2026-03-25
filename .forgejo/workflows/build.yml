@@ -1,6 +1,6 @@
 name: bluebuild
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref_name}}
   cancel-in-progress: true
 on:
   schedule:
@@ -61,11 +61,9 @@ jobs:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
           BB_BUILD_PUSH: "true"
           BB_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
-          BB_USERNAME: ${{ github.repository_owner }}
+          BB_USERNAME: ${{ forgejo.repository_owner }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
-          BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
-          BB_REPOSITORY: pandabrain/pureuda-os
-          GH_PR_EVENT_NUMBER: ${{ github.event.number || '' }}
+          #BB_REGISTRY_NAMESPACE: ${{ forgejo.repository_owner }}
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
