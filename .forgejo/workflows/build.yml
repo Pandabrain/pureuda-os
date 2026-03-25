@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "59 14 * * *"
+    - cron: "28 15 * * *"
   #push:
     #branches:
     #  - main
