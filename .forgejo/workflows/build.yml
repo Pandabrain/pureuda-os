@@ -1,6 +1,6 @@
 name: bluebuild
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref_name}}
+  group: ${{ forgejo.workflow }}-${{ forgejo.ref_name}}
   cancel-in-progress: true
 on:
   schedule:
@@ -52,9 +52,8 @@ jobs:
 
       - name: Log GitHub context
         run: |
-          echo "${{ toJSON(github) }}"
-          echo "${{ toJSON(matrix) }}"
           echo "${{ toJSON(forgejo) }}"
+          echo "${{ toJSON(secrets) }}"
 
       - name: Build Image
         env:
