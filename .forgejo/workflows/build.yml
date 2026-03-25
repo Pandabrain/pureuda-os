@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "51 13 * * *"
+    - cron: "28 14 * * *"
   #push:
     #branches:
     #  - main
@@ -52,8 +52,8 @@ jobs:
 
       - name: Log GitHub context
         run: |
+          echo "Forgejo context:"
           echo "${{ toJSON(forgejo) }}"
-          echo "${{ toJSON(secrets) }}"
 
       - name: Build Image
         env:
@@ -66,5 +66,7 @@ jobs:
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
+          GITHUB_REPOSITORY: ${{ forgejo.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ forgejo.repository_owner }}
         run: |
           bluebuild build -v "${RECIPE_PATH}"
