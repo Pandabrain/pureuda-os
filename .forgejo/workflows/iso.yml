@@ -1,4 +1,4 @@
-name: ISO Generation
+name: ISO-Generation
 on:
   #schedule:
   #  - cron: "0 0 1 */3 *" # Every 3 months
@@ -61,7 +61,7 @@ jobs:
         with:
           url: https://forgejo.pandabrain.com #probably not needed
           repo: pandabrain/pureuda-os #probably not needed
-          sha: ${{ github.sha }} #probably not needed
+          sha: ${{ forgejo.sha }} #probably not needed
           title: "iso-${{ env.RELEASE_TAG }}"
           token: ${{ secrets.RELEASE_TOKEN }}
           direction: upload
