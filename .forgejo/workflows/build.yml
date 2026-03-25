@@ -5,13 +5,13 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "52 20 * * *"
-  #push:
-    #branches:
-    #  - main
-    #  - test
-    #paths-ignore:
-    #  - "**.md"
+    #- cron: "52 20 * * *"
+  push:
+    branches:
+      - main
+      - test
+    paths-ignore:
+      - "**.md"
   workflow_dispatch:
 
 jobs:
