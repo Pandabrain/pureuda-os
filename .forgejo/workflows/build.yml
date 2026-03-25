@@ -101,7 +101,8 @@ jobs:
                   name: '${{ forgejo.repository }}'.split('/')[1] || '${{ forgejo.repository }}',
                   owner: {
                     login: '${{ forgejo.repository_owner }}'
-                  }
+                  },
+                  default_branch: 'main'
                 };
               }
               fs.writeFileSync('/tmp/event.json', JSON.stringify(event, null, 2));
