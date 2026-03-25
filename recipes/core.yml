@@ -175,7 +175,7 @@ modules:
 
         - android-tools
 
-        - snapd
+        #- snapd
 
         - lutris
         - heroic-games-launcher
@@ -193,12 +193,12 @@ modules:
   - type: script
     scripts:
       - fix-dnf-conflicts-for-steam.sh
-      - setup-snapd.sh
+      #- setup-snapd.sh
 
   - type: systemd
     system:
       enabled:
-        - snapd.service
+        #- snapd.service
         - coolercontrold.service
 
   - type: dnf
