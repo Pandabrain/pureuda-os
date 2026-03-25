@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "28 16 * * *"
+    - cron: "40 16 * * *"
   #push:
     #branches:
     #  - main
@@ -97,6 +97,10 @@ jobs:
               } catch (e) {}
               if (!event.repository) {
                 event.repository = {
+                  
+                  owner: {
+                    login: '${{ forgejo.repository_owner }}'
+                  } 
                   html_url: '${{ forgejo.server_url }}/${{ forgejo.repository}}',
                   default_branch: 'main'
                 };
