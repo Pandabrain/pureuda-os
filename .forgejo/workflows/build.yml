@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "10 10 * * *"
+    - cron: "14 10 * * *"
   #push:
     #branches:
     #  - main
@@ -49,6 +49,12 @@ jobs:
           mkdir -p .secure_files
           echo "${{ secrets.MOK_PRIVATE_KEY }}" > .secure_files/MOK.priv
           chmod 600 .secure_files/MOK.priv
+
+      - name: Log GitHub context
+        run: |
+          echo "${{ toJSON(github) }}"
+          echo "${{ toJSON(matrix) }}"
+          echo "${{ toJSON(forgejo) }}"
 
       - name: Build Image
         env:
