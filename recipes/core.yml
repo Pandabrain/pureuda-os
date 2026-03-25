@@ -258,6 +258,7 @@ modules:
           - md.obsidian.Obsidian
           - me.amankhanna.opendeck
           - org.zulip.Zulip
+          - com.github.jeromerobert.pdfarranger
       - notify: false
         scope: user
         repo:
