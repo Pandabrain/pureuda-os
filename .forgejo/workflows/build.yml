@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "06 21 * * *"
+    - cron: "19 21 * * *"
   #push:
   #  branches:
   #    - main
@@ -87,12 +87,7 @@ jobs:
           # We point GITHUB_EVENT_PATH to the patched file for all subsequent steps
           echo "GITHUB_EVENT_PATH=/tmp/event.json" >> $GITHUB_ENV
 
-      - name: Debug patched event
-        run: |
-          echo "GITHUB_EVENT_PATH (env): $GITHUB_EVENT_PATH"
-          echo "Expected path: /tmp/event.json"
-          echo "File contents of /tmp/event.json:"
-          cat /tmp/event.json
+
 
       - name: Build Image
         env:
@@ -105,8 +100,6 @@ jobs:
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
-          GITHUB_REPOSITORY: ${{ forgejo.repository }}
-          GITHUB_REPOSITORY_OWNER: ${{ forgejo.repository_owner }}
           GITHUB_EVENT_PATH: /tmp/event.json
         run: |
           bluebuild build -v "${RECIPE_PATH}"
