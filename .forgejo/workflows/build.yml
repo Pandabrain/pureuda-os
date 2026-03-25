@@ -89,9 +89,10 @@ jobs:
 
       - name: Debug patched event
         run: |
-          echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
-          echo "File contents:"
-          cat "$GITHUB_EVENT_PATH"
+          echo "GITHUB_EVENT_PATH (env): $GITHUB_EVENT_PATH"
+          echo "Expected path: /tmp/event.json"
+          echo "File contents of /tmp/event.json:"
+          cat /tmp/event.json
 
       - name: Build Image
         env:
@@ -106,5 +107,6 @@ jobs:
           CLICOLOR_FORCE: "1"
           GITHUB_REPOSITORY: ${{ forgejo.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ forgejo.repository_owner }}
+          GITHUB_EVENT_PATH: /tmp/event.json
         run: |
           bluebuild build -v "${RECIPE_PATH}"
