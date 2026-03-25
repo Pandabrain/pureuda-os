@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "14 10 * * *"
+    - cron: "12 12 * * *"
   #push:
     #branches:
     #  - main
@@ -63,7 +63,7 @@ jobs:
           BB_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
           BB_USERNAME: ${{ forgejo.repository_owner }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
-          #BB_REGISTRY_NAMESPACE: ${{ forgejo.repository_owner }}
+          BB_REGISTRY_NAMESPACE: ${{ forgejo.repository_owner }}
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
           CLICOLOR_FORCE: "1"
