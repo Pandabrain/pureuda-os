@@ -5,7 +5,7 @@ concurrency:
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "5 10 * * *"
+    - cron: "10 10 * * *"
   #push:
     #branches:
     #  - main
@@ -58,7 +58,7 @@ jobs:
           BB_USERNAME: ${{ github.repository_owner }}
           BB_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
           BB_REGISTRY_NAMESPACE: ${{ github.repository_owner }}
-          BB_REPOSITORY: ${{ github.repository }}
+          BB_REPOSITORY: pandabrain/pureuda-os
           GH_PR_EVENT_NUMBER: ${{ github.event.number || '' }}
           RECIPE_PATH: ./recipes/${{ matrix.recipe }}
           RUST_LOG_STYLE: always
