@@ -244,6 +244,7 @@ modules:
           - it.mijorus.gearlever
           - org.gnome.gitlab.somas.Apostrophe
           - com.discordapp.Discord
+          - org.localsend.localsend_app
       - notify: false
         scope: user
         repo:
