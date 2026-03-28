@@ -260,6 +260,7 @@ modules:
           - me.amankhanna.opendeck
           - org.zulip.Zulip
           - com.github.jeromerobert.pdfarranger
+          - io.github.Qalculate
       - notify: false
         scope: user
         repo:
