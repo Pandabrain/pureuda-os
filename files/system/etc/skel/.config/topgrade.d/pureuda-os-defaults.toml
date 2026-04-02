@@ -4,7 +4,7 @@ assume_yes = true
 #don't ask what to do on failure
 ask_retry = false
 #sudo at the beginning and cache (sudo -v) to avoid blocks in between updates
-pre_sudo = true
+pre_sudo = false
 
 [linux]
 #run bootc (this will also ignore dnf)
