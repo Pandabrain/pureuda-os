@@ -100,6 +100,8 @@ disabled = false
 
 [shlvl]
 disabled = false
+symbol = '↕️'
+format = '[ $symbol$shlvl]($style)'
 style = 'bg:section2 fg:darktext'
 
 [sudo]
@@ -242,7 +244,7 @@ format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
 [container]
 symbol = "⬢ "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol [$name] ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol( $name) ](fg:darktext bg:section7)]($style)'
 
 [gcloud]
 symbol = " "
