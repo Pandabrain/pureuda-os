@@ -14,6 +14,7 @@ $username\
 $hostname\
 [ ](bg:section3)\
 [ ](fg:section3 bg:section4)\
+$container\
 $directory\
 $direnv\
 [ ](bg:section4)\
@@ -41,7 +42,6 @@ $aws\
 $azure\
 $cmake\
 $conda\
-$container\
 $docker_context\
 $gcloud\
 $gradle\
