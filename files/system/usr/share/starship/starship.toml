@@ -159,87 +159,87 @@ disabled = false
 [nodejs]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [cpp]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [dart]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [dotnet]
 symbol = "󰪮 "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [rust]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [golang]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [php]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [java]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [kotlin]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [lua]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [ruby]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [swift]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
 
 [python]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)(\(#$virtualenv\)) ](fg:darktext bg:section6)]($style)'
 
 [docker_context]
 symbol = ""
 style = "bg:section7 "
-format = '[[ $symbol( $context) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($context) ](fg:darktext bg:section7)]($style)'
 
 [aws]
 symbol = " "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $profile)(\($region\))(\[$duration\]) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($profile)(\($region\))(\[$duration\]) ](fg:darktext bg:section7)]($style)'
 
 [azure]
 symbol = "󰠅 "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $subscription) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($subscription) ](fg:darktext bg:section7)]($style)'
 
 [cmake]
 symbol = "△ "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
 
 [container]
 symbol = "⬢ "
@@ -249,47 +249,47 @@ format = '[[ $symbol($name) ](fg:darktext bg:section7)]($style)'
 [gcloud]
 symbol = " "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($project)(\($region\)) ](fg:darktext bg:section7)]($style)'
 
 [gradle]
 symbol = " "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
 
 [helm]
 symbol = "⎈ "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
 
 [kubernetes]
 symbol = "󱃾 "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $context)( \($namespace\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($context)( \($namespace\)) ](fg:darktext bg:section7)]($style)'
 
 [nix_shell]
 symbol = " "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $state)( \($name\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($state)( \($name\)) ](fg:darktext bg:section7)]($style)'
 
 [opa]
 symbol = " "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
 
 [openstack]
 symbol = "󰐎 "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($project)(\($region\)) ](fg:darktext bg:section7)]($style)'
 
 [package]
 symbol = "󰏗 "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
 
 [terraform]
 symbol = "󱁢 "
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol( $workspace) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($workspace) ](fg:darktext bg:section7)]($style)'
 
 [conda]
 symbol = "  "
