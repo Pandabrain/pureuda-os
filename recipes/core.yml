@@ -163,6 +163,8 @@ modules:
         - mission-center
         - fresh
 
+        - obs-studio
+
         #flutter dependencies
         - clang
         - cmake
