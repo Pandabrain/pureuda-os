@@ -159,142 +159,142 @@ disabled = false
 [nodejs]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [cpp]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [dart]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [dotnet]
 symbol = "󰪮 "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [rust]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [golang]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [php]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [java]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [kotlin]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [lua]
 symbol = " "
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [ruby]
-symbol = " "
+symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [swift]
-symbol = " "
+symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section6)]($style)'
 
 [python]
 symbol = ""
 style = "bg:section6 fg:darktext"
-format = '[[ $symbol($version)(\(#$virtualenv\)) ](fg:darktext bg:section6)]($style)'
+format = '[[ $symbol($version)(\(#$virtualenv\))](fg:darktext bg:section6)]($style)'
 
 [docker_context]
 symbol = ""
 style = "bg:section7 "
-format = '[[ $symbol($context) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($context)](fg:darktext bg:section7)]($style)'
 
 [aws]
-symbol = " "
+symbol = ""
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($profile)(\($region\))(\[$duration\]) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($profile)(\($region\))(\[$duration\])](fg:darktext bg:section7)]($style)'
 
 [azure]
-symbol = "󰠅 "
+symbol = "󰠅"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($subscription) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($subscription)](fg:darktext bg:section7)]($style)'
 
 [cmake]
-symbol = "△ "
+symbol = "△"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
 
 [container]
-symbol = "⬢ "
+symbol = "⬢"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($name) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($name)](fg:darktext bg:section7)]($style)'
 
 [gcloud]
-symbol = " "
+symbol = ""
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($project)(\($region\))](fg:darktext bg:section7)]($style)'
 
 [gradle]
-symbol = " "
+symbol = ""
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
 
 [helm]
-symbol = "⎈ "
+symbol = "⎈"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
 
 [kubernetes]
-symbol = "󱃾 "
+symbol = "󱃾"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($context)( \($namespace\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($context)(\($namespace\))](fg:darktext bg:section7)]($style)'
 
 [nix_shell]
-symbol = " "
+symbol = ""
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($state)( \($name\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($state)(\($name\))](fg:darktext bg:section7)]($style)'
 
 [opa]
-symbol = " "
+symbol = ""
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
 
 [openstack]
-symbol = "󰐎 "
+symbol = "󰐎"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($project)(\($region\)) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($project)(\($region\))](fg:darktext bg:section7)]($style)'
 
 [package]
-symbol = "󰏗 "
+symbol = "󰏗"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($version) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
 
 [terraform]
-symbol = "󱁢 "
+symbol = "󱁢"
 style = "bg:section7 fg:darktext"
-format = '[[ $symbol($workspace) ](fg:darktext bg:section7)]($style)'
+format = '[[ $symbol($workspace)](fg:darktext bg:section7)]($style)'
 
 [conda]
-symbol = "  "
+symbol = ""
 style = "fg:darktext bg:section7"
-format = '[$symbol$environment ]($style)'
+format = '[ $symbol$environment]($style)'
 ignore_base = false
 
 [time]
@@ -306,10 +306,11 @@ format = '[[  $time ](fg:darktext bg:section8)]($style)'
 
 
 [battery]
-full_symbol = " "
-charging_symbol = "󱐋 "
-discharging_symbol = " "
-empty_symbol = " "
+full_symbol = ""
+charging_symbol = "󱐋"
+discharging_symbol = ""
+empty_symbol = ""
+format = '[$symbol $percentage]($style)'
 
 [[battery.display]]
 threshold = 100
