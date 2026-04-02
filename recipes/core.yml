@@ -149,6 +149,7 @@ modules:
         - okular
         - tailscale
         - eog
+        - snapshot
         - ptyxis
         - cifs-utils
         - pavucontrol
