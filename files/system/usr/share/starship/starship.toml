@@ -121,6 +121,11 @@ style = 'bg:section3 fg:darktext'
 ssh_only = true
 format = '[@$ssh_symbol$hostname]($style)'
 
+[container]
+symbol = "⬢"
+style = "bg:section4 fg:darktext"
+format = '[[ $symbol($name)](fg:darktext bg:section7)]($style)'
+
 [directory]
 style = "bg:section4 fg:darktext"
 format = "[$path]($style)"
@@ -240,11 +245,6 @@ format = '[[ $symbol($subscription)](fg:darktext bg:section7)]($style)'
 symbol = "△"
 style = "bg:section7 fg:darktext"
 format = '[[ $symbol($version)](fg:darktext bg:section7)]($style)'
-
-[container]
-symbol = "⬢"
-style = "bg:section7 fg:darktext"
-format = '[[ $symbol($name)](fg:darktext bg:section7)]($style)'
 
 [gcloud]
 symbol = ""
