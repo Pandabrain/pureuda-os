@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Restart Pipewire
+Exec=systemctl --user restart wireplumber pipewire pipewire-pulse
+Icon=pipewire
+Terminal=true
+Categories=Utility;
