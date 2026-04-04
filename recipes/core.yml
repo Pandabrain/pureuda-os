@@ -248,6 +248,7 @@ modules:
           - org.gnome.gitlab.somas.Apostrophe
           - com.discordapp.Discord
           - org.localsend.localsend_app
+          - io.github.zaedus.spider
       - notify: false
         scope: user
         repo:
