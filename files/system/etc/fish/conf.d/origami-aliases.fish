@@ -54,7 +54,7 @@ end
 alias update topgrade
 alias docker podman
 alias docker-compose podman-compose
-alias cat bat
+alias cat lolcat
 alias sudo sudo-rs
 alias su su-rs
 #alias cmatrix termflix
