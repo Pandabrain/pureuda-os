@@ -183,6 +183,8 @@ modules:
         - lutris
         - heroic-games-launcher
 
+        - mediainfo-gui
+
         #- nix //make nix work for fedora atomic
 
 
