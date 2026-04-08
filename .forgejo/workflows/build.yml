@@ -6,12 +6,12 @@ on:
   schedule:
     - cron: "0 6 * * *"
     #- cron: "19 21 * * *"
-  #push:
-  #  branches:
-  #    - main
-  #    - test
-  #  paths-ignore:
-  #    - "**.md"
+  push:
+    branches:
+      - main
+      - test
+    paths-ignore:
+      - "**.md"
   workflow_dispatch:
 
 jobs:
