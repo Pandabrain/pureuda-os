@@ -153,6 +153,7 @@ modules:
         - ptyxis
         - cifs-utils
         - pavucontrol
+        - papers
 
         - fcitx5
         - fcitx5-configtool
