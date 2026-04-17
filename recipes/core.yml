@@ -263,7 +263,7 @@ modules:
           - org.jellyfin.JellyfinDesktop
           - org.freecad.FreeCAD
           - com.bambulab.BambuStudio
-          - org.onlyoffice.desktopeditors
+          - org.libreoffice.LibreOffice
           - md.obsidian.Obsidian
           - me.amankhanna.opendeck
           - org.zulip.Zulip
